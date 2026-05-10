@@ -1,0 +1,338 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Banner Hero ── */
+.bannerHero {
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-dark),
+        var(--color-teal)
+    );
+    
+    padding: 64px 32px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.heroContent {
+    width: 100%;
+    max-width: 680px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.heroTag {
+    font-size: 18px;
+    font-weight: 600;
+    
+    text-transform: uppercase;
+    letter-spacing: 5%;
+    
+    color: var(--color-teal-soft);
+}
+
+.titleHero {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--color-neutral-sub);
+
+    margin-bottom: 16px;
+}
+
+.subtitleHero {
+    font-size: 18px;
+
+    color: var(--color-neutral-sub);
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.iconHero {
+    font-size: 130px;
+    opacity: 0.3;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* ── Conteúdo ── */
+.info {
+    width: 100%;
+    max-width: 960px;
+
+    margin: 0 auto;
+    padding: 64px 32px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+/* ── Seção do Projeto ── */
+.projectSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.projectText {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.projectText p {
+    font-size: 18px;
+    font-family: var(--font-roboto);
+    line-height: 1.8;
+    color: black;
+}
+
+/* ── Stack ── */
+.projectStack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    background-color: var(--color-neutral-sub);
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 12px;
+    
+    overflow: hidden;
+}
+
+.stackBlock {
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stackHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stackIcon {
+    font-size: 24px;
+}
+
+.stackTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.stackDivisor {
+    height: 2px;
+    background-color: var(--color-neutral-light);
+    margin: 0 20px;
+}
+
+.tecnologiasList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tecnologiaTag {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+.tagFront {
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-subtle);
+}
+
+.tagBack {
+    color: var(--color-teal-dark);
+    background-color: var(--color-teal-soft);
+}
+
+/* ── Seção ── */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.titleSection {
+    font-size: 36px;
+    font-weight: 800;
+    font-family: var(--font-darker-grotesque);
+    color: var(--color-primary-dark);
+
+    padding-bottom: 12px;
+    
+    border-bottom: 2px solid var(--color-primary-dark);
+}
+
+/* ── GRID ── */
+.gridGrupo {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+}
+
+/* ── CARD ── */
+.card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+    padding: 20px 24px;
+    
+    background-color: var(--color-neutral-sub);
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 12px;
+    
+    transition: all ease 0.25s;
+
+    &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        transform: translateX(6px);
+        transform: scale(1.05);
+        border-color: var(--color-primary);
+    }
+}
+
+.cardNumber {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--color-primary-dark);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.cardInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardNome {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+.cardGithubUrl {
+    font-size: 14px;
+    color: black;
+}
+
+.githubIcon {
+   font-size: 40px;
+
+    color: var(--color-neutral);
+    flex-shrink: 0;
+    transition: all ease 0.2s;
+
+}
+
+.card:hover .githubIcon {
+    color: var(--color-primary-dark);
+}
+
+/* ── Institucional ── */
+.institucional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-dark),
+        var(--color-teal)
+    );
+    
+    border-radius: 16px;
+    padding: 40px 48px;
+}
+
+.institucionalText {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.institucionalLabel {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.institucionalNome {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--color-neutral-sub);
+}
+
+.institucionalDisciplina {
+    font-size: 18px;
+    color: var(--color-neutral-sub);
+    opacity: 0.75;
+}
+
+.institucionalReferencia {
+    font-size: 16px;
+    color: var(--color-neutral-sub);
+    opacity: 0.6;
+    
+    margin-top: 4px;
+}
+
+.institucionalIcon {
+    font-size: 120px;
+    opacity: 0.4;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+    .bannerHero {
+        flex-direction: column;
+    }
+
+    .iconHero {
+        display: none;
+    }
+
+    .projectSection {
+        grid-template-columns: 1fr;
+    }
+
+    .institucional {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .titleHero {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        padding: 16px;
+  }
+}

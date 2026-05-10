@@ -1,0 +1,46 @@
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    
+    padding: 30px 50px;
+    width: 100%;
+    background-color: var(--color-teal-medium);
+}
+
+.titleSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.iconFigure {
+    width: 60px;
+    height: 60px;
+
+    overflow: hidden;
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    font-family: var(--font-darker-grotesque);
+    color: var(--color-neutral-sub);
+}

@@ -1,0 +1,352 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HERO ── */
+.bannerHero {
+    
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-dark),
+        var(--color-teal)
+    );
+    
+    padding: 64px 32px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.heroContent {
+    width: 100%;
+    max-width: 680px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.heroMsg {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 5%;
+    
+    color: var(--color-teal-soft);
+}
+
+.titleHero {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+
+    color: var(--color-neutral-sub);
+}
+
+.subtitleHero {
+    font-size: 18px;
+    color: var(--color-neutral-sub);
+    opacity: 0.85;
+
+    line-height: 1.7;
+}
+
+.dataHero {
+    font-size: 16px;
+    font-weight: 500;
+
+    color: var(--color-neutral-sub);
+    margin-top: 4px;
+
+    border-bottom: 1px solid var(--color-neutral-sub);
+    width: fit-content;
+}
+
+.iconHero {
+    font-size: 130px;
+    opacity: 0.3;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* ── Conteúdo ── */
+.info {
+    width: 100%;
+    max-width: 960px;
+
+    margin: 0 auto;
+    padding: 64px 32px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    
+}
+
+/* ── Aviso ── */
+.warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    
+    background-color: var(--color-warning-light);
+    border-left: 4px solid var(--color-warning);
+    border-radius: 6px;
+    
+    padding: 16px 20px;
+    
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-warning);
+    line-height: 1.6;
+}
+
+/* ── Seção ── */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titleSection {
+    font-size: 36px;
+    font-weight: 800;
+    font-family: var(--font-darker-grotesque);
+
+    color: var(--color-primary-dark);
+
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-primary-dark);
+}
+
+.section p {
+    font-size: 18px;
+    font-family: var(--font-roboto);
+    line-height: 1.8;
+}
+
+/* ── Dados Coletados ── */
+.gridDados {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dadoCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    padding: 14px 16px;
+    
+    background-color: var(--color-neutral-sub);
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 8px;
+    
+    transition: all ease 0.2s;
+
+    &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        transform: translateY(-3px);
+    }
+}
+
+.iconDado {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.textDado {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ── Finalidades ── */
+.finalidades {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.finalidadeCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    
+    padding: 20px;
+    
+    background-color: var(--color-neutral-sub);
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        transform: translateY(-3px);
+    }
+}
+
+.iconFinalidade {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.finalidadeTitle {
+    font-size: 18px;
+    font-weight: 700;
+
+    color: var(--color-primary-dark);
+    display: block;
+    
+    margin-bottom: 4px;
+}
+
+.finalidadeDescription {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* ── DESTAQUE ── */
+.destaque {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    
+    background-color: var(--color-success-light);
+    border-left: 4px solid var(--color-success);
+    border-radius: 6px;
+    
+    padding: 20px;
+}
+
+.destaqueIcon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.destaque p {
+    font-size: 18px;
+    color: var(--color-success);
+    line-height: 1.7;
+}
+
+/* ── Direitos ── */
+.direitos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.direitoCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    padding: 16px 20px;
+    
+    background-color: var(--color-neutral-sub);
+
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 8px;
+    transition: all ease 0.2s;
+
+    &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        transform: translateY(-3px);
+    }
+}
+
+.direitoNumber {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--color-primary-dark);
+    flex-shrink: 0;
+    line-height: 1;
+    padding-top: 2px;
+}
+
+.direitoTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.direitoDescription {
+    font-size: 16;
+    line-height: 1.6;
+}
+
+/* ── Contato ── */
+.contact {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-dark),
+        var(--color-teal)
+    );
+    
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.contactIcon {
+    font-size: 36px;
+    flex-shrink: 0;
+}
+
+.contactTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-neutral-sub);
+    
+    margin-bottom: 8px;
+}
+
+.contactText {
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: var(--color-neutral-sub);
+    opacity: 0.85;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+    .bannerHero {
+        flex-direction: column;
+    }
+
+    .iconHero {
+        display: none;
+    }
+
+    .gridDados {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .finalidades {
+        grid-template-columns: 1fr;
+    }
+
+    .direitos {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .gridDados {
+        grid-template-columns: 1fr;
+    }
+
+    .titleHero {
+        font-size: 1.8rem;
+    }
+}

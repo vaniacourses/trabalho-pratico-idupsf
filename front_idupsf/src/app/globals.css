@@ -9,7 +9,14 @@
   --color-neutral-dark:    #1a1f2e;   /* quase preto */
   --color-neutral:         #4a5a7a;   /* cinza azulado */
   --color-neutral-light:   #c5cedf;   /* cinza claro */
-  --color-neutral-sub:  #f4f6fb;   /* fundo levemente azulado */
+  --color-neutral-sub:     #f4f6fb;   /* fundo levemente azulado */
+
+  /* Teal (azul esverdeado) */  
+  --color-teal-dark:   #0a5c73;   /* azul esverdeado escuro (hover) */
+  --color-teal:        #0e7490;   /* azul esverdeado principal */
+  --color-teal-medium: #1a9db5;
+  --color-teal-soft:   #67d4e8;
+  --color-teal-light:  #cffafe;   /* azul esverdeado claro (fundo sutil) */
 
   /* Feedback */
   --color-success:         #2e7d32;

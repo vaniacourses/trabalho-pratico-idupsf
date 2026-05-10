@@ -50,7 +50,7 @@ export default function Footer() {
                 <h3 className={styles.title}>Institucional</h3>
                 
                 <ul className={styles.list}>
-                    <Link href="/sobre" className={styles.link}>Sobre a UPSF</Link>
+                    <Link href="/sobreUPSF" className={styles.link}>Sobre a UPSF</Link>
                     
                     <Link href="/politica" className={styles.link}>Política de Privacidade</Link>
                     
