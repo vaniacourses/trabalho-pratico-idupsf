@@ -20,7 +20,7 @@ public class Turma {
     private String cod;
     private String nome;
     private String anoSemestre;
-    private String status;
+    private String status; // pode ser enum {ATIVA, INATIVA} OU ABERTA, FECHADA
     private String ementa;
     private int maxAlunos;
     @ManyToOne

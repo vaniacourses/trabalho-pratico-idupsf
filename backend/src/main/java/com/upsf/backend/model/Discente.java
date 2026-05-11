@@ -21,7 +21,7 @@ public class Discente extends Usuario{
     private String periodo;
     private String periodoIngresso;
     private String codCurriculo;
-    public enum SituacaoAcademica{REGULAR, IRREGULAR}
+    public enum SituacaoAcademica{ATIVO, FORMADO, JUBILADO, TRANCADO}
     public enum FormaPermanencia{DEFINITIVA, TEMPORARIA}
     @Enumerated(EnumType.STRING)
     private SituacaoAcademica situacaoAcademica;

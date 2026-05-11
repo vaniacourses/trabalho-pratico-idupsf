@@ -15,7 +15,6 @@ public class DisciplinaCursada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Turma turma;
     private float nota;
