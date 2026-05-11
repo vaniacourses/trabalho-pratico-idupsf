@@ -10,6 +10,7 @@ import com.upsf.backend.repository.HistoricoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,14 +29,13 @@ public class HistoricoService {
 
     public List<Disciplina> buscarDisciplinasConcluidas(Long discenteId) {
         Historico historico = buscarPorDiscente(discenteId);
-
-        // esse retorno está muito bagunçado, retorno não pode ser de dtos pois preciso da lista de pre requisitos
-        return historico.getListaDisciplinas().stream()
-                // 1. Usa getStatusFinal() em vez de getStatus()
-                .filter(dc -> "APROVADO".equalsIgnoreCase(dc.getStatusFinal()))
-                // 2. Navega da DisciplinaCursada -> Turma -> Disciplina
-                .map(dc -> dc.getTurma().getDisciplina())
-                .collect(Collectors.toList());
+        List<Disciplina> disciplinasConcluidas = new ArrayList<>();
+        for (DisciplinaCursada dc : historico.getListaDisciplinas()) {
+            if ("APROVADO".equalsIgnoreCase(dc.getStatusFinal())) {
+                disciplinasConcluidas.add(dc.getTurma().getDisciplina());
+            }
+        }
+        return disciplinasConcluidas;
     }
 
     public void atualizarCoeficiente(Long discenteId) {
