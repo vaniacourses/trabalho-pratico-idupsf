@@ -19,7 +19,9 @@ public class DisciplinaCursada {
     private Turma turma;
     private float nota;
     private float notaVS;
-    private String statusFinal; // pode ser enum
+    public enum StatusFinal{APROVADO, REPROVADO, TRANCADO, AGUARDO}
+    @Enumerated(EnumType.STRING)
+    private StatusFinal statusFinal; // pode ser enum
     private boolean frequencia;
     private String periodo;
     // também precisa de carga horaria pra realizar calculo do cr caso o calculo seja feito no modelo
@@ -33,11 +35,17 @@ public class DisciplinaCursada {
         this.frequencia = frequencia;
         this.periodo = periodo;
         this.cargaHoraria = cargaHoraria;
+        this.statusFinal = StatusFinal.AGUARDO;
     }
 
     public void calcularStatusFinal(){
-        if(this.nota >= 6.0) setStatusFinal("APROVADO");
-        else if(this.notaVS >= 6.0) setStatusFinal("APROVADO");
-        else setStatusFinal("REPROVADO");
+        if (this.frequencia && this.statusFinal != StatusFinal.TRANCADO) {
+            if(this.nota >= 6.0) this.statusFinal = StatusFinal.APROVADO;
+            else if(this.notaVS >= 6.0) this.statusFinal = StatusFinal.APROVADO;
+            else this.statusFinal = StatusFinal.REPROVADO;
+        }
+        else {
+            this.statusFinal = StatusFinal.REPROVADO;
+        }
     }
 }

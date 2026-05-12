@@ -31,7 +31,7 @@ public class HistoricoService {
         Historico historico = buscarPorDiscente(discenteId);
         List<Disciplina> disciplinasConcluidas = new ArrayList<>();
         for (DisciplinaCursada dc : historico.getListaDisciplinas()) {
-            if ("APROVADO".equalsIgnoreCase(dc.getStatusFinal())) {
+            if (dc.getStatusFinal() == DisciplinaCursada.StatusFinal.APROVADO) {
                 disciplinasConcluidas.add(dc.getTurma().getDisciplina());
             }
         }

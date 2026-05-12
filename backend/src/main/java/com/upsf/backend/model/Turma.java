@@ -20,7 +20,16 @@ public class Turma {
     private String cod;
     private String nome;
     private String anoSemestre;
-    private String status; // pode ser enum {ATIVA, INATIVA} OU ABERTA, FECHADA
+
+    /*
+    * Interpretação do StatusTurma:
+    * -> ATIVA: Com Docente associado
+    * -> INATIVA: Sem Docente associado (Criada assim)
+    * */
+    public enum StatusTurma{ATIVA, INATIVA}
+    @Enumerated(EnumType.STRING)
+    private StatusTurma status; // pode ser enum {ATIVA, INATIVA} OU ABERTA, FECHADA
+
     private String ementa;
     private int maxAlunos;
     @ManyToOne
@@ -30,18 +39,19 @@ public class Turma {
     @ManyToOne
     private Horario horario;
 
-    // docente pode ser atribuido depois da criação
-    public Turma(String cod, String nome, String anoSemestre, String status, String ementa, int maxAlunos, Disciplina disciplina, Horario horario) {
+    // Docente pode ser atribuído depois da criação
+    public Turma(String cod, String nome, String anoSemestre, String ementa, int maxAlunos, Disciplina disciplina, Horario horario) {
         this.cod = cod;
         this.nome = nome;
         this.anoSemestre = anoSemestre;
-        this.status = status;
+        this.status = StatusTurma.INATIVA;
         this.ementa = ementa;
-        this.maxAlunos = maxAlunos;
+        this.maxAlunos = maxAlunos; // Colocar um valor padrão (Ex.: 60)?
         this.disciplina = disciplina;
         this.horario = horario;
     }
 
+    // não é um setEmenta()?
     public void atualizarEmenta(String novaEmenta){}
 
     public void encerrarTurma(){}
