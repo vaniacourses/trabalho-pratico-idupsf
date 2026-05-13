@@ -16,7 +16,7 @@ import java.util.Date;
 public class Discente extends Usuario{
     @ManyToOne
     private Curso curso;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "discente")
     private Historico historico;
     private String periodo;
     private String periodoIngresso;
