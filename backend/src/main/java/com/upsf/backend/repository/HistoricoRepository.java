@@ -20,19 +20,22 @@ public interface HistoricoRepository extends JpaRepository<Historico, Long> {
     Optional<Historico> findByDiscenteId(Long discenteId);
 
     // Possível Query sem o problema de N+1
-    @Query("SELECT d.historico FROM Discente d JOIN FETCH d.historico h JOIN FETCH h.listaDisciplinas dc " +
-            "JOIN FETCH dc.turma t JOIN FETCH t.disciplina WHERE d.id = :discenteId")
+    @Query("SELECT h FROM Historico h " +
+            "JOIN FETCH h.listaDisciplinas dc " +
+            "JOIN FETCH dc.turma t " +
+            "JOIN FETCH t.disciplina " +
+            "WHERE h.discente.id = :discenteId")
     Optional<Historico> findHistoricoByDiscenteId(@Param("discenteId") Long discenteId);
 
-    @Query("SELECT t.disciplina FROM Discente d " +
-            "JOIN d.historico h " +
+    @Query("SELECT DISTINCT t.disciplina FROM Historico h " +
             "JOIN h.listaDisciplinas dc " +
             "JOIN dc.turma t " +
-            "WHERE d.id = :discenteId " +
+            "WHERE h.discente.id = :discenteId " +
             "AND dc.statusFinal = :status")
     List<Disciplina> findDisciplinasByDiscenteAndStatus(
             @Param("discenteId") Long discenteId,
             @Param("status") DisciplinaCursada.StatusFinal status
     );
+
 
 }

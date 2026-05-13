@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface InscricaoMapper{
 
-    @Mapping(source = "turma.codigo", target = "codigoTurma")
-    @Mapping(source = "turma.disciplina.nome", target = "nomeDisciplina")
-    @Mapping(source = "discente.matricula", target = "matriculaDiscente")
-    @Mapping(source = "discente.nome", target = "nomeDiscente")
-    InscricaoResponseDTO toResponseDTO(RegistroDisciplina inscricao);
+//    @Mapping(source = "turma.codigo", target = "codigoTurma")
+//    @Mapping(source = "turma.disciplina.nome", target = "nomeDisciplina")
+//    @Mapping(source = "discente.matricula", target = "matriculaDiscente")
+//    @Mapping(source = "discente.nome", target = "nomeDiscente")
+//    InscricaoResponseDTO toResponseDTO(RegistroDisciplina inscricao);
 }

@@ -11,9 +11,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TurmaMapper {
 
-    @Mapping(source = "codigo", target = "codigoTurma")
-    @Mapping(source = "disciplina.nome", target = "nomeDisciplina")
-    @Mapping(source = "docente.nome", target = "nomeDocente")
+    // o mapping daqui estava source disciplina.nome target nomeDisciplina
+    // troquei para source disciplina target disciplinaResumo, porque estava dando erro
+    @Mapping(source = "cod", target = "codigoTurma")
+    @Mapping(source = "disciplina", target = "disciplinaResumo")
+    @Mapping(source = "docente", target = "docenteResumo")
     TurmaDTO toTurmaDTO(Turma turma); // Mapeamento de Turma para TurmaDTO
 
     // Mapeamento de List<Turma> para List<TurmaDTO>

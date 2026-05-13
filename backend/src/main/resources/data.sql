@@ -67,7 +67,7 @@ INSERT INTO historico (id, coeficiente_rend, discente_id) VALUES
     (1, 9.5, 2);
 
 -- 13. DISCIPLINAS CURSADAS (A Ada tirou 9.5 em Algoritmos)
-INSERT INTO disciplina_cursada (id, nota, nota_vs, status_final, frequencia, periodo, carga_horaria, turma_id, historico_id) VALUES
+INSERT INTO disciplina_cursada (id, nota, notavs, status_final, frequencia, periodo, carga_horaria, turma_id, historico_id) VALUES
     (1, 9.5, 0.0, 'APROVADO', 1, '2024.1', 60, 1, 1);
 
 -- Reativa a checagem de chave estrangeira
