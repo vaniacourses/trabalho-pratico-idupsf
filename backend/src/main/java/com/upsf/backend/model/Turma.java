@@ -18,21 +18,23 @@ public class Turma {
 
     @Column(unique = true, nullable = false)
     private String cod;
-    private String nome;
     private String anoSemestre;
 
     /*
     * Interpretação do StatusTurma:
     * -> ATIVA: Com Docente associado
     * -> INATIVA: Sem Docente associado (Criada assim)
+    * -> FECHADA: Fim do período e término da turma
     * */
-    public enum StatusTurma{ATIVA, INATIVA}
+    public enum StatusTurma{ATIVA, INATIVA, FECHADA}
     @Enumerated(EnumType.STRING)
     private StatusTurma status; // pode ser enum {ATIVA, INATIVA} OU ABERTA, FECHADA
 
     private String ementa;
     private int maxAlunos;
+
     @ManyToOne
+    @JoinColumn(name = "disciplina_id" , foreignKey = @ForeignKey(name = "TURMA_DISCIPLINA_ID_FK"))
     private Disciplina disciplina;
     @ManyToOne
     private Docente docente;
@@ -40,9 +42,8 @@ public class Turma {
     private Horario horario;
 
     // Docente pode ser atribuído depois da criação
-    public Turma(String cod, String nome, String anoSemestre, String ementa, int maxAlunos, Disciplina disciplina, Horario horario) {
+    public Turma(String cod, String anoSemestre, String ementa, int maxAlunos, Disciplina disciplina, Horario horario) {
         this.cod = cod;
-        this.nome = nome;
         this.anoSemestre = anoSemestre;
         this.status = StatusTurma.INATIVA;
         this.ementa = ementa;
