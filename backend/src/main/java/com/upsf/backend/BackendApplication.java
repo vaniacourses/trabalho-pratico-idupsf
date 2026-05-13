@@ -1,6 +1,5 @@
 package com.upsf.backend;
 
-import com.upsf.backend.service.DocumentoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

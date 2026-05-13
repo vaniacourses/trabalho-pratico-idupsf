@@ -51,7 +51,6 @@ public class DocumentoController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=historico-" + aluno.matricula() + ".pdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdf);
-        }
     }
 
 }
