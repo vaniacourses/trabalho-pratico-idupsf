@@ -39,6 +39,8 @@ public class HistoricoService {
         return disciplinaMapper.toDisciplinasDTO(disciplinas);
     }
 
+
+
     public void atualizarCoeficiente(Long discenteId) {
         Historico historico = buscarPorDiscente(discenteId);
         historico.calcularCR();

@@ -1,5 +1,6 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.mapper.InscricaoMapper;
 import com.upsf.backend.mapper.TurmaMapper;
@@ -46,9 +47,10 @@ public class InscricaoService {
 //        return turmaMapper.toTurmasDto(disponiveis);
 //    }
 
+    // talvez eu tenha introduzido um erro aqui
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
-        Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasConcluidas(discenteId));
+        Set<DisciplinaDTO> concluidas = new HashSet<>(historicoService.buscarDisciplinasConcluidas(discenteId));
         List<Turma> turmasAtivas = turmaService.buscarTurmasEntitiesAtivasComRequisitos();
 
         List<Turma> disponiveis = turmasAtivas.stream()
