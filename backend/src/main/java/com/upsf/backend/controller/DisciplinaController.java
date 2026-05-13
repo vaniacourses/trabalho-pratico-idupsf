@@ -15,7 +15,7 @@ import java.util.List;
 public class DisciplinaController {
 
     @Autowired
-    DisciplinaService disciplinaService;
+    private DisciplinaService disciplinaService;
 
     @GetMapping
     public List<DisciplinaDTO> retornarListaDisciplinasPeloNome(@RequestParam String nome) {

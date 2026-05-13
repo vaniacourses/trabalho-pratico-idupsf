@@ -3,11 +3,13 @@ package com.upsf.backend.service;
 import org.openpdf.text.*;
 import org.openpdf.text.pdf.PdfWriter;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public abstract class GeradorDePDF<T> {
+@Service
+public abstract class GeradorDePDFService<T> {
 
     public byte[] gerarPdf(T dados) {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
