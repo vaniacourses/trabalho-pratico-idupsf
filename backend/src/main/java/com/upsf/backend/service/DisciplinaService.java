@@ -17,10 +17,10 @@ import java.util.List;
 public class DisciplinaService {
 
     @Autowired
-    DisciplinaRepository disciplinaRepository;
+    private DisciplinaRepository disciplinaRepository;
 
     @Autowired
-    DisciplinaMapper disciplinaMapper;
+    private DisciplinaMapper disciplinaMapper;
 
     public List<DisciplinaDTO> retornarListaDisciplinasPeloNome(@RequestParam String nome) {
         List<Disciplina> disciplinas = disciplinaRepository.findByNomeContainingIgnoreCase(nome);

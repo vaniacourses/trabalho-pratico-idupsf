@@ -1,7 +1,9 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.dto.HistoricoDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
+import com.upsf.backend.mapper.DisciplinaMapper;
 import com.upsf.backend.mapper.HistoricoMapper;
 import com.upsf.backend.model.Disciplina;
 import com.upsf.backend.model.DisciplinaCursada;
@@ -20,6 +22,8 @@ public class HistoricoService {
     private HistoricoRepository historicoRepository;
     @Autowired
     private HistoricoMapper historicoMapper;
+    @Autowired
+    private DisciplinaMapper disciplinaMapper;
 
     // talvez seja melhor buscar por matricula
     public Historico buscarPorDiscente(Long discenteId) {
@@ -27,15 +31,12 @@ public class HistoricoService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o aluno ID: " + discenteId));
     }
 
-    public List<Disciplina> buscarDisciplinasConcluidas(Long discenteId) {
-        Historico historico = buscarPorDiscente(discenteId);
-        List<Disciplina> disciplinasConcluidas = new ArrayList<>();
-        for (DisciplinaCursada dc : historico.getListaDisciplinas()) {
-            if (dc.getStatusFinal() == DisciplinaCursada.StatusFinal.APROVADO) {
-                disciplinasConcluidas.add(dc.getTurma().getDisciplina());
-            }
-        }
-        return disciplinasConcluidas;
+    public List<DisciplinaDTO> buscarDisciplinasConcluidas(Long discenteId) {
+        List<Disciplina> disciplinas = historicoRepository.findDisciplinasByDiscenteAndStatus(
+                discenteId,
+                DisciplinaCursada.StatusFinal.APROVADO
+        );
+        return disciplinaMapper.toDisciplinasDTO(disciplinas);
     }
 
     public void atualizarCoeficiente(Long discenteId) {
