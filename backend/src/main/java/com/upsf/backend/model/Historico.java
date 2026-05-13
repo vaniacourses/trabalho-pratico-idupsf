@@ -21,6 +21,9 @@ public class Historico {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "historico_id")
     private List<DisciplinaCursada> listaDisciplinas;
+    @OneToOne
+    @JoinColumn(name = "discente_id")
+    private Discente discente;
 
     //cr inicial 0
     public Historico() {

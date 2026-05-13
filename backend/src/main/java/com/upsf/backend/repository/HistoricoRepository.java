@@ -19,4 +19,5 @@ public interface HistoricoRepository extends JpaRepository<Historico, Long> {
     @Query("SELECT d.historico FROM Discente d JOIN FETCH d.historico h JOIN FETCH h.listaDisciplinas dc " +
             "JOIN FETCH dc.turma t JOIN FETCH t.disciplina WHERE d.id = :discenteId")
     Optional<Historico> findHistoricoByDiscenteId(@Param("discenteId") Long discenteId);
+
 }
