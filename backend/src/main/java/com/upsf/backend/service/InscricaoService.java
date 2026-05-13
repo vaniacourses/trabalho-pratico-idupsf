@@ -55,6 +55,6 @@ public class InscricaoService {
                 .filter(turma -> concluidas.containsAll(turma.getDisciplina().getPreRequisitos()))
                 .toList();
 
-        return turmaMapper.toTurmasDto(disponiveis);
+        return turmaMapper.toTurmasDTO(disponiveis);
     }
 }

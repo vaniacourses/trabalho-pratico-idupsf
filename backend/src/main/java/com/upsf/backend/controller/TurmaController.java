@@ -11,22 +11,35 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/quadro") // caminhos aqui são placeholders (Quadro de Horários)
+@RequestMapping("api/quadro") // caminhos aqui são placeholders (Quadro de Horários)
 public class TurmaController {
 
     @Autowired
     private TurmaService turmaService;
 
-    // Requisição Get para Turmas Ativas (Para Quadro de Horários)
+    // Requisição GET para Turmas Ativas (Para Quadro de Horários)
     @GetMapping
     public List<TurmaDTO> buscarTurmasAtivas() {
         return turmaService.buscarTurmasAtivas();
     }
 
     // Dependência de @Valid ainda inexistente
-    // Ainda a implementar - Cláudio
+    // Requisição POST para Criação/Cadastro de Novas Turmas (Tarefa do Coordenador)
     @PostMapping
-    public void cadastrarTurma(@RequestBody TurmaCreate turmaCreate) { // Passa um Objeto Transiente
-        // return turmaService.cadastrarTurma(turmaCreate);
+    public TurmaDTO cadastrarTurma(@RequestBody TurmaCreate turmaCreate) { // Passa um Objeto Transiente
+        return turmaService.cadastrarTurma(turmaCreate);
+    }
+
+    // Requisição PUT para Atualização dos Dados de uma Turma
+    @PutMapping
+    public TurmaDTO alterarTurma(@RequestBody TurmaDTO turma) { // Passa um Objeto Destacado
+        return turmaService.alterarTurma(turma);
+    }
+
+    // Requisição DELETE para Exclução de uma Turma
+    @DeleteMapping("{idTurma}")
+    public void removerTurmaPorId(@PathVariable("idTurma") long id) {
+        turmaService.removerTurmaPorId(id);
+        // Espera receber um Objeto Persistente
     }
 }

@@ -1,5 +1,6 @@
 package com.upsf.backend.mapper;
 
+import com.upsf.backend.create.TurmaCreate;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.model.Turma;
 import org.mapstruct.Mapper;
@@ -13,9 +14,16 @@ public interface TurmaMapper {
     @Mapping(source = "codigo", target = "codigoTurma")
     @Mapping(source = "disciplina.nome", target = "nomeDisciplina")
     @Mapping(source = "docente.nome", target = "nomeDocente")
-    TurmaDTO toDTO(Turma turma);
+    TurmaDTO toTurmaDTO(Turma turma); // Mapeamento de Turma para TurmaDTO
 
-    List<TurmaDTO> toTurmasDto(List<Turma> turmas);
+    // Mapeamento de List<Turma> para List<TurmaDTO>
+    List<TurmaDTO> toTurmasDTO(List<Turma> turmas);
 
-    Turma toEntity(TurmaDTO dto);
+    @Mapping(source = "disciplinaResumo", target = "disciplina")
+    @Mapping(source = "docenteResumo", target = "docente")
+    Turma toTurma(TurmaDTO dto); // Mapeamento de TurmaDTO para Turma
+
+    @Mapping(source = "disciplinaResumo", target = "disciplina")
+    @Mapping(source = "docenteResumo", target = "docente")
+    Turma toTurma(TurmaCreate produtoCreate); // Mapeamento de TurmaCreate para Turma
 }
