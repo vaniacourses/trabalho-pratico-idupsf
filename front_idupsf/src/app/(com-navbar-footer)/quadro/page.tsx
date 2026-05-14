@@ -1,9 +1,16 @@
 import styles from './styles.module.css'
 import Image from 'next/image'
 import calendar from '../../../assets/calendar.webp'
+import QuadroFiltrosTurma from '@/components/QuadroFiltrosTurmas'
+import { opcoesService } from '@/services/opcoesService';
+import QuadroHelper from '@/components/QuadroHelper';
 
 export default async function QuadroHorarios() {
-
+    
+    const [departamentos, cursos] = await Promise.all([
+        opcoesService.listarDepartamentos(),
+        opcoesService.listarCursos()
+    ]);
 
     return (
         <main className={styles.main}>
@@ -22,7 +29,7 @@ export default async function QuadroHorarios() {
             
 
             <section className={styles.filtersSection}>
-                {/* Componente de Filtros para consultas de turmas. */}
+                <QuadroHelper departamentos={departamentos} cursos={cursos}/>
             </section>
 
             <section className={styles.tableSection}>

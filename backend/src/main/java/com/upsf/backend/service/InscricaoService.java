@@ -48,9 +48,11 @@ public class InscricaoService {
 //    }
 
     // talvez eu tenha introduzido um erro aqui
+    // Função de Listagem de Turmas Disponíveis para um determinado Discente
+    // Em resposta à InscricaoController
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
-        Set<DisciplinaDTO> concluidas = new HashSet<>(historicoService.buscarDisciplinasConcluidas(discenteId));
+        Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
         List<Turma> turmasAtivas = turmaService.buscarTurmasEntitiesAtivasComRequisitos();
 
         List<Turma> disponiveis = turmasAtivas.stream()

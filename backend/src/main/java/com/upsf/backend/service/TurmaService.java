@@ -6,7 +6,9 @@ import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.mapper.TurmaMapper;
 import com.upsf.backend.model.Turma;
 import com.upsf.backend.repository.TurmaRepository;
+import com.upsf.backend.spec.TurmaSpec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,6 +27,13 @@ public class TurmaService {
     public List<TurmaDTO> buscarTurmasAtivas() {
 
         List<Turma> turmas = turmaRepository.buscarTurmasAtivas();
+        return turmaMapper.toTurmasDTO(turmas);
+    }
+
+    // Função de Busca de Turmas com Filtros para TurmaController (Para Quadro de Horários)
+    public List<TurmaDTO> listarQuadroTurmas(String nomeCodDisciplina, String departamento, String docente, String anoSemestre) {
+        Specification<Turma> spec = TurmaSpec.comFiltros(nomeCodDisciplina, departamento, docente, anoSemestre);
+        List<Turma> turmas = turmaRepository.findAll(spec);
         return turmaMapper.toTurmasDTO(turmas);
     }
 

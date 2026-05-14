@@ -31,12 +31,13 @@ public class HistoricoService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o aluno ID: " + discenteId));
     }
 
-    public List<DisciplinaDTO> buscarDisciplinasConcluidas(Long discenteId) {
-        List<Disciplina> disciplinas = historicoRepository.findDisciplinasByDiscenteAndStatus(
+    // Função usada em "listarTurmasDisponiveis" de InscricaoService
+    // Deve retornar a versão Entity de Disciplina
+    public List<Disciplina> buscarDisciplinasEntitiesAprovadas(Long discenteId) {
+        return historicoRepository.findDisciplinasByDiscenteAndStatus(
                 discenteId,
                 DisciplinaCursada.StatusFinal.APROVADO
         );
-        return disciplinaMapper.toDisciplinasDTO(disciplinas);
     }
 
 

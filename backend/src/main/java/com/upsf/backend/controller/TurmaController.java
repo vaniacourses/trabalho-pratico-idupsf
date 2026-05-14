@@ -19,11 +19,22 @@ public class TurmaController {
     @Autowired
     private TurmaService turmaService;
 
-    // Requisição GET para Turmas Ativas (Para Quadro de Horários)
+    // Requisição GET para Turmas Ativas (Para Quadro de Horários) - Talvez Desnecessário
     @GetMapping
     public ResponseEntity<List<TurmaDTO>> buscarTurmasAtivas() {
         List<TurmaDTO> turmasAtivas = turmaService.buscarTurmasAtivas();
         return ResponseEntity.ok(turmasAtivas); // Status 200
+    }
+
+    // Busca de Turmas com Filtros (Para Quadro de Horários)
+    @GetMapping("/turmas")
+    public ResponseEntity<List<TurmaDTO>> listarQuadroTurmas(
+            @RequestParam(required = false) String nomeCodDisciplina,
+            @RequestParam(required = false) String departamento,
+            @RequestParam(required = false) String docente,
+            @RequestParam(required = false) String anoSemestre
+    ) {
+        return ResponseEntity.ok(turmaService.listarQuadroTurmas(nomeCodDisciplina, departamento, docente, anoSemestre));
     }
 
     // Dependência de @Valid ainda inexistente

@@ -5,27 +5,31 @@
 
 export type TipoCategoria = "Obrigatória" | "Optativa" | "Eletiva";
 
-export type SituacaoAcademica = "Ativo" | "Trancado" | "Formado" | "Jubilado";
+export type SituacaoAcademica = "ATIVO" | "TRANCADO" | "FORMADO" | "JUBILADO";
 
-export type FormaPermanencia = "Regular" | "Transferência" | "Reopção" | "Ação Afirmativa";
+// export type FormaPermanencia = "Regular" | "Transferência" | "Reopção" | "Ação Afirmativa";
+export type FormaPermanencia = "DEFINITIVA" | "TEMPORARIA" // A verifivar
 
-export type Titulacao = "Mestre" | "Doutor";
+export type Titulacao = "MESTRE" | "DOUTOR";
 
-export type StatusUsuario = "Ativo" | "Inativo";
+export type StatusUsuario = "ATIVO" | "INATIVO";
 
-export type StatusInscricao = "Pendente" |"Matriculado" | "Cancelado" | "Concluído";
+export type StatusTurma = "ATIVA" | "INATIVA" | "FECHADA";
 
-export type StatusDisciplinaCursada = "Aprovado" | "Reprovado" | "Trancado";
+export type StatusInscricao = "PENDENTE" |"MATRICULADO" | "CANCELADO" | "CONCLUIDO"; // Colocar enum no Back
 
-export type Regime = "Integral" | "Parcial" | "Visitante";
+export type StatusDisciplinaCursada = "APROVADO" | "REPROVADO" | "TRANCADO" | "AGUARDO";
 
-export type Turno = "Diurno" | "Noturno" | "Integral";
+export type Regime = "DE" | "TP";
+
+export type Turno = "DIURNO" | "NOTURNO" | "INTEGRAL";
 
 // ============================================================
 // HORÁRIO
 // ============================================================
 
 export type Horario = {
+    id?: number;
     diasDaSemana?: string[];
     horarioInicio?: string; // formato "HH:mm"
     horarioFim?: string;    // formato "HH:mm"
@@ -36,6 +40,7 @@ export type Horario = {
 // ============================================================
 
 export type Disciplina = {
+    id?: number;
     nome?: string;
     cod?: string;
     cargaHoraria?: number;
@@ -47,6 +52,7 @@ export type Disciplina = {
 // ============================================================
 
 export type RegistroDisciplina = {
+    id?: number;
     tipoCategoria?: TipoCategoria;
     periodoRecomendado?: number;
     disciplina?: Disciplina;
@@ -57,6 +63,7 @@ export type RegistroDisciplina = {
 // ============================================================
 
 export type Curriculo = {
+    id?: number;
     cod?: string;
     registroDisciplina?: RegistroDisciplina[];
 };
@@ -66,6 +73,7 @@ export type Curriculo = {
 // ============================================================
 
 export type Departamento = {
+    id?: number;
     nome?: string;
     cod?: number;
     endereco?: string;
@@ -78,6 +86,7 @@ export type Departamento = {
 // ============================================================
 
 export type Curso = {
+    id?: number;
     cod?: string;
     nome?: string;
     duracaoMin?: number;
@@ -92,6 +101,7 @@ export type Curso = {
 // ============================================================
 
 export type Usuario = {
+    id?: number;
     nome?: string;
     matricula?: string;
     status?: StatusUsuario;
@@ -107,6 +117,7 @@ export type Usuario = {
 // ============================================================
 
 export type Historico = {
+    id?: number;
     coeficienteRend?: number;
     listaDisciplinas?: DisciplinaCursada[];
 };
@@ -157,7 +168,7 @@ export type Turma = {
     id?: number;
     nome?: string;
     cod?: string;
-    ano_semestre?: string; // formato "YYYY.S" ex: "2026.1"
+    anoSemestre?: string; // formato "YYYY.S" ex: "2026.1"
     horario?: Horario;
     status?: string;
     disciplina?: Disciplina;
@@ -171,6 +182,7 @@ export type Turma = {
 // ============================================================
 
 export type DisciplinaCursada = {
+    id?: number;
     turma?: Turma;
     nota?: number;
     notaVS?: number;
@@ -185,6 +197,7 @@ export type DisciplinaCursada = {
 // ============================================================
 
 export type Inscricao = {
+    id?: number;
     turma?: Turma;
     aluno?: Discente;
     status?: StatusInscricao;
