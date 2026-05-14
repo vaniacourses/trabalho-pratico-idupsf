@@ -14,7 +14,7 @@ public class DepartamentoService {
     private DepartamentoRepository departamentoRepository;
 
 
-    public List<DepartamentoDTO> listarOptions() {
-        return departamentoRepository.findAllAsOptions();
-    }
+//    public List<DepartamentoDTO> listarOptions() {
+//        return departamentoRepository.findAllAsOptions();
+//    }
 }

@@ -35,7 +35,7 @@ public class DocumentoController {
 
         DiscenteDTO aluno = discenteService.buscarPorId(id_aluno);
 
-        List<DisciplinaDTO> disciplinas = historicoService.buscarDisciplinasConcluidas(id_aluno);
+        List<DisciplinaDTO> disciplinas = historicoService.buscarDisciplinasEntitiesAprovadasDTO(id_aluno);
 
         RelatorioHistoricoDTO dadosParaPdf = new RelatorioHistoricoDTO(
                 aluno.nome(),

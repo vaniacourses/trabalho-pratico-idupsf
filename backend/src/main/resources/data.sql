@@ -58,9 +58,9 @@ INSERT INTO horario (id, horario_inicio, horario_fim) VALUES
 INSERT INTO horario_dias_da_semana (horario_id, dias_da_semana) VALUES
                                                                     (1, 'SEGUNDA'), (1, 'QUARTA');
 
--- 11. TURMAS
-INSERT INTO turma (id, cod, nome, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id) VALUES
-    (1, 'T01', 'Algoritmos Turma A', '2024.1', 'ATIVA', 'Introdução à lógica de programação', 40, 2, 1, 1);
+-- -- 11. TURMAS
+-- INSERT INTO turma (id, cod, nome, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id) VALUES
+--     (1, 'T01', 'Algoritmos Turma A', '2024.1', 'ATIVA', 'Introdução à lógica de programação', 40, 2, 1, 1);
 
 -- 12. HISTÓRICO (O Hibernate criou discente_id graças ao @JoinColumn)
 INSERT INTO historico (id, coeficiente_rend, discente_id) VALUES

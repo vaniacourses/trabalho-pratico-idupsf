@@ -22,10 +22,10 @@ public class OpcaoController {
     // private CursoService cursoService;
     // private CurriculoService curriculoService;
 
-    @GetMapping("/departamentos")
-    public ResponseEntity<List<DepartamentoDTO>> departamentos() {
-        return ResponseEntity.ok(departamentoService.listarOptions());
-    }
+//    @GetMapping("/departamentos")
+//    public ResponseEntity<List<DepartamentoDTO>> departamentos() {
+//        return ResponseEntity.ok(departamentoService.listarOptions());
+//    }
 
     // Necessário discutir certas relações entre Turma e (Curso, Currículo) para fazer esses filtros de busca
     // Placeholders temporários

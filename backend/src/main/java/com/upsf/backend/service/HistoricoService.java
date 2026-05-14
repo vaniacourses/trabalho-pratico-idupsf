@@ -40,6 +40,14 @@ public class HistoricoService {
         );
     }
 
+    // Versao da funcao acima que retorna um DTO
+    public List<DisciplinaDTO> buscarDisciplinasEntitiesAprovadasDTO(Long discenteId) {
+        List<Disciplina> disciplinas = historicoRepository.findDisciplinasByDiscenteAndStatus(
+                discenteId,
+                DisciplinaCursada.StatusFinal.APROVADO
+        );
+        return disciplinaMapper.toDisciplinasDTO(disciplinas);
+    }
 
 
     public void atualizarCoeficiente(Long discenteId) {
