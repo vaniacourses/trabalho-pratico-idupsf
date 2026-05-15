@@ -1,6 +1,6 @@
 package com.upsf.backend.service;
 
-import com.upsf.backend.dto.DisciplinaDTO;
+import com.upsf.backend.dto.DisciplinaCursadaDTO;
 import com.upsf.backend.dto.RelatorioHistoricoDTO;
 import org.openpdf.text.*;
 import org.openpdf.text.pdf.PdfPCell;
@@ -23,25 +23,35 @@ public class HistoricoPDFService extends GeradorDePDFService<RelatorioHistoricoD
         document.add(new Paragraph("CPF: " + dados.cpf()));
         document.add(new Paragraph("Matrícula UFF: " + dados.matricula()));
 
-        PdfPTable tabela = new PdfPTable(6);
+        String crFormatado = dados.cr() != null ? String.format("%.2f", dados.cr()) : "0.00";
+        document.add(new Paragraph("CR: " + crFormatado));
+
+        PdfPTable tabela = new PdfPTable(7);
         tabela.setWidthPercentage(100);
         tabela.setSpacingBefore(15);
 
-        tabela.addCell(new PdfPCell(new Paragraph("Código da Disciplina", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
-        tabela.addCell(new PdfPCell(new Paragraph("Nome da Disciplina", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
+        tabela.setWidths(new float[]{2f, 4f, 1.5f, 1.5f, 1.5f, 2f, 2.5f});
+
+        tabela.addCell(new PdfPCell(new Paragraph("Código", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
+        tabela.addCell(new PdfPCell(new Paragraph("Disciplina", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
         tabela.addCell(new PdfPCell(new Paragraph("Nota", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
         tabela.addCell(new PdfPCell(new Paragraph("VS", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
-        tabela.addCell(new PdfPCell(new Paragraph("Horas ", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
+        tabela.addCell(new PdfPCell(new Paragraph("Horas", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
         tabela.addCell(new PdfPCell(new Paragraph("Período", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
+        tabela.addCell(new PdfPCell(new Paragraph("Situação", FontFactory.getFont(FontFactory.HELVETICA_BOLD))));
 
-        for (DisciplinaDTO disc : dados.disciplinas()) {
-            tabela.addCell(disc.cod());
-            tabela.addCell(disc.nome());
+        for (DisciplinaCursadaDTO disc : dados.disciplinasCursadas()) {
+            tabela.addCell(disc.codigoDisciplina() != null ? disc.codigoDisciplina() : "-");
+            tabela.addCell(disc.nomeDisciplina() != null ? disc.nomeDisciplina() : "-");
+            tabela.addCell(disc.nota() != null ? String.valueOf(disc.nota()) : "-");
 
-            tabela.addCell("-");
-            tabela.addCell("-");
-            tabela.addCell("-");
-            tabela.addCell("-");
+            // Regra visual: Se a nota da VS for nula ou 0.0, exibe um traço para manter a tabela limpa
+            String textoVS = (disc.notaVS() != null && disc.notaVS() > 0.0f) ? String.valueOf(disc.notaVS()) : "-";
+            tabela.addCell(textoVS);
+
+            tabela.addCell(disc.cargaHoraria() != null ? String.valueOf(disc.cargaHoraria()) : "-");
+            tabela.addCell(disc.anoSemestre() != null ? disc.anoSemestre() : "-");
+            tabela.addCell(disc.status() != null ? disc.status() : "-");
         }
 
         document.add(tabela);

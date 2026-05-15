@@ -1,5 +1,6 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.dto.DisciplinaCursadaDTO;
 import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.dto.HistoricoDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
@@ -29,6 +30,32 @@ public class HistoricoService {
     public Historico buscarPorDiscente(Long discenteId) {
         return historicoRepository.findByDiscenteId(discenteId)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o aluno ID: " + discenteId));
+    }
+
+    public Float buscarCR(Long idAluno) {
+        Historico historico = historicoRepository.findByDiscenteId(idAluno)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o discente: " + idAluno));
+
+        return historico.getCoeficienteRend();
+    }
+
+    public List<DisciplinaCursadaDTO> buscarDisciplinasCursadasDTO(Long idAluno) {
+        Historico historico = historicoRepository.findByDiscenteId(idAluno)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o discente: " + idAluno));
+
+        // Percorre a lista de disciplinas cursadas e converte uma por uma para o DTO
+        return historico.getListaDisciplinas().stream()
+                .map(cursada -> new DisciplinaCursadaDTO(
+                        cursada.getId(),
+                        cursada.getTurma().getDisciplina().getNome(), // Navegando até a Disciplina para pegar o nome
+                        cursada.getTurma().getDisciplina().getCod(),  // Navegando até a Disciplina para pegar o código
+                        cursada.getNota(),
+                        cursada.getNotaVS(),
+                        cursada.getStatusFinal().name(), // Convertendo o Enum (APROVADO, REPROVADO) para String
+                        cursada.getCargaHoraria(),
+                        cursada.getPeriodo() // Ou cursada.getTurma().getAnoSemestre() dependendo da sua preferência
+                ))
+                .toList();
     }
 
     // Função usada em "listarTurmasDisponiveis" de InscricaoService

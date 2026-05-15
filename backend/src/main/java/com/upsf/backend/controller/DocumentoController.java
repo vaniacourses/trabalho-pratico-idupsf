@@ -1,6 +1,7 @@
 package com.upsf.backend.controller;
 
 import com.upsf.backend.dto.DiscenteDTO;
+import com.upsf.backend.dto.DisciplinaCursadaDTO;
 import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.dto.RelatorioHistoricoDTO;
 import com.upsf.backend.service.DiscenteService;
@@ -35,12 +36,15 @@ public class DocumentoController {
 
         DiscenteDTO aluno = discenteService.buscarPorId(id_aluno);
 
-        List<DisciplinaDTO> disciplinas = historicoService.buscarDisciplinasEntitiesAprovadasDTO(id_aluno);
+        Float crAluno = historicoService.buscarCR(id_aluno);
+
+        List<DisciplinaCursadaDTO> disciplinas = historicoService.buscarDisciplinasCursadasDTO(id_aluno);
 
         RelatorioHistoricoDTO dadosParaPdf = new RelatorioHistoricoDTO(
                 aluno.nome(),
                 aluno.cpf(),
                 aluno.matricula(),
+                crAluno,
                 disciplinas
         );
 
