@@ -23,11 +23,15 @@ public class DiscenteService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
                         "Discente de id = " + id_discente + " não encontrado."
                 ));
-        return discenteMapper.toDiscenteDTO(discente);
+        return discenteMapper.toDto(discente);
     }
 
-    public DiscenteDTO castrarDiscente(DiscenteCreate discenteCreate) {
+    public DiscenteDTO cadastrarDiscente(DiscenteCreate discenteCreate) {
+        Discente discente =  discenteMapper.toEntity(discenteCreate);
 
+        discente = discenteRepository.save(discente);
+
+        return discenteMapper.toDto(discente);
     }
 
 }

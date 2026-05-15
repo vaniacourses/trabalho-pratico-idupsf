@@ -27,18 +27,16 @@ public class Docente extends Usuario{
     @ElementCollection
     private List<String> areasAtuacao;
     private String lattes;
-    private Date dataAdmissao;
 
     public Docente(String matricula, String nome, String email, String emailInst, String cpf, String senha,
                    Date dataNasc, Usuario.Status status, Titulacao titulacao, Regime regime, Departamento departamento,
-                   List<String> areasAtuacao, String lattes, Date dataAdmissao) {
-        super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status);
+                   List<String> areasAtuacao, String lattes, Date dataIngresso) {
+        super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status, dataIngresso);
         this.titulacao = titulacao;
         this.regime = regime;
         this.departamento = departamento;
         this.areasAtuacao = areasAtuacao;
         this.lattes = lattes;
-        this.dataAdmissao = dataAdmissao;
     }
 
     public void adicionarAreaAtuacao(String novaArea) {

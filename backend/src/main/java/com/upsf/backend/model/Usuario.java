@@ -29,12 +29,13 @@ public abstract class Usuario {
     private String cpf;
     private String senha;
     private Date dataNasc;
+    private Date dataIngresso;
     public enum Status{ATIVO, INATIVO};
     @Enumerated(EnumType.STRING)
     private Status status;
 
     public Usuario(String matricula, String nome, String email, String emailInst,
-                   String cpf, String senha, Date dataNasc, Status status) {
+                   String cpf, String senha, Date dataNasc, Status status, Date dataIngresso) {
         this.matricula = matricula;
         this.nome = nome;
         this.email = email;
@@ -43,6 +44,7 @@ public abstract class Usuario {
         this.senha = senha;
         this.dataNasc = dataNasc;
         this.status = status;
+        this.dataIngresso = dataIngresso;
     }
 
     abstract void atualizarSenha(String novaSenha);

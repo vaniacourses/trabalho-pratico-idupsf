@@ -7,7 +7,6 @@ import java.util.List;
 
 // Dependência de @Null ainda inexistente
 public record CoordenadorCreate(
-        String matricula,
         String nome,
         String email,
         String cpf,
