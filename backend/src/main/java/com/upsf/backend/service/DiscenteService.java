@@ -26,4 +26,8 @@ public class DiscenteService {
         return discenteMapper.toDiscenteDTO(discente);
     }
 
+    public DiscenteDTO castrarDiscente(DiscenteCreate discenteCreate) {
+
+    }
+
 }

@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface DiscenteMapper {
 
-    DiscenteDTO toDiscenteDTO(Discente discente);
+    DiscenteDTO toDto(Discente discente);
 }
