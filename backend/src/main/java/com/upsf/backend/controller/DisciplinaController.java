@@ -18,7 +18,12 @@ public class DisciplinaController {
     private DisciplinaService disciplinaService;
 
     @GetMapping
-    public List<DisciplinaDTO> retornarListaDisciplinasPeloNome(@RequestParam String nome) {
+    public List<DisciplinaDTO> listarDisciplinas(@RequestParam(required = false) String nome) {
+
+        if (nome == null || nome.isBlank()) {
+            return disciplinaService.retornarTodasAsDisciplinas();
+        }
+
         return disciplinaService.retornarListaDisciplinasPeloNome(nome);
     }
 
@@ -27,13 +32,13 @@ public class DisciplinaController {
         return disciplinaService.retornarDisciplina(id_disciplina);
     }
 
-    // trocar o retorno para um DisciplinaResponse no futuro
+    // trocar o retorno para um DisciplinaResponse no futuro?
     @PostMapping
     public DisciplinaDTO cadastrarDisciplina(@RequestBody DisciplinaCreate disciplinaCreate) {
         return disciplinaService.cadastrarDisciplina(disciplinaCreate);
     }
 
-    // trocar o retorno para um DisciplinaResponse
+    // trocar o retorno para um DisciplinaResponse?
     @PutMapping("{id_disciplina}")
     public DisciplinaDTO alterarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
         return disciplinaService.alterarDisciplina(disciplinaDTO);

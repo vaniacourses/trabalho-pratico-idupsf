@@ -13,12 +13,12 @@ INSERT INTO curso (id, cod, nome, duracao_min, duracao_max, cod_curriculo_atual,
 INSERT INTO curriculo (id, cod, curso_id) VALUES
     (1, 'CC-2024', 1);
 
--- 4. DISCIPLINAS
-INSERT INTO disciplina (id, cod, nome, carga_horaria) VALUES
-                                                          (1, 'MAT001', 'Cálculo 1', 60),
-                                                          (2, 'COMP001', 'Algoritmos 1', 60),
-                                                          (3, 'COMP002', 'Estrutura de Dados', 60);
-
+-- 6. DISCIPLINAS
+-- Certifique-se de que a ordem das colunas corresponde ao seu modelo JPA
+INSERT INTO disciplina (id, cod, nome, carga_horaria, status) VALUES
+                                                                  (1, 'MAT001', 'Cálculo 1', 60, 'ATIVA'),
+                                                                  (2, 'COMP001', 'Algoritmos 1', 60, 'ATIVA'),
+                                                                  (3, 'COMP002', 'Estrutura de Dados', 60, 'ATIVA');
 -- 5. PRÉ-REQUISITOS (Estrutura de Dados exige Algoritmos)
 INSERT INTO disciplina_prerequisitos (disciplina_id, prerequisito_id) VALUES
     (3, 2);
@@ -58,9 +58,9 @@ INSERT INTO horario (id, horario_inicio, horario_fim) VALUES
 INSERT INTO horario_dias_da_semana (horario_id, dias_da_semana) VALUES
                                                                     (1, 'SEGUNDA'), (1, 'QUARTA');
 
--- -- 11. TURMAS
--- INSERT INTO turma (id, cod, nome, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id) VALUES
---     (1, 'T01', 'Algoritmos Turma A', '2024.1', 'ATIVA', 'Introdução à lógica de programação', 40, 2, 1, 1);
+-- 11. TURMAS
+INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id) VALUES
+    (1, 'T01', '2024.1', 'ATIVA', 'Introdução à lógica de programação', 40, 2, 1, 1);
 
 -- 12. HISTÓRICO (O Hibernate criou discente_id graças ao @JoinColumn)
 INSERT INTO historico (id, coeficiente_rend, discente_id) VALUES
