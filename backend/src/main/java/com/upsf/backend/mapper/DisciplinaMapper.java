@@ -4,6 +4,7 @@ import com.upsf.backend.create.DisciplinaCreate;
 import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.model.Disciplina;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface DisciplinaMapper {
 
     Disciplina toDisciplina(DisciplinaDTO disciplinaDTO);
 
+    @Mapping(target = "preRequisitos", ignore = true)
     Disciplina toDisciplina(DisciplinaCreate disciplinaCreate);
 
     DisciplinaDTO toDisciplinaDTO(Disciplina disciplina);

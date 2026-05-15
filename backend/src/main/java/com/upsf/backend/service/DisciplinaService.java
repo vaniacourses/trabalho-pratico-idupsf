@@ -27,6 +27,11 @@ public class DisciplinaService {
         return disciplinaMapper.toDisciplinasDTO(disciplinas);
     }
 
+    public List<DisciplinaDTO> retornarTodasAsDisciplinas() {
+        List<Disciplina> disciplinas = disciplinaRepository.findAll();
+        return disciplinaMapper.toDisciplinasDTO(disciplinas);
+    }
+
     public DisciplinaDTO retornarDisciplina(@PathVariable Long id_disciplina) {
         Disciplina disciplina = disciplinaRepository.findById(id_disciplina)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
@@ -35,9 +40,18 @@ public class DisciplinaService {
         return disciplinaMapper.toDisciplinaDTO(disciplina);
     }
 
-    // trocar o retorno
+    // trocar o retorno?
     public DisciplinaDTO cadastrarDisciplina(DisciplinaCreate disciplinaCreate) {
         Disciplina disciplina = disciplinaMapper.toDisciplina(disciplinaCreate);
+
+        disciplina.setStatus(Disciplina.Status.ATIVA);
+
+        if (disciplinaCreate.preRequisitosIds() != null && !disciplinaCreate.preRequisitosIds().isEmpty()) {
+            // busca as entidades com os ids
+            List<Disciplina> preReqs = disciplinaRepository.findAllById(disciplinaCreate.preRequisitosIds());
+            disciplina.setPreRequisitos(preReqs);
+        }
+
         return disciplinaMapper.toDisciplinaDTO(disciplinaRepository.save(disciplina));
     }
 
@@ -47,8 +61,12 @@ public class DisciplinaService {
         return disciplinaMapper.toDisciplinaDTO(disciplinaRepository.save(disciplina));
     }
 
-    public void deletarDisciplina(@PathVariable Long id_disciplina) {
-        disciplinaRepository.deleteById(id_disciplina);
-    }
+    public void deletarDisciplina(Long id_disciplina) {
+        Disciplina disciplina = disciplinaRepository.findById(id_disciplina)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Disciplina não encontrada."));
 
+        disciplina.setStatus(Disciplina.Status.INATIVA);
+
+        disciplinaRepository.save(disciplina);
+    }
 }

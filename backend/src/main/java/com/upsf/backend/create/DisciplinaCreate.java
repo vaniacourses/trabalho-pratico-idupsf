@@ -9,5 +9,5 @@ public record DisciplinaCreate(String cod,
                                String nome,
                                int cargaHoraria,
                                @JsonProperty("preRequisitos")
-                               List<Disciplina> preRequisitos) {
+                               List<Long> preRequisitosIds) {
 }

@@ -23,6 +23,15 @@ public class Disciplina {
     private String cod;
     private String nome;
     private int cargaHoraria;
+
+    public enum Status {
+        ATIVA,
+        INATIVA
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ATIVA;
+
     @ManyToMany
     @JoinTable(name = "disciplina_prerequisitos",
             joinColumns = @JoinColumn(name = "disciplina_id"),

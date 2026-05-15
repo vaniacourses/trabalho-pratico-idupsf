@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface DepartamentoRepository extends JpaRepository<Departamento, Long> {
 
-    @Query("SELECT new com.upsf.backend.dto.DepartamentoDTO(d.id, d.nome, d.cod) FROM Departamento d ORDER BY d.nome")
-    List<DepartamentoDTO> findAllAsOptions();
+        // essa query ta errada, ta dando erro no programa
+//    @Query("SELECT new com.upsf.backend.dto.DepartamentoDTO(d.id, d.nome, d.cod) FROM Departamento d ORDER BY d.nome")
+//    List<DepartamentoDTO> findAllAsOptions();
 
 }

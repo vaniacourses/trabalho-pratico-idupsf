@@ -1,11 +1,14 @@
 package com.upsf.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.upsf.backend.model.Disciplina;
 
 import java.util.List;
 
 public record DisciplinaDTO(Long id,
                             String cod,
-                            String nome)
+                            String nome,
+                            int cargaHoraria,
+                            Disciplina.Status status)
 {
 }
