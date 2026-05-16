@@ -23,13 +23,13 @@ public class InscricaoController {
         return inscricaoService.listarTurmasDisponiveis(discenteId);
     }
 
-//    @PostMapping
-//    public InscricaoResponseDTO realizarInscricao(@RequestBody InscricaoRequestDTO dto) {
-//        return  inscricaoService.realizarInscricao(dto);
-//    }
-//
-//    @DeleteMapping("/{id}/cancelar")
-//    public InscricaoResponseDTO cancelarInscricao(@PathVariable Long id) {
-//        return inscricaoService.cancelarInscricao(id);
-//    }
+    @PostMapping
+    public List<InscricaoResponseDTO> realizarInscricao(@RequestBody InscricaoRequestDTO dto) {
+        return  inscricaoService.realizarInscricao(dto);
+    }
+
+    @DeleteMapping("/{id}/cancelar")
+    public void cancelarInscricao(@RequestBody InscricaoRequestDTO dto) {
+        inscricaoService.cancelarInscricao(dto);
+    }
 }

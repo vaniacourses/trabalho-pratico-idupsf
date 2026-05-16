@@ -35,4 +35,15 @@ public class Horario {
     public void removerDiaDaSemana(String dia) {
         this.diasDaSemana.remove(dia);
     }
+
+    // false = não tem conflito
+    public boolean temConflitoCom(Horario outro) {
+        boolean mesmoDia = this.diasDaSemana.stream()
+                .anyMatch(dia -> outro.getDiasDaSemana().contains(dia));
+        if (!mesmoDia) return false;
+
+        //inicio1 < fim2 && inicio2 < fim1
+        return this.horarioInicio.compareTo(outro.getHorarioFim()) < 0 &&
+                outro.getHorarioInicio().compareTo(this.horarioFim) < 0;
+    }
 }
