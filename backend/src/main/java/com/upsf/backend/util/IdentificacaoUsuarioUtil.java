@@ -1,6 +1,7 @@
 package com.upsf.backend.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class IdentificacaoUsuarioUtil {
     public static String createEmailInst(String nome) {
@@ -19,12 +20,26 @@ public class IdentificacaoUsuarioUtil {
         return email.toString().toLowerCase();
     }
 
-    public static String formatarDataParaAnoSemestre(LocalDate dataIngresso)  {
+    public static LocalDate getDataHoje(){
+        return LocalDate.now();
+    }
 
+    public static String formatarDataParaAnoSemestre(LocalDate dataIngresso)  {
+        String semestre = "";
+        int mes = dataIngresso.getMonthValue();
+        StringBuilder anoSemestre = new StringBuilder();
+
+        if (mes <= 6)  semestre = "1";
+        else semestre = "2";
+
+        anoSemestre.append(DateTimeFormatter.ofPattern("yy"));
+        anoSemestre.append(semestre);
+
+        return anoSemestre.toString();
     }
 
     public static String createMatricula(String cursoCod, Long userId){
-        LocalDate dataIngresso =  LocalDate.now();
+        LocalDate dataIngresso =  IdentificacaoUsuarioUtil.getDataHoje();
         String anoSemestreAdmissao = IdentificacaoUsuarioUtil.formatarDataParaAnoSemestre(dataIngresso);
 
         StringBuilder matricula = new StringBuilder();

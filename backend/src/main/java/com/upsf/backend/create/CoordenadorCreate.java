@@ -19,5 +19,8 @@ public record CoordenadorCreate(
         Long idDepartamento,
         Long idCurso
 ) {
-
+//    public CoordenadorCreate{
+//        if (nome == null || nome.isEmpty() || email == null || email.isEmpty())
+//            throw new java.lang.IllegalArgumentException("Campos nome ou email vazios/nulos.");
+//    }
 }

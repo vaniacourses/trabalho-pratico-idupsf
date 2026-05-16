@@ -1,5 +1,6 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.model.Coordenador;
 import com.upsf.backend.model.Curso;
 import com.upsf.backend.model.Departamento;
