@@ -1,12 +1,12 @@
 package com.upsf.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Docente extends Usuario{
 
     public Docente(String matricula, String nome, String email, String emailInst, String cpf, String senha,
                    Date dataNasc, Usuario.Status status, Titulacao titulacao, Regime regime, Departamento departamento,
-                   List<String> areasAtuacao, String lattes, Date dataIngresso) {
+                   List<String> areasAtuacao, String lattes, LocalDate dataIngresso) {
         super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status, dataIngresso);
         this.titulacao = titulacao;
         this.regime = regime;
@@ -39,16 +39,4 @@ public class Docente extends Usuario{
         this.lattes = lattes;
     }
 
-    public void adicionarAreaAtuacao(String novaArea) {
-        this.areasAtuacao.add(novaArea);
-    }
-
-    public void removerAreaAtuacao(String area) {
-        this.areasAtuacao.remove(area);
-    }
-
-    public void atualizarSenha(String novaSenha){
-        setSenha(novaSenha);
-    }
-    public void desativarConta(){}
 }

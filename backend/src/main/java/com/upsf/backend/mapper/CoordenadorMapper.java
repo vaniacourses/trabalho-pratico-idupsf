@@ -5,9 +5,12 @@ import org.mapstruct.Mapper;
 
 import com.upsf.backend.model.Coordenador;
 import com.upsf.backend.dto.CoordenadorDTO;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CoordenadorMapper{
+    @Mapping(source = "departamento.id", target = "idDepartamento")
+    @Mapping(source = "curso.id", target = "idCurso")
     CoordenadorDTO toDto(Coordenador coordenador);
     Coordenador toEntity(CoordenadorCreate coordenadorCreate);
 }

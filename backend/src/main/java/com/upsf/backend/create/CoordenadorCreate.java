@@ -12,15 +12,12 @@ public record CoordenadorCreate(
         String cpf,
         String senha,
         Date dataNasc,
-        Docente.Titulacao titulo,
+        Docente.Titulacao titulacao,
         Docente.Regime regime, // eu não sei oq é esse regime, então deixei aqui
         List<String> areasAtuacao,
         String lattes,
         Long idDepartamento,
         Long idCurso
 ) {
-//    public CoordenadorCreate{
-//        if (nome == null || nome.isEmpty() || email == null || email.isEmpty())
-//            throw new java.lang.IllegalArgumentException("Campos nome ou email vazios/nulos.");
-//    }
+
 }

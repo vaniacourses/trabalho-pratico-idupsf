@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Coordenador extends Docente{
 
     public Coordenador(String matricula, String nome, String email, String emailInst, String cpf, String senha,
                        Date dataNasc, Status status, Titulacao titulacao, Regime regime, Departamento departamento,
-                       List<String> areasAtuacao, String lattes, Date dataAdmissao, Curso curso, Date inicioMandato, Date fimMandato) {
+                       List<String> areasAtuacao, String lattes, LocalDate dataAdmissao, Curso curso, Date inicioMandato, Date fimMandato) {
         super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status, titulacao, regime, departamento, areasAtuacao, lattes, dataAdmissao);
         this.curso = curso;
         this.inicioMandato = inicioMandato;

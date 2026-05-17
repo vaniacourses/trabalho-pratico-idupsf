@@ -13,7 +13,7 @@ public record DiscenteCreate(
         String senha,
         Date dataNasc,
         Long idCurso,
-        Discente.FormaPermanencia permanencia //não sei oq seria isso, então estou deixando aqui
+        Discente.FormaPermanencia formaPermanencia //não sei oq seria isso, então estou deixando aqui
 ) {
 
 }

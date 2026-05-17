@@ -3,7 +3,9 @@ package com.upsf.backend.dto;
 import com.upsf.backend.model.Departamento;
 import com.upsf.backend.model.Docente;
 import com.upsf.backend.model.Usuario;
+import org.mapstruct.Mapping;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +16,9 @@ public record DocenteDTO(String id,
                          Usuario.Status status,
                          Docente.Titulacao titulacao,
                          Docente.Regime regime,
-                         Departamento departamento,
+                         Long idDepartamento,
                          List<String> areasAtuacao,
                          String lattes,
-                         Date dataAdmissao){
+                         LocalDate dataIngresso){
 
 }

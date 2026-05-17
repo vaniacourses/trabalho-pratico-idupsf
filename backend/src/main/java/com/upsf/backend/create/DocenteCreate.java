@@ -1,6 +1,7 @@
 package com.upsf.backend.create;
 
 import com.upsf.backend.model.Docente;
+import org.mapstruct.Mapping;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ public record DocenteCreate(
         String cpf,
         String senha,
         Date dataNasc,
-        Docente.Titulacao titulo,
+        Docente.Titulacao titulacao,
         Docente.Regime regime, // eu não sei oq é esse regime, então deixei aqui
         List<String> areasAtuacao,
         String lattes,

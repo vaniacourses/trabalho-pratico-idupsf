@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,7 +20,6 @@ public class Discente extends Usuario{
     @OneToOne(mappedBy = "discente")
     private Historico historico;
     private String periodo;
-    private String periodoIngresso;
     private String codCurriculo;
     public enum SituacaoAcademica{ATIVO, FORMADO, JUBILADO, TRANCADO}
     public enum FormaPermanencia{DEFINITIVA, TEMPORARIA}
@@ -29,20 +29,15 @@ public class Discente extends Usuario{
     private FormaPermanencia formaPermanencia;
 
     public Discente(String matricula, String nome, String email, String emailInst, String cpf, String senha,
-                    Date dataNasc, Status status, Curso curso, Historico historico, String periodo, String periodoIngresso,
+                    Date dataNasc, Status status, Curso curso, Historico historico, String periodo, LocalDate dataIngresso,
                     String codCurriculo, SituacaoAcademica situacaoAcademica, FormaPermanencia formaPermanencia) {
-        super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status);
+        super(matricula, nome, email, emailInst, cpf, senha, dataNasc, status, dataIngresso);
         this.curso = curso;
         this.historico = historico;
         this.periodo = periodo;
-        this.periodoIngresso = periodoIngresso;
         this.codCurriculo = codCurriculo;
         this.situacaoAcademica = situacaoAcademica;
         this.formaPermanencia = formaPermanencia;
     }
 
-    void atualizarSenha(String novaSenha){}
-    void desativarConta(){}
-    void trancarMatricula(){}
-    boolean estarRegular(){return true;}
 }

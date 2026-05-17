@@ -4,9 +4,11 @@ import com.upsf.backend.create.DocenteCreate;
 import com.upsf.backend.dto.DocenteDTO;
 import com.upsf.backend.model.Docente;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface DocenteMapper {
+    @Mapping(source = "departamento.id", target = "idDepartamento")
     DocenteDTO toDto(Docente docente);
     Docente toEntity(DocenteCreate docenteCreate);
 }

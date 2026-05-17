@@ -32,7 +32,7 @@ public class IdentificacaoUsuarioUtil {
         if (mes <= 6)  semestre = "1";
         else semestre = "2";
 
-        anoSemestre.append(DateTimeFormatter.ofPattern("yy"));
+        anoSemestre.append(dataIngresso.format(DateTimeFormatter.ofPattern("yy")));
         anoSemestre.append(semestre);
 
         return anoSemestre.toString();
