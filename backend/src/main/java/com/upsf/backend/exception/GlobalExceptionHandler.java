@@ -67,4 +67,19 @@ public class GlobalExceptionHandler {
                         map,
                         e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<ErrorResponse> handleRegraNegocioException(
+            RegraNegocioException e, HttpServletRequest request) {
+
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        LocalDateTime.now(),
+                        HttpStatus.BAD_REQUEST.value(), // 400 Bad Request
+                        "Violação de Regra de Negócio",
+                        request.getMethod(),
+                        request.getRequestURI(),
+                        null,
+                        e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
 }

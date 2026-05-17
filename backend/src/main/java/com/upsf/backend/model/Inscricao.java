@@ -19,19 +19,21 @@ public class Inscricao {
     @ManyToOne
     private Turma turma;
     @ManyToOne
-    private Discente aluno;
+    private Discente discente;
     private String status; // Cancelada, Aprovada, Trancada, Em Espera?
     private float nota;
     private float notaVS;
     private boolean frequencia;
 
     // nota, notaVS e frequencia são definidos com o tempo
-    public Inscricao(Turma turma, Discente aluno, String status) {
+    public Inscricao(Turma turma, Discente discente, String status) {
         this.turma = turma;
-        this.aluno = aluno;
+        this.discente = discente;
         this.status = status;
     }
 
-    public void cancelar(){}
+    public void trancar() {
+        this.status = "Trancada";
+    }
     public void efetivarExcedente(){}
 }
