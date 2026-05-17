@@ -1,0 +1,23 @@
+package com.upsf.backend.create;
+
+import com.upsf.backend.model.Docente;
+import org.mapstruct.Mapping;
+
+import java.util.Date;
+import java.util.List;
+
+// Dependência de @Null ainda inexistente
+public record DocenteCreate(
+        String nome,
+        String email,
+        String cpf,
+        String senha,
+        Date dataNasc,
+        Docente.Titulacao titulacao,
+        Docente.Regime regime, // eu não sei oq é esse regime, então deixei aqui
+        List<String> areasAtuacao,
+        String lattes,
+        Long idDepartamento
+) {
+
+}

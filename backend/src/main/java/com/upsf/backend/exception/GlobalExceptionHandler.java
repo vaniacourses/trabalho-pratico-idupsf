@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntidadeNaoEncontradaException.class)
@@ -27,6 +29,22 @@ public class GlobalExceptionHandler {
                         request.getRequestURI(),
                         null,
                         e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EntidadeJaExistenteException.class)
+    public ResponseEntity<ErrorResponse> handleEntidadeJaExistente(
+            EntidadeJaExistenteException e,
+            HttpServletRequest request) {
+
+        return new ResponseEntity<>(
+                new ErrorResponse(
+                        LocalDateTime.now(),
+                        HttpStatus.CONFLICT.value(),
+                        HttpStatus.CONFLICT.name(),
+                        request.getMethod(),
+                        request.getRequestURI(),
+                        null,
+                        e.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

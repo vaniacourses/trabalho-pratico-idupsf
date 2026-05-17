@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -29,12 +30,13 @@ public abstract class Usuario {
     private String cpf;
     private String senha;
     private Date dataNasc;
+    private LocalDate dataIngresso;
     public enum Status{ATIVO, INATIVO};
     @Enumerated(EnumType.STRING)
     private Status status;
 
     public Usuario(String matricula, String nome, String email, String emailInst,
-                   String cpf, String senha, Date dataNasc, Status status) {
+                   String cpf, String senha, Date dataNasc, Status status, LocalDate dataIngresso) {
         this.matricula = matricula;
         this.nome = nome;
         this.email = email;
@@ -43,8 +45,7 @@ public abstract class Usuario {
         this.senha = senha;
         this.dataNasc = dataNasc;
         this.status = status;
+        this.dataIngresso = dataIngresso;
     }
 
-    abstract void atualizarSenha(String novaSenha);
-    abstract void desativarConta();
 }

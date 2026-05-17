@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DiscenteRepository extends JpaRepository<Discente, Long> {
 
-
-
 }
