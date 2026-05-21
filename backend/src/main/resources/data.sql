@@ -128,36 +128,46 @@ INSERT INTO horario_dias_da_semana (horario_id, dias_da_semana) VALUES
                                                                     (5, 'SEXTA');
 
 -- ==============================================================================
--- 11. TURMAS (Sem a coluna "nome")
+-- 11. PERÍODOS LETIVOS (2 registros - 2023.2 e 2024.1)
 -- ==============================================================================
-INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id) VALUES
-                                                                                                                 (1, 'T01', '2024.1', 'ATIVA', 'Lógica em C', 40, 2, 2, 1),
-                                                                                                                 (2, 'T02', '2024.1', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2),
-                                                                                                                 (3, 'T03', '2024.1', 'ATIVA', 'Listas e Árvores', 30, 3, 1, 3),
-                                                                                                                 (4, 'T04', '2024.1', 'ATIVA', 'Modelo OSI e TCP/IP', 40, 7, 4, 4),
-                                                                                                                 (5, 'T05', '2024.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5),
-                                                                                                                 (6, 'T06', '2024.1', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2),
-                                                                                                                 (7, 'T07', '2024.1', 'ATIVA', 'Processos e Threads', 35, 8, 4, 1),
-                                                                                                                 (8, 'T08', '2024.1', 'ATIVA', 'Mecânica Clássica', 50, 4, 3, 3),
-                                                                                                                 (9, 'T09', '2023.2', 'FECHADA', 'Lógica em Python', 40, 2, 2, 5),
-                                                                                                                 (10, 'T10', '2023.2', 'FECHADA', 'Scrum e UML', 40, 9, 5, 4);
+-- Ajuste as datas de inscricao (data_inicio_inscricao e data_fim_inscricao) para testar validações
+INSERT INTO periodo (id, semestre, data_inicio, data_fim, data_inicio_inscricao, data_fim_inscricao) VALUES
+                                                                                                         (1, '2023.2', '2023-08-01 00:00:00', '2023-12-15 00:00:00', '2023-07-15 00:00:00', '2023-07-30 00:00:00'),
+                                                                                                         (2, '2024.1', '2024-03-01 00:00:00', '2024-07-15 00:00:00', '2024-01-01 00:00:00', '2026-12-31 00:00:00'); -- Deixei o fim_inscricao em 2026 para os testes de "período ativo" passarem com segurança
 
 -- ==============================================================================
--- 12. INSCRIÇÕES ATUAIS (Alunos cursando turmas neste semestre 2024.1)
+-- 12. TURMAS (Associadas aos Períodos criados)
 -- ==============================================================================
-INSERT INTO inscricao (id, aluno_id, turma_id, nota, notavs, frequencia, status) VALUES
-                                                                                     (1, 6, 3, 0.0, 0.0, 1, 'INSCRITO'), -- Guilherme em ED (T03)
-                                                                                     (2, 6, 5, 0.0, 0.0, 1, 'INSCRITO'), -- Guilherme em IA (T05)
-                                                                                     (3, 7, 1, 0.0, 0.0, 1, 'INSCRITO'), -- Maria em Algoritmos (T01)
-                                                                                     (4, 7, 2, 0.0, 0.0, 1, 'INSCRITO'), -- Maria em Cálculo 1 (T02)
-                                                                                     (5, 8, 6, 0.0, 0.0, 1, 'INSCRITO'); -- João em Banco de Dados (T06)
+INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id, periodo_id) VALUES
+                                                                                                                             (1, 'T01', '2024.1', 'ATIVA', 'Lógica em C', 40, 2, 2, 1, 2),
+                                                                                                                             (2, 'T02', '2024.1', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2, 2),
+                                                                                                                             (3, 'T03', '2024.1', 'ATIVA', 'Listas e Árvores', 30, 3, 1, 3, 2),
+                                                                                                                             (4, 'T04', '2024.1', 'ATIVA', 'Modelo OSI e TCP/IP', 40, 7, 4, 4, 2),
+                                                                                                                             (5, 'T05', '2024.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5, 2),
+                                                                                                                             (6, 'T06', '2024.1', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2, 2),
+                                                                                                                             (7, 'T07', '2024.1', 'ATIVA', 'Processos e Threads', 35, 8, 4, 1, 2),
+                                                                                                                             (8, 'T08', '2024.1', 'ATIVA', 'Mecânica Clássica', 50, 4, 3, 3, 2),
+                                                                                                                             (9, 'T09', '2023.2', 'FECHADA', 'Lógica em Python', 40, 2, 2, 5, 1),
+                                                                                                                             (10, 'T10', '2023.2', 'FECHADA', 'Scrum e UML', 40, 9, 5, 4, 1);
 
 -- ==============================================================================
--- 13. DISCIPLINAS CURSADAS (Histórico passado dos alunos)
+-- 13. INSCRIÇÕES ATUAIS (Alunos cursando turmas no semestre 2024.1)
 -- ==============================================================================
-INSERT INTO disciplina_cursada (id, historico_id, turma_id, carga_horaria, nota, notavs, frequencia, periodo, status_final) VALUES
-                                                                                                                                (1, 1, 9, 60, 9.5, 0.0, 1, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
-                                                                                                                                (2, 1, 10, 60, 8.0, 0.0, 1, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
-                                                                                                                                (3, 3, 9, 60, 4.0, 6.5, 1, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
-                                                                                                                                (4, 5, 10, 60, 10.0, 0.0, 1, '2023.2', 'APROVADO'), -- Pedro passou com 10
-                                                                                                                                (5, 2, 9, 60, 3.0, 0.0, 0, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos
+-- Modificado aluno_id -> discente_id | notavs -> nota_vs | INSCRITO -> ATIVA
+INSERT INTO inscricao (id, discente_id, turma_id, nota, nota_vs, frequencia, status) VALUES
+                                                                                         (1, 6, 3, 0.0, 0.0, true, 'ATIVA'), -- Guilherme em ED (T03)
+                                                                                         (2, 6, 5, 0.0, 0.0, true, 'ATIVA'), -- Guilherme em IA (T05)
+                                                                                         (3, 7, 1, 0.0, 0.0, true, 'ATIVA'), -- Maria em Algoritmos (T01)
+                                                                                         (4, 7, 2, 0.0, 0.0, true, 'ATIVA'), -- Maria em Cálculo 1 (T02)
+                                                                                         (5, 8, 6, 0.0, 0.0, true, 'ATIVA'); -- João em Banco de Dados (T06)
+
+-- ==============================================================================
+-- 14. DISCIPLINAS CURSADAS (Histórico passado dos alunos)
+-- ==============================================================================
+-- Modificado notavs -> nota_vs para manter padrão de snake_case do banco
+INSERT INTO disciplina_cursada (id, historico_id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
+                                                                                                                                 (1, 1, 9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
+                                                                                                                                 (2, 1, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
+                                                                                                                                 (3, 3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
+                                                                                                                                 (4, 5, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
+                                                                                                                                 (5, 2, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos

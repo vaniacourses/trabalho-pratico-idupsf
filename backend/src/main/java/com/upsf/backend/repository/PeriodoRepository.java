@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface PeriodoRepository {
-    // Busca o periodo atual, é optional pq existem ferias
-    @Query("select p from Periodo p where :agora between p.dataInicio and p.dataFim")
-    Optional<Periodo> findPeriodoAtual(LocalDateTime agora);
+    // Busca o periodo inscrição atual, é optional pq existem ferias
+    @Query("select p from Periodo p where :agora between p.dataInicioInscricao and p.dataFimInscricao")
+    Optional<Periodo> findPeriodoInscricaoAtual(LocalDateTime agora);
 }

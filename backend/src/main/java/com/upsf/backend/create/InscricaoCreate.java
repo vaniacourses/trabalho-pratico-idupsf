@@ -1,11 +1,11 @@
-package com.upsf.backend.dto;
+package com.upsf.backend.create;
 
 import java.util.List;
 
 // tentei usar uma anotação notnull e não funcionou
 // talvez deve ter matricula e não id
 //inscricaoCreate
-public record InscricaoRequestDTO(
+public record InscricaoCreate(
         Long discenteId,
         List<Long> turmasIds) {
 }

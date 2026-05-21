@@ -1,10 +1,8 @@
 package com.upsf.backend.mapper;
 
-import com.upsf.backend.dto.InscricaoResponseDTO;
+import com.upsf.backend.dto.InscricaoDTO;
 import com.upsf.backend.model.Inscricao;
-import com.upsf.backend.model.RegistroDisciplina;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public interface InscricaoMapper{
 //    @Mapping(source = "discente.nome", target = "nomeDiscente")
 //    InscricaoResponseDTO toResponseDTO(RegistroDisciplina inscricao);
 
-    InscricaoResponseDTO toResponseDTO(Inscricao inscricao);
+    InscricaoDTO toResponseDTO(Inscricao inscricao);
 
-    List<InscricaoResponseDTO> toInscricoesDTO(List<Inscricao> inscricoes);
+    List<InscricaoDTO> toInscricoesDTO(List<Inscricao> inscricoes);
 }

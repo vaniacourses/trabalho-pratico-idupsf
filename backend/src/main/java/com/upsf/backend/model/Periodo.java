@@ -44,7 +44,7 @@ public class Periodo {
 
     public boolean isInscricaoAtiva() {
         LocalDateTime agora = LocalDateTime.now();
-        return agora.isAfter(dataInicioInscricao) && agora.isBefore(dataFimInscricao);
+        return !agora.isBefore(dataInicioInscricao) && !agora.isAfter(dataFimInscricao);
     }
 
     public void adicionarTurmas(Turma turma) {
