@@ -42,7 +42,7 @@ public class DiscenteService {
             throw new EntidadeJaExistenteException("Email já cadastrado.");
 
         Curso curso = cursoRepository.findById(discenteCreate.idCurso()).orElseThrow(() -> new EntidadeNaoEncontradaException("Curso não encontrado."));
-        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), discente.getId());
+        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), 1L);
         String emailInst = IdentificacaoUsuarioUtil.createEmailInst(discente.getNome());
 
         discente.setMatricula(matricula);
