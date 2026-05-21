@@ -38,7 +38,7 @@ public class DocenteService {
 
         Departamento dept = departamentoRepository.findById(docenteCreate.idDepartamento()).orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
         String emailInst = IdentificacaoUsuarioUtil.createEmailInst(docente.getNome());
-        String matricula = IdentificacaoUsuarioUtil.createMatricula("", docente.getId());
+        String matricula = IdentificacaoUsuarioUtil.createMatricula("", 1L);
 
         docente.setMatricula(matricula);
         docente.setEmailInst(emailInst);

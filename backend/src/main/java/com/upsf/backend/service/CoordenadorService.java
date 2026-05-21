@@ -42,7 +42,7 @@ public class CoordenadorService {
         Curso curso = cursoRepository.findById(coordenadorCreate.idCurso()).orElseThrow(() -> new EntidadeNaoEncontradaException("Curso não encontrado."));
         Departamento dept = departamentoRepository.findById(coordenadorCreate.idDepartamento()).orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
         String email = IdentificacaoUsuarioUtil.createEmailInst(coordenador.getNome());
-        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), coordenador.getId());
+        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), 1L);
 
         coordenador.setMatricula(matricula);
         coordenador.setEmailInst(email);
