@@ -145,7 +145,8 @@ INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina
                                                                                                                              (7, 'T07', '2024.1', 'ATIVA', 'Processos e Threads', 35, 8, 4, 1, 2),
                                                                                                                              (8, 'T08', '2024.1', 'ATIVA', 'Mecânica Clássica', 50, 4, 3, 3, 2),
                                                                                                                              (9, 'T09', '2023.2', 'FECHADA', 'Lógica em Python', 40, 2, 2, 5, 1),
-                                                                                                                             (10, 'T10', '2023.2', 'FECHADA', 'Scrum e UML', 40, 9, 5, 4, 1);
+                                                                                                                             (10, 'T10', '2023.2', 'FECHADA', 'Scrum e UML', 40, 9, 5, 4, 1),
+                                                                                                                             (11, 'T11', '2024.1', 'ATIVA', 'HPC em Nuvem', 40, 9, 5, 1, NULL);
 
 -- ==============================================================================
 -- 13. INSCRIÇÕES ATUAIS (Alunos cursando turmas no semestre 2024.1)

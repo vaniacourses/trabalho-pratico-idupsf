@@ -23,18 +23,16 @@ public class InscricaoController {
         return inscricaoService.listarTurmasDisponiveis(discenteId);
     }
 
+    @GetMapping("/inscrições-feitas/{discenteId}")
+    public List<InscricaoDTO> listarInscricoesFeitasPorId(@PathVariable Long discenteId) {
+        return inscricaoService.listarInscricoesFeitasPorId(discenteId);
+    }
+
     @PostMapping
     public List<InscricaoDTO> realizarInscricao(@RequestBody InscricaoCreate dto) {
         return  inscricaoService.realizarInscricao(dto);
     }
 
-    // isso aqui está errado o delete não aceita dtos
-//    @DeleteMapping("/{id}/cancelar")
-//    public void cancelarInscricao(@RequestBody InscricaoRequestDTO dto) {
-//        inscricaoService.cancelarInscricao(dto);
-//    }
-
-    // nova versão
     @DeleteMapping("/cancelar")
     public void cancelarInscricao(@RequestParam Long discenteId,
                                   @RequestParam List<Long> turmasIds) {

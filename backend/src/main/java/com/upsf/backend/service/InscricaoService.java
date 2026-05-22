@@ -59,6 +59,11 @@ public class InscricaoService {
         return turmaMapper.toTurmasDTO(disponiveis);
     }
 
+    public List<InscricaoDTO> listarInscricoesFeitasPorId(Long discenteId) {
+        List<Inscricao> inscricoesFeitas = inscricaoRepository.findByDiscenteId(discenteId);
+        return inscricaoMapper.toInscricoesDTO(inscricoesFeitas);
+    }
+
     @Transactional
     public List<InscricaoDTO> realizarInscricao(InscricaoCreate dto) {
         validarPeriodoInscricaoAtivo();
