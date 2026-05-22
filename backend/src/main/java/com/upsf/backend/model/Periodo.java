@@ -28,7 +28,8 @@ public class Periodo {
     // Periodo de inscrição
     private LocalDateTime dataInicioInscricao;
     private LocalDateTime dataFimInscricao;
-    @OneToMany(mappedBy = "periodo")
+    @OneToMany
+    @JoinColumn(name = "periodo_id")
     private List<Turma> turmas;
 
     // o calendario é definido pela reitoria no inicio do periodo, todas as datas devem existir ao instanciar a classe

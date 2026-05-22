@@ -17,11 +17,14 @@ public class Inscricao {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "turma_id")
     private Turma turma;
     @ManyToOne
+    @JoinColumn(name = "discente_id")
     private Discente discente;
     private String status; // Cancelada, Aprovada, Trancada, Em Espera?
     private float nota;
+    @Column(name = "nota_vs")
     private float notaVS;
     private boolean frequencia;
 

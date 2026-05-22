@@ -25,6 +25,8 @@ public class Docente extends Usuario{
     @ManyToOne
     private Departamento departamento;
     @ElementCollection
+    @CollectionTable(name = "docente_areas_atuacao", joinColumns = @JoinColumn(name = "docente_id"))
+    @Column(name = "areas_atuacao")
     private List<String> areasAtuacao;
     private String lattes;
 

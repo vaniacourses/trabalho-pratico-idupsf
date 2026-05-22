@@ -18,13 +18,16 @@ public class DisciplinaCursada {
     @ManyToOne
     private Turma turma;
     private float nota;
+    @Column(name = "nota_vs")
     private float notaVS;
     public enum StatusFinal{APROVADO, REPROVADO, TRANCADO, AGUARDO}
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_final")
     private StatusFinal statusFinal; // pode ser enum
     private boolean frequencia;
     private String periodo;
     // também precisa de carga horaria pra realizar calculo do cr caso o calculo seja feito no modelo
+    @Column(name = "carga_horaria")
     private int cargaHoraria;
 
     // status final é definido depois de disciplina cursada ser criada

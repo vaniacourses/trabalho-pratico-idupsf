@@ -68,27 +68,26 @@ INSERT INTO registro_disciplina (id, periodo_recomendado, tipo_categoria, curric
 -- ==============================================================================
 -- 7. USUÁRIOS BASE (10 registros: 1-5 Docentes, 6-10 Discentes)
 -- ==============================================================================
-INSERT INTO usuario (id, matricula, nome, email, email_inst, senha, status, data_nasc, cpf) VALUES
-                                                                                                (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '11111111111'),
-                                                                                                (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '22222222222'),
-                                                                                                (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '33333333333'),
-                                                                                                (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '44444444444'),
-                                                                                                (5, 'DOC005', 'Tim Berners-Lee', 'tim@uff.br', 'tim.lee@id.uff.br', 'senha123', 'ATIVO', '1955-06-08', '55555555555'),
-                                                                                                (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '66666666666'),
-                                                                                                (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '77777777777'),
-                                                                                                (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '88888888888'),
-                                                                                                (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '99999999999'),
-                                                                                                (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '00000000000');
-
+INSERT INTO usuario (id, matricula, nome, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
+                                                                                                               (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '11111111111', '2010-01-15'),
+                                                                                                               (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '22222222222', '2012-03-10'),
+                                                                                                               (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '33333333333', '2015-08-01'),
+                                                                                                               (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '44444444444', '2018-02-20'),
+                                                                                                               (5, 'DOC005', 'Tim Berners-Lee', 'tim@uff.br', 'tim.lee@id.uff.br', 'senha123', 'ATIVO', '1955-06-08', '55555555555', '2020-07-05'),
+                                                                                                               (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '66666666666', '2022-03-01'),
+                                                                                                               (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '77777777777', '2023-03-01'),
+                                                                                                               (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '88888888888', '2021-03-01'),
+                                                                                                               (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '99999999999', '2024-03-01'),
+                                                                                                               (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '00000000000', '2020-03-01');
 -- ==============================================================================
 -- 8. DOCENTES (Aproveitando os IDs 1 a 5)
 -- ==============================================================================
-INSERT INTO docente (id, departamento_id, titulacao, regime, lattes, data_admissao) VALUES
-                                                                                        (1, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/111', '2010-01-15'),
-                                                                                        (2, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/222', '2012-03-10'),
-                                                                                        (3, 2, 'MESTRE', 'TP', 'http://lattes.cnpq.br/333', '2015-08-01'),
-                                                                                        (4, 4, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/444', '2018-02-20'),
-                                                                                        (5, 1, 'MESTRE', 'TP', 'http://lattes.cnpq.br/555', '2020-07-05');
+INSERT INTO docente (id, departamento_id, titulacao, regime, lattes) VALUES
+                                                                         (1, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/111'),
+                                                                         (2, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/222'),
+                                                                         (3, 2, 'MESTRE', 'TP', 'http://lattes.cnpq.br/333'),
+                                                                         (4, 4, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/444'),
+                                                                         (5, 1, 'MESTRE', 'TP', 'http://lattes.cnpq.br/555');
 
 INSERT INTO docente_areas_atuacao (docente_id, areas_atuacao) VALUES
                                                                   (1, 'Inteligência Artificial'), (1, 'Teoria da Computação'),
@@ -96,16 +95,15 @@ INSERT INTO docente_areas_atuacao (docente_id, areas_atuacao) VALUES
                                                                   (3, 'Cálculo Numérico'),
                                                                   (4, 'Sistemas Operacionais'), (4, 'Redes'),
                                                                   (5, 'Desenvolvimento Web');
-
 -- ==============================================================================
 -- 9. DISCENTES E SEUS HISTÓRICOS (Aproveitando os IDs 6 a 10)
 -- ==============================================================================
-INSERT INTO discente (id, curso_id, cod_curriculo, periodo, periodo_ingresso, forma_permanencia, situacao_academica) VALUES
-                                                                                                                         (6, 1, 'CC-2024', '5', '2022.1', 'DEFINITIVA', 'ATIVO'),
-                                                                                                                         (7, 1, 'CC-2024', '3', '2023.1', 'DEFINITIVA', 'ATIVO'),
-                                                                                                                         (8, 2, 'SI-2024', '7', '2021.1', 'DEFINITIVA', 'ATIVO'),
-                                                                                                                         (9, 3, 'MAT-2024', '1', '2024.1', 'DEFINITIVA', 'ATIVO'),
-                                                                                                                         (10, 4, 'FIS-2024', '8', '2020.1', 'DEFINITIVA', 'FORMADO');
+INSERT INTO discente (id, curso_id, cod_curriculo, periodo, forma_permanencia, situacao_academica) VALUES
+                                                                                                                         (6, 1, 'CC-2024', '5', 'DEFINITIVA', 'ATIVO'),
+                                                                                                                         (7, 1, 'CC-2024', '3', 'DEFINITIVA', 'ATIVO'),
+                                                                                                                         (8, 2, 'SI-2024', '7', 'DEFINITIVA', 'ATIVO'),
+                                                                                                                         (9, 3, 'MAT-2024', '1', 'DEFINITIVA', 'ATIVO'),
+                                                                                                                         (10, 4, 'FIS-2024', '8', 'DEFINITIVA', 'FORMADO');
 
 INSERT INTO historico (id, discente_id, coeficiente_rend) VALUES
                                                               (1, 6, 8.5), (2, 7, 9.1), (3, 8, 7.2), (4, 9, 0.0), (5, 10, 8.8);
@@ -130,7 +128,6 @@ INSERT INTO horario_dias_da_semana (horario_id, dias_da_semana) VALUES
 -- ==============================================================================
 -- 11. PERÍODOS LETIVOS (2 registros - 2023.2 e 2024.1)
 -- ==============================================================================
--- Ajuste as datas de inscricao (data_inicio_inscricao e data_fim_inscricao) para testar validações
 INSERT INTO periodo (id, semestre, data_inicio, data_fim, data_inicio_inscricao, data_fim_inscricao) VALUES
                                                                                                          (1, '2023.2', '2023-08-01 00:00:00', '2023-12-15 00:00:00', '2023-07-15 00:00:00', '2023-07-30 00:00:00'),
                                                                                                          (2, '2024.1', '2024-03-01 00:00:00', '2024-07-15 00:00:00', '2024-01-01 00:00:00', '2026-12-31 00:00:00'); -- Deixei o fim_inscricao em 2026 para os testes de "período ativo" passarem com segurança
@@ -165,9 +162,9 @@ INSERT INTO inscricao (id, discente_id, turma_id, nota, nota_vs, frequencia, sta
 -- 14. DISCIPLINAS CURSADAS (Histórico passado dos alunos)
 -- ==============================================================================
 -- Modificado notavs -> nota_vs para manter padrão de snake_case do banco
-INSERT INTO disciplina_cursada (id, historico_id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
-                                                                                                                                 (1, 1, 9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
-                                                                                                                                 (2, 1, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
-                                                                                                                                 (3, 3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
-                                                                                                                                 (4, 5, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
-                                                                                                                                 (5, 2, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos
+INSERT INTO disciplina_cursada (id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
+                                                                                                                                 (1,9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
+                                                                                                                                 (2, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
+                                                                                                                                 (3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
+                                                                                                                                 (4, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
+                                                                                                                                 (5, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos
