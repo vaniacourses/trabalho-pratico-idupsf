@@ -13,6 +13,7 @@ import com.upsf.backend.model.Inscricao;
 import com.upsf.backend.model.Turma;
 import com.upsf.backend.repository.*;
 import com.upsf.backend.inscricao.ValidacaoInscricao;
+import com.upsf.backend.repository.InscricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,9 @@ import java.util.Set;
 
 @Service
 public class InscricaoService {
+
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
     @Autowired
     private HistoricoService historicoService;
@@ -47,6 +51,7 @@ public class InscricaoService {
     // talvez eu tenha introduzido um erro aqui
     // Função de Listagem de Turmas Disponíveis para um determinado Discente
     // Em resposta à InscricaoController
+
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
         Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
@@ -106,4 +111,11 @@ public class InscricaoService {
 //        inscricoesParaTrancar.forEach(Inscricao::trancar);
 //        inscricaoRepository.saveAll(inscricoesParaTrancar);
 //    }
+    public List<Inscricao> listarInscricoesPorTurma(Long id) {
+        return inscricaoRepository.findByTurmaId(id);
+    }
+
+    public void deletarInscricoesPorTurma(Long turmaId) {
+        inscricaoRepository.deleteByTurmaId(turmaId);
+    }
 }
