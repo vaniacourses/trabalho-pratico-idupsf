@@ -31,6 +31,9 @@ public class InscricaoService {
 
     @Autowired
     private HistoricoService historicoService;
+
+    @Autowired
+    private HistoricoService historicoService;
     @Autowired
     private TurmaService turmaService;
     @Autowired

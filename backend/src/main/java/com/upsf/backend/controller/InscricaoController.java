@@ -39,6 +39,15 @@ public class InscricaoController {
                                   @RequestParam List<Long> turmasIds) {
         inscricaoService.cancelarInscricao(discenteId, turmasIds);
     }
+//    @PostMapping
+//    public InscricaoResponseDTO realizarInscricao(@RequestBody InscricaoRequestDTO dto) {
+//        return  inscricaoService.realizarInscricao(dto);
+//    }
+//
+//    @DeleteMapping("/{id}/cancelar")
+//    public InscricaoResponseDTO cancelarInscricao(@PathVariable Long id) {
+//        return inscricaoService.cancelarInscricao(id);
+//    }
 
     // Requisição de Listar todas as Inscrições Por Turma
     @GetMapping("/turma-inscricoes/{turmaId}")
@@ -53,4 +62,8 @@ public class InscricaoController {
     public void deletarInscricoesPorTurma(@PathVariable Long turmaId) {
         inscricaoService.deletarInscricoesPorTurma(turmaId);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1aa626e992e7bd1d72e6c44b18b81f9205fdf9dd
 }
