@@ -42,7 +42,6 @@ public class Departamento {
     }
 
     public void removerCurso(Curso curso) {
-        this.cursos.remove(curso);
+        this.cursos.removeIf(c -> c.getId().equals(curso.getId()));
     }
-
 }
