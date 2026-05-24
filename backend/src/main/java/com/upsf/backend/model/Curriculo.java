@@ -31,15 +31,27 @@ public class Curriculo {
     }
 
     public int calcularTotalHoras() {
-        return 0;
+        if (registroDisciplinas == null) return 0;
+        return registroDisciplinas.stream()
+                .mapToInt(r -> r.getDisciplina().getCargaHoraria())
+                .sum();
     }
 
-    public int calcularHorasOptativas(){
-        return 0;
+    public int calcularHorasObrigatorias() {
+        if (registroDisciplinas == null) return 0;
+        return registroDisciplinas.stream()
+                .filter(r -> r.getTipoCategoria() == RegistroDisciplina.TipoCategoria.OBRIGATORIA)
+                .mapToInt(r -> r.getDisciplina().getCargaHoraria())
+                .sum();
     }
 
-    public int calcularHorasObrigatorias(){
-        return 0;
+    public int calcularHorasOptativas() {
+        if (registroDisciplinas == null) return 0;
+        return registroDisciplinas.stream()
+                .filter(r -> r.getTipoCategoria() == RegistroDisciplina.TipoCategoria.OPTATIVA
+                        || r.getTipoCategoria() == RegistroDisciplina.TipoCategoria.ELETIVA)
+                .mapToInt(r -> r.getDisciplina().getCargaHoraria())
+                .sum();
     }
 
     public void adicionarDisciplina(RegistroDisciplina disciplina) {

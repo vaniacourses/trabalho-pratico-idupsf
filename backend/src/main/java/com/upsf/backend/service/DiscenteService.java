@@ -52,6 +52,7 @@ public class DiscenteService {
         discente.setHistorico(hist);
         discente.setStatus(Usuario.Status.ATIVO);
         discente.setDataIngresso(IdentificacaoUsuarioUtil.getDataHoje());
+        discente.setCodCurriculo(curso.getCodCurriculoAtual());
 
 
         discente = discenteRepository.save(discente);
