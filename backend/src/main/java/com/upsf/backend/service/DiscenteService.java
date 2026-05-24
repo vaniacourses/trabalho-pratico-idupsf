@@ -9,6 +9,7 @@ import com.upsf.backend.mapper.DiscenteMapper;
 import com.upsf.backend.model.*;
 import com.upsf.backend.repository.CursoRepository;
 import com.upsf.backend.repository.DiscenteRepository;
+import com.upsf.backend.repository.HistoricoRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.DiscenteUpdate;
 import com.upsf.backend.util.IdentificacaoUsuarioUtil;
@@ -28,6 +29,8 @@ public class DiscenteService {
     private DiscenteMapper discenteMapper;
     @Autowired
     private CursoRepository cursoRepository;
+    @Autowired
+    private HistoricoRepository historicoRepository;
 
     public DiscenteDTO cadastrarDiscente(DiscenteCreate discenteCreate) {
         Discente discente =  discenteMapper.toEntity(discenteCreate);
@@ -40,15 +43,20 @@ public class DiscenteService {
         Curso curso = cursoRepository.findById(discenteCreate.idCurso()).orElseThrow(() -> new EntidadeNaoEncontradaException("Curso não encontrado."));
         String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), 1L);
         String emailInst = IdentificacaoUsuarioUtil.createEmailInst(discente.getNome());
+        Historico hist =  new Historico();
+        hist.setDiscente(discente);
 
         discente.setMatricula(matricula);
         discente.setEmailInst(emailInst);
         discente.setCurso(curso);
-        discente.setHistorico(new Historico());
+        discente.setHistorico(hist);
         discente.setStatus(Usuario.Status.ATIVO);
         discente.setDataIngresso(IdentificacaoUsuarioUtil.getDataHoje());
 
+
         discente = discenteRepository.save(discente);
+
+        hist = historicoRepository.save(hist);
 
         return discenteMapper.toDto(discente);
     }
@@ -93,6 +101,16 @@ public class DiscenteService {
             discente.setSituacaoAcademica(discenteUpdate.situacaoAcademica());
         if (discenteUpdate.formaPermanencia() != null && !discenteUpdate.formaPermanencia().equals(discente.getFormaPermanencia()))
             discente.setFormaPermanencia(discenteUpdate.formaPermanencia());
+
+        discente = discenteRepository.save(discente);
+
+        return discenteMapper.toDto(discente);
+    }
+
+    public DiscenteDTO removeDiscenteById(Long id){
+        Discente discente = discenteRepository.findById(id)
+                .orElseThrow(() -> new  EntidadeNaoEncontradaException("Discente de id = " + id + "não encontrado"));
+        discente.setStatus(Usuario.Status.INATIVO);
 
         discente = discenteRepository.save(discente);
 

@@ -42,4 +42,10 @@ public class DiscenteController {
         DiscenteDTO discenteAtualizado = discenteService.setDiscenteById(id, discenteUpdate);
         return ResponseEntity.ok(discenteAtualizado);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DiscenteDTO> removerDiscente(@PathVariable Long id){
+        DiscenteDTO discenteRemovido = discenteService.removeDiscenteById(id);
+        return ResponseEntity.ok(discenteRemovido);
+    }
 }

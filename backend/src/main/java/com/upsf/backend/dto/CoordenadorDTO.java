@@ -22,8 +22,8 @@ public record CoordenadorDTO(Long id,
                              String lattes,
                              LocalDate dataIngresso,
                              Long idCurso,
-                             Date inicioMandato,
-                             Date fimMandato
+                             LocalDate inicioMandato,
+                             LocalDate fimMandato
                              ){
 
 }

@@ -43,5 +43,11 @@ public class CoordenadorController {
         return ResponseEntity.ok(coordenadorAtualizado);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CoordenadorDTO> removerCoordenador(@PathVariable Long id){
+        CoordenadorDTO coordenadorRemovido = coordenadorService.removeCoordenadorById(id);
+        return ResponseEntity.ok(coordenadorRemovido);
+    }
+
 
 }

@@ -40,9 +40,10 @@ public class DocenteService {
         if (usuarioRepository.existsByEmail(docente.getEmail()))
             throw new EntidadeJaExistenteException("Email já cadastrado.");
 
-        Departamento dept = departamentoRepository.findById(docenteCreate.idDepartamento()).orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
+        Departamento dept = departamentoRepository.findById(docenteCreate.idDepartamento())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
         String emailInst = IdentificacaoUsuarioUtil.createEmailInst(docente.getNome());
-        String matricula = IdentificacaoUsuarioUtil.createMatricula("", 1L);
+        String matricula = IdentificacaoUsuarioUtil.createMatricula(dept.getCod(), 1L);
 
         docente.setMatricula(matricula);
         docente.setEmailInst(emailInst);
@@ -96,6 +97,16 @@ public class DocenteService {
         if (docenteUpdate.regime() != null && !docenteUpdate.regime().equals(docente.getRegime())) docente.setRegime(docenteUpdate.regime());
         if (docenteUpdate.areasAtuacao() != null && !docenteUpdate.areasAtuacao().equals(docente.getAreasAtuacao())) docente.setAreasAtuacao(docenteUpdate.areasAtuacao());
         if (docenteUpdate.lattes() != null && !docenteUpdate.lattes().equals(docente.getLattes())) docente.setLattes(docenteUpdate.lattes());
+
+        docente = docenteRepository.save(docente);
+
+        return docenteMapper.toDto(docente);
+    }
+
+    public DocenteDTO removeDocenteById(Long id){
+        Docente docente = docenteRepository.findById(id)
+                .orElseThrow(() -> new  EntidadeNaoEncontradaException("Docente de id = " + id + "não encontrado"));
+        docente.setStatus(Usuario.Status.INATIVO);
 
         docente = docenteRepository.save(docente);
 

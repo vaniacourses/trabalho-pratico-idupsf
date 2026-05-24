@@ -51,6 +51,7 @@ public class CoordenadorService {
         coordenador.setDepartamento(dept);
         coordenador.setStatus(Usuario.Status.ATIVO);
         coordenador.setDataIngresso(IdentificacaoUsuarioUtil.getDataHoje());
+        coordenador.setInicioMandato(IdentificacaoUsuarioUtil.getDataHoje());
 
         coordenadorRepository.save(coordenador);
 
@@ -100,6 +101,17 @@ public class CoordenadorService {
             coordenador.setAreasAtuacao(coordenadorUpdate.areasAtuacao());
         if (coordenadorUpdate.lattes() != null &&   !coordenadorUpdate.lattes().equals(coordenador.getLattes()))
             coordenador.setLattes(coordenadorUpdate.lattes());
+
+        coordenador = coordenadorRepository.save(coordenador);
+
+        return coordenadorMapper.toDto(coordenador);
+    }
+
+    public CoordenadorDTO removeCoordenadorById(Long id){
+        Coordenador coordenador = coordenadorRepository.findById(id)
+                .orElseThrow(() -> new  EntidadeNaoEncontradaException("Coordenador de id = " + id + "não encontrado"));
+        coordenador.setStatus(Usuario.Status.INATIVO);
+        coordenador.setFimMandato(IdentificacaoUsuarioUtil.getDataHoje());
 
         coordenador = coordenadorRepository.save(coordenador);
 

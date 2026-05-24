@@ -42,4 +42,10 @@ public class DocenteController {
         DocenteDTO docenteAtualizado = docenteService.setDocenteById(id, docenteUpdate);
         return ResponseEntity.ok(docenteAtualizado);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DocenteDTO> removerDocente(@PathVariable Long id){
+        DocenteDTO docenteRemovido = docenteService.removeDocenteById(id);
+        return ResponseEntity.ok(docenteRemovido);
+    }
 }
