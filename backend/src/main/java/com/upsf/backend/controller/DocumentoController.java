@@ -34,7 +34,7 @@ public class DocumentoController {
     @GetMapping("historico/{id_aluno}")
     public ResponseEntity<byte[]> baixarHistorico(@PathVariable Long id_aluno) {
 
-        DiscenteDTO aluno = discenteService.buscarPorId(id_aluno);
+        DiscenteDTO aluno = discenteService.getDiscenteById(id_aluno);
 
         Float crAluno = historicoService.buscarCR(id_aluno);
 
