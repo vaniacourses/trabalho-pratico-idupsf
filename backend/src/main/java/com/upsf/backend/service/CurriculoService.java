@@ -8,6 +8,7 @@ import com.upsf.backend.mapper.CursoMapper;
 import com.upsf.backend.model.Curriculo;
 import com.upsf.backend.model.Curso;
 import com.upsf.backend.repository.CurriculoRepository;
+import com.upsf.backend.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

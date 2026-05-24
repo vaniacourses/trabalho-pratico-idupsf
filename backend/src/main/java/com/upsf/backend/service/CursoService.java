@@ -24,6 +24,9 @@ public class CursoService {
     private CursoRepository cursoRepository;
 
     @Autowired
+    private CurriculoRepository curriculoRepository;
+
+    @Autowired
     private CursoMapper cursoMapper;
 
     @Transactional(readOnly = true)
