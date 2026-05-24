@@ -51,7 +51,7 @@ public class CursoService {
         }
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
-        // Se vier um codCurriculoAtual, valida que ele existe
+        /*
         if (cursoCreate.codCurriculoAtual() != null && !cursoCreate.codCurriculoAtual().isBlank()) {
             if (!curriculoRepository.existsByCod(cursoCreate.codCurriculoAtual())) {
                 throw new EntidadeNaoEncontradaException(
@@ -59,6 +59,7 @@ public class CursoService {
                 );
             }
         }
+        */
 
         Curso curso = cursoMapper.toCurso(cursoCreate);
         return cursoMapper.toCursoDTO(cursoRepository.save(curso));
@@ -80,7 +81,6 @@ public class CursoService {
         curso.setNome(cursoCreate.nome());
         curso.setDuracaoMin(cursoCreate.duracaoMin());
         curso.setDuracaoMax(cursoCreate.duracaoMax());
-        curso.setCodCurriculoAtual(cursoCreate.codCurriculoAtual());
         curso.setTurno(cursoCreate.turno());
 
         return cursoMapper.toCursoDTO(cursoRepository.save(curso));

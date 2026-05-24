@@ -39,9 +39,10 @@ public class CurriculoService {
         }
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
-        Curriculo curriculo = new Curriculo(cod);
+        Curriculo curriculo = curriculoRepository.save(new Curriculo(cod));
         curso.adicionarCurriculo(curriculo);
-        cursoRepository.save(curso);         
+
+        cursoRepository.save(curso);
 
         return cursoMapper.toCursoDTO(curso);
     }
@@ -62,6 +63,7 @@ public class CurriculoService {
         }
 
         curso.removerCurriculo(curriculo);
+        cursoRepository.save(curso);
         return cursoMapper.toCursoDTO(curso);
     }
 
@@ -71,7 +73,7 @@ public class CurriculoService {
         Curso curso = cursoService.buscarCursoPorId(cursoId);
         Curriculo curriculo = curriculoRepository
                 .findByIdAndCursoId(curriculoId, cursoId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                .orElseThrow(() -> new RegraNegocioException(
                         "Currículo de id = " + curriculoId + " não pertence ao curso de id = " + cursoId + "."
                 ));
 
@@ -80,7 +82,6 @@ public class CurriculoService {
         return cursoMapper.toCursoDTO(curso);
     }
 
-    // Método auxiliar reutilizável internamente
     public Curriculo buscarCurriculoPorId(Long id) {
         return curriculoRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
