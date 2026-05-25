@@ -13,6 +13,7 @@ import com.upsf.backend.repository.HistoricoRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.DiscenteUpdate;
 import com.upsf.backend.util.IdentificacaoUsuarioUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,10 @@ public class DiscenteService {
     private CursoRepository cursoRepository;
     @Autowired
     private HistoricoRepository historicoRepository;
+    @Autowired
+    private MatriculaSequenceService matriculaSequenceService;
 
+    @Transactional
     public DiscenteDTO cadastrarDiscente(DiscenteCreate discenteCreate) {
         Discente discente =  discenteMapper.toEntity(discenteCreate);
 
@@ -41,13 +45,13 @@ public class DiscenteService {
             throw new EntidadeJaExistenteException("Email já cadastrado.");
 
         Curso curso = cursoRepository.findById(discenteCreate.idCurso()).orElseThrow(() -> new EntidadeNaoEncontradaException("Curso não encontrado."));
-        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), 1L);
-        String emailInst = IdentificacaoUsuarioUtil.createEmailInst(discente.getNome());
+        MatriculaSequenceService.IdentificacaoUsuario identificacao =
+                matriculaSequenceService.gerarIdentificacao(curso.getCod(), discente.getNome());
         Historico hist =  new Historico();
         hist.setDiscente(discente);
 
-        discente.setMatricula(matricula);
-        discente.setEmailInst(emailInst);
+        discente.setMatricula(identificacao.matricula());
+        discente.setEmailInst(identificacao.emailInst());
         discente.setCurso(curso);
         discente.setHistorico(hist);
         discente.setStatus(Usuario.Status.ATIVO);

@@ -10,6 +10,7 @@ import com.upsf.backend.repository.DepartamentoRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.DocenteUpdate;
 import com.upsf.backend.util.IdentificacaoUsuarioUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,10 @@ public class DocenteService {
     private DocenteMapper docenteMapper;
     @Autowired
     private DepartamentoRepository departamentoRepository;
+    @Autowired
+    private MatriculaSequenceService matriculaSequenceService;
 
+    @Transactional
     public DocenteDTO cadastrarDocente(DocenteCreate docenteCreate) {
         Docente docente = docenteMapper.toEntity(docenteCreate);
 
@@ -42,11 +46,11 @@ public class DocenteService {
 
         Departamento dept = departamentoRepository.findById(docenteCreate.idDepartamento())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
-        String emailInst = IdentificacaoUsuarioUtil.createEmailInst(docente.getNome());
-        String matricula = IdentificacaoUsuarioUtil.createMatricula(dept.getCod(), 1L);
+        MatriculaSequenceService.IdentificacaoUsuario identificacao =
+                matriculaSequenceService.gerarIdentificacao(dept.getCod(), docente.getNome());
 
-        docente.setMatricula(matricula);
-        docente.setEmailInst(emailInst);
+        docente.setMatricula(identificacao.matricula());
+        docente.setEmailInst(identificacao.emailInst());
         docente.setDepartamento(dept);
         docente.setStatus(Usuario.Status.ATIVO);
         docente.setDataIngresso(IdentificacaoUsuarioUtil.getDataHoje());
