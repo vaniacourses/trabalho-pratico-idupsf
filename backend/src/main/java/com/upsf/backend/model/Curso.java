@@ -30,7 +30,7 @@ public class Curso {
     private Turno turno;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "curso_id")
-    private List<Curriculo> curriculos;
+    private List<Curriculo> curriculos = new ArrayList<>();
 
     // Construtor sem codCurriculoAtual, tem que chamar o setCodCurriculoAtual separadamente para definir
     public Curso(String cod, String nome, int duracaoMin, int duracaoMax, Turno turno) {
@@ -47,7 +47,7 @@ public class Curso {
     }
 
     public void removerCurriculo(Curriculo curriculo) {
-        this.curriculos.remove(curriculo);
+        this.curriculos.removeIf(c -> c.getId().equals(curriculo.getId()));
     }
 
 }

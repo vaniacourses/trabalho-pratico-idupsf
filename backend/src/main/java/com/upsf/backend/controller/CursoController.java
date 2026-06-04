@@ -1,71 +1,72 @@
 package com.upsf.backend.controller;
 
+import com.upsf.backend.create.CursoCreate;
 import com.upsf.backend.dto.CursoDTO;
-import com.upsf.backend.exception.EntidadeNaoEncontradaException;
-import com.upsf.backend.mapper.CursoMapper;
-import com.upsf.backend.model.Curso;
-import com.upsf.backend.repository.CursoRepository;
-import lombok.RequiredArgsConstructor;
+import com.upsf.backend.service.CurriculoService;
+import com.upsf.backend.service.CursoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/cursos")
-@RequiredArgsConstructor
+@RequestMapping("/api/cursos")
 public class CursoController {
 
-    private final CursoRepository cursoRepository;
-    private final CursoMapper cursoMapper;
+    @Autowired
+    private CursoService cursoService;
+
+    @Autowired
+    private CurriculoService curriculoService;
 
     @GetMapping
-    public List<CursoDTO> listarTodos() {
-        return cursoRepository.findAll()
-                .stream()
-                .map(cursoMapper::toCursoDTO)
-                .toList();
+    public ResponseEntity<List<CursoDTO>> listarTodos() {
+        return ResponseEntity.ok(cursoService.listarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CursoDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(cursoService.buscarDTOPorId(id));
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CursoDTO criar(@RequestBody CursoDTO dto) {
-
-        Curso curso = cursoMapper.toCurso(dto);
-
-        Curso salvo = cursoRepository.save(curso);
-
-        return cursoMapper.toCursoDTO(salvo);
+    public ResponseEntity<CursoDTO> criar(@RequestBody CursoCreate cursoCreate) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.criar(cursoCreate));
     }
 
     @PutMapping("/{id}")
-    public CursoDTO atualizar(@PathVariable Long id,
-                              @RequestBody CursoDTO dto) {
-
-        Curso curso = cursoRepository.findById(id)
-                .orElseThrow(() ->
-                        new EntidadeNaoEncontradaException("Curso não encontrado"));
-
-        curso.setCod(dto.cod());
-        curso.setNome(dto.nome());
-        curso.setDuracaoMin(dto.duracaoMin());
-        curso.setDuracaoMax(dto.duracaoMax());
-        curso.setCodCurriculoAtual(dto.codCurriculoAtual());
-        curso.setTurno(dto.turno());
-
-        Curso atualizado = cursoRepository.save(curso);
-
-        return cursoMapper.toCursoDTO(atualizado);
+    public ResponseEntity<CursoDTO> atualizar(@PathVariable Long id,
+                                              @RequestBody CursoCreate cursoCreate) {
+        return ResponseEntity.ok(cursoService.atualizar(id, cursoCreate));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        cursoService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 
-        Curso curso = cursoRepository.findById(id)
-                .orElseThrow(() ->
-                        new EntidadeNaoEncontradaException("Curso não encontrado"));
+    // --- Endpoints de Currículo ---
 
-        cursoRepository.delete(curso);
+    @PostMapping("/{cursoId}/curriculos")
+    public ResponseEntity<CursoDTO> adicionarCurriculo(@PathVariable Long cursoId,
+                                                       @RequestParam String cod) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(curriculoService.criarCurriculo(cursoId, cod));
+    }
+
+    @PatchMapping("/{cursoId}/curriculos/{curriculoId}/definir-atual")
+    public ResponseEntity<CursoDTO> definirCurriculoAtual(@PathVariable Long cursoId,
+                                                          @PathVariable Long curriculoId) {
+        return ResponseEntity.ok(curriculoService.definirCurriculoAtual(cursoId, curriculoId));
+    }
+
+    @DeleteMapping("/{cursoId}/curriculos/{curriculoId}")
+    public ResponseEntity<CursoDTO> removerCurriculo(@PathVariable Long cursoId,
+                                                     @PathVariable Long curriculoId) {
+        return ResponseEntity.ok(curriculoService.removerCurriculo(cursoId, curriculoId));
     }
 }
