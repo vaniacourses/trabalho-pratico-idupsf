@@ -1,17 +1,14 @@
 package com.upsf.backend.service;
 
 import com.upsf.backend.create.TurmaCreate;
-import com.upsf.backend.dto.DisciplinaDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.mapper.TurmaMapper;
 import com.upsf.backend.model.Disciplina;
+import com.upsf.backend.model.Docente;
 import com.upsf.backend.model.Horario;
 import com.upsf.backend.model.Turma;
-import com.upsf.backend.repository.DisciplinaRepository;
-import com.upsf.backend.repository.HorarioRepository;
-import com.upsf.backend.repository.InscricaoRepository;
-import com.upsf.backend.repository.TurmaRepository;
+import com.upsf.backend.repository.*;
 import com.upsf.backend.spec.TurmaSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -24,8 +21,8 @@ import java.util.List;
 @Service
 public class TurmaService {
 
-//    @Autowired
-//    private DocenteRepository docenteRepository;
+    @Autowired
+    private DocenteRepository docenteRepository;
 
     @Autowired
     private TurmaRepository turmaRepository;
@@ -56,11 +53,6 @@ public class TurmaService {
         return turmaMapper.toTurmasDTO(turmas);
     }
 
-    // Função de Busca de Turmas Ativas com Retorno em Entity e com Pré-Requisitos para InscricaoService
-    public List<Turma> buscarTurmasEntitiesAtivasComRequisitos() {
-        return turmaRepository.buscarTurmasAtivasComRequisitos();
-    }
-
     public TurmaDTO buscarTurmaPorId(@PathVariable Long idTurma) {
         Turma turma = turmaRepository.buscarTurmaPorId(idTurma)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
@@ -78,10 +70,10 @@ public class TurmaService {
 
         if (turmaCreate.docenteId() != null)  {
             turma.setStatus(Turma.StatusTurma.ATIVA);
-            // Docente docente = docenteRepository.findById(turmaCreate.docenteId())
-            //      .orElseThrow(() -> new EntidadeNaoEncontradaException(
-            //                            "Docente de id = " + turmaCreate.horarioId() + " não encontrado."));
-            // turma.setDocente(docente);
+             Docente docente = docenteRepository.findById(turmaCreate.docenteId())
+                  .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                                        "Docente de id = " + turmaCreate.horarioId() + " não encontrado."));
+             turma.setDocente(docente);
         } else {
             turma.setStatus(Turma.StatusTurma.INATIVA);
         }
@@ -100,6 +92,7 @@ public class TurmaService {
                     .orElseThrow(() -> new EntidadeNaoEncontradaException(
                             "Disciplina de id = " + turmaCreate.disciplinaId() + " não encontrada."
                     ));
+            turma.setDisciplina(disciplina);
         }
 
 
@@ -113,10 +106,6 @@ public class TurmaService {
         return turmaMapper.toTurmaDTO(turmaRepository.save(turma));
     }
 
-//    public DisciplinaDTO alterarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
-//        Disciplina disciplina = disciplinaMapper.toDisciplina(disciplinaDTO);
-//        return disciplinaMapper.toDisciplinaDTO(disciplinaRepository.save(disciplina));
-//    }
 
     public void removerTurmaPorId(long id) {
         // Ordem importa: Deleção das Inscrições Primeiro para respeitar Foreign Key

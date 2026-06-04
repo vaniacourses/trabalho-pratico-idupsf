@@ -52,16 +52,11 @@ public class TurmaController {
         return new ResponseEntity<>(novaTurma, HttpStatus.CREATED); // Status 201
     }
 
-    // Requisição PUT para Atualização dos Dados de uma Turma - ERRADA
+    // Requisição PUT para Atualização dos Dados de uma Turma
     @PutMapping("{idTurma}")
     public ResponseEntity<TurmaDTO> alterarTurma(@RequestBody TurmaDTO turmaDto) { // Passa um Objeto Destacado
         return ResponseEntity.ok(turmaService.alterarTurma(turmaDto));
     }
-
-//    @PutMapping("{id_disciplina}")
-//    public DisciplinaDTO alterarDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
-//        return disciplinaService.alterarDisciplina(disciplinaDTO);
-//    }
 
     // Requisição DELETE para Exclução de uma Turma
     @DeleteMapping("{idTurma}")

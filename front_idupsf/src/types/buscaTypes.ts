@@ -5,17 +5,17 @@
 
 */
 
-import { Curriculo, Curso, Departamento } from "./modelUPSF";
+import { Curriculo, Curso, Departamento, Periodo } from "./modelUPSF";
 
 // Interface que representa todos os possíveis Filtros para Buscar Turmas (Quadro de Horários)
 export interface FiltrosBuscaTurmas {
-  nomeCodDisciplina?: string;
-  anoSemestre?: string;
-  turno?: string; // Ainda a ser implementado
-  departamentoCod?: string;
-  nomeDocente?: string;
-  cursoId?: string;
-  curriculoId?: string;
+    nomeCodDisciplina?: string;
+    anoSemestre?: string;
+    turno?: string; // Ainda a ser implementado
+    departamentoCod?: string;
+    nomeDocente?: string;
+    cursoId?: string;
+    curriculoId?: string;
 }
 
 /*
@@ -30,6 +30,7 @@ export interface FiltrosBuscaTurmas {
 export interface TurmasOptionsProps {
     departamentos: Departamento[];
     cursos: Curso[]; 
+    periodos: Periodo[];
 }
 
 
@@ -41,6 +42,7 @@ export interface TurmasOptionsProps {
 export interface BuscaTurmasProps {
     departamentos: Departamento[];
     cursos: Curso[];
+    periodos: Periodo[];
     curriculos: Curriculo[];
     onCursoChange: (cursoId: string) => void;
     onBuscar: (filtros: FiltrosBuscaTurmas) => void;

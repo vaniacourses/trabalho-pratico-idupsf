@@ -3,16 +3,25 @@ import styles from './styles.module.css'
 import DiscenteCases from '@/components/DiscenteCases'
 import Carrossel from '@/components/Carrossel'
 import { defaultSlides } from '@/types/carrosselTypes'
+import { Perfil } from '@/types/modelUPSF'
+
 
 
 export default function Home() {
+
+    const perfil: Perfil = {
+        nome: "Cláudio Pires Salgado",
+        matricula: "0000000",
+        CPF: "123.456.789-00",
+        curso: "Ciência da Computação"
+    }
 
     return (     
 
         <section className={styles.contentSection}>
             
             <div className={styles.funcsSection}>
-                <PerfilCard/>
+                <PerfilCard perfil={perfil}/>
 
                 <DiscenteCases/>
             </div>

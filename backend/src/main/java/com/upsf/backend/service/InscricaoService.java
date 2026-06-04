@@ -27,27 +27,26 @@ import java.util.Set;
 public class InscricaoService {
 
     @Autowired
+    private InscricaoMapper inscricaoMapper;
+
+    @Autowired
     private InscricaoRepository inscricaoRepository;
 
     @Autowired
     private HistoricoService historicoService;
-
-    @Autowired
-    private HistoricoService historicoService;
-    @Autowired
-    private TurmaService turmaService;
+    
     @Autowired
     private TurmaMapper turmaMapper;
+    
     @Autowired
     private TurmaRepository turmaRepository;
-    @Autowired
-    private InscricaoMapper inscricaoMapper;
-    @Autowired
-    private InscricaoRepository inscricaoRepository;
+
     @Autowired
     private PeriodoRepository periodoRepository;
+    
     @Autowired
     private DiscenteRepository discenteRepository;
+    
     @Autowired
     private List<ValidacaoInscricao> validacoesInscricao;
 
@@ -58,7 +57,7 @@ public class InscricaoService {
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
         Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
-        List<Turma> turmasAtivas = turmaService.buscarTurmasEntitiesAtivasComRequisitos();
+        List<Turma> turmasAtivas = turmaRepository.buscarTurmasAtivasComRequisitos();
 
         List<Turma> disponiveis = turmasAtivas.stream()
                 .filter(turma -> concluidas.containsAll(turma.getDisciplina().getPreRequisitos()))

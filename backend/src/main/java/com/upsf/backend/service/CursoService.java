@@ -1,6 +1,7 @@
 package com.upsf.backend.service;
 
 import com.upsf.backend.dto.CursoDTO;
+import com.upsf.backend.dto.DepartamentoDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.mapper.CursoMapper;
 import com.upsf.backend.model.Curso;
@@ -19,4 +20,7 @@ public class CursoService {
     @Autowired
     private final CursoMapper cursoMapper;
 
+    public List<CursoDTO> listarOptions() {
+        return cursoRepository.findAllAsOptions();
+    }
 }

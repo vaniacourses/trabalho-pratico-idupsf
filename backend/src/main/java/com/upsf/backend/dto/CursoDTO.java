@@ -8,9 +8,10 @@ public record CursoDTO(
         Long id,
         String cod,
         String nome,
-        int duracaoMin,
-        int duracaoMax,
+        Integer duracaoMin,
+        Integer duracaoMax,
         String codCurriculoAtual,
-        Curso.Turno turno,
-        List<Long> curriculosIds){
+        Curso.Turno turno
+        // List<Long> curriculosIds
+        ){
 }

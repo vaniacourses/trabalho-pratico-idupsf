@@ -1,8 +1,13 @@
 import Image from 'next/image'
 import avatar from '../../../public/avatar.png'
 import styles from './styles.module.css'
+import { Perfil } from '@/types/modelUPSF'
 
-export default function PerfilCard() {
+interface PerfilProps {
+    perfil: Perfil
+}
+
+export default function PerfilCard( { perfil }: PerfilProps) {
     return (
         <section className={styles.perfilCard}>
             
@@ -15,10 +20,15 @@ export default function PerfilCard() {
             
 
             <div className={styles.info}>
-                <h2>Cláudio Pires Salgado</h2>
-                <h3><span>Perfil:</span> Discente</h3>
-                <h3><span>Matrícula:</span> 123456</h3>
-                <h3><span>Id-UPSF:</span> 123.456.789-00</h3>
+                <h2>{perfil.nome}</h2>
+                
+                <h3><span>Perfil:</span> A fazer</h3>
+                <h3><span>Matrícula:</span>{perfil.matricula}</h3>
+                <h3><span>Id-UPSF:</span>{perfil.CPF}</h3>
+
+                {perfil.curso ? <h3><span>Curso:</span>{perfil.curso}</h3> : <></>}
+                {perfil.departamento ? <h3><span>Departamento:</span>{perfil.departamento}</h3> : <></>}
+
             </div>
         
         </section>

@@ -1,6 +1,6 @@
 package com.upsf.backend.service;
 
-import com.upsf.backend.dto.PeriodoCreate;
+import com.upsf.backend.create.PeriodoCreate;
 import com.upsf.backend.dto.PeriodoDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;

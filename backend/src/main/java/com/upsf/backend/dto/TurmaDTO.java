@@ -3,7 +3,6 @@ package com.upsf.backend.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.upsf.backend.model.Horario;
 import com.upsf.backend.model.Turma;
-import com.upsf.backend.resumo.DocenteResumo;
 
 public record TurmaDTO(
         Long id,
@@ -14,7 +13,7 @@ public record TurmaDTO(
 
         DisciplinaDTO disciplina,
 
-        DocenteResumo docente,
+        DocenteDTO docente,
 
         Integer maxAlunos
         )

@@ -1,4 +1,4 @@
-// app/api/opcoes/departamentos/route.ts
+// app/api/opcoes/periodos/route.ts
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -7,18 +7,18 @@ export async function GET() {
         // URL do Back-End Java (Fazer .env em algum momento)
         const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
 
-        const response = await fetch(`${BACKEND_URL}/opcoes/departamentos`, {
+        const response = await fetch(`${BACKEND_URL}/opcoes/periodos`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
-            // Departamentos mudam raramente — cache de 1 hora
+            // Periodos mudam raramente — cache de 1 hora
             next: { revalidate: 3600 },
         });
 
         if (!response.ok) {
             return NextResponse.json(
-                { error: "Erro ao buscar departamentos" },
+                { error: "Erro ao buscar periodos" },
                 { status: response.status }
             );
         }
@@ -28,7 +28,7 @@ export async function GET() {
 
     } catch (error) {
         const message = error instanceof Error ? error.message : "Erro desconhecido";
-        console.error("Erro na API Route Handler [GET /api/opcoes/departamentos]:", message);
+        console.error("Erro na API Route Handler [GET /api/opcoes/periodos]:", message);
 
         return NextResponse.json(
             { error: "Erro interno no servidor" },

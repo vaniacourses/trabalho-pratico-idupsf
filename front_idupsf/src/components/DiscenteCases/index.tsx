@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 
 export default function DiscenteCases() {
     return (
-        <section className={styles.discenteSection}>
+        <section className={styles.atorSection}>
             <h1 className={styles.title}>Discentes</h1>
 
             <div className={styles.discenteContent}>

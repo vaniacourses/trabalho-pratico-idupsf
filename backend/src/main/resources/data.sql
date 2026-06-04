@@ -136,12 +136,12 @@ INSERT INTO periodo (id, semestre, data_inicio, data_fim, data_inicio_inscricao,
 -- 12. TURMAS (Associadas aos Períodos criados)
 -- ==============================================================================
 INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id, periodo_id) VALUES
-                                                                                                                             (1, 'T01', '2024.1', 'ATIVA', 'Lógica em C', 40, 2, 2, 1, 2),
-                                                                                                                             (2, 'T02', '2024.1', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2, 2),
+                                                                                                                             (1, 'T01', '2023.2', 'ATIVA', 'Lógica em C', 40, 2, 2, 1, 2),
+                                                                                                                             (2, 'T02', '2023.2', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2, 2),
                                                                                                                              (3, 'T03', '2024.1', 'ATIVA', 'Listas e Árvores', 30, 3, 1, 3, 2),
                                                                                                                              (4, 'T04', '2024.1', 'ATIVA', 'Modelo OSI e TCP/IP', 40, 7, 4, 4, 2),
-                                                                                                                             (5, 'T05', '2024.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5, 2),
-                                                                                                                             (6, 'T06', '2024.1', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2, 2),
+                                                                                                                             (5, 'T05', '2025.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5, 2),
+                                                                                                                             (6, 'T06', '2023.2', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2, 2),
                                                                                                                              (7, 'T07', '2024.1', 'ATIVA', 'Processos e Threads', 35, 8, 4, 1, 2),
                                                                                                                              (8, 'T08', '2024.1', 'ATIVA', 'Mecânica Clássica', 50, 4, 3, 3, 2),
                                                                                                                              (9, 'T09', '2023.2', 'FECHADA', 'Lógica em Python', 40, 2, 2, 5, 1),

@@ -25,6 +25,29 @@ export type Regime = "DE" | "TP";
 export type Turno = "DIURNO" | "NOTURNO" | "INTEGRAL";
 
 // ============================================================
+// PERFIL
+// ============================================================
+
+export type Perfil = Usuario & {
+    curso?: string;
+    departamento?: string;
+}
+
+
+// ============================================================
+// PERÍODO
+// ============================================================
+
+export type Periodo = {
+    id?: number;
+    semestre?: string; // "2026.1", "2024.2"
+    dataInicio?: string;
+    dataFim?: string;
+    dataInicioInscricao?: string;
+    dataFimInscricao?: string;
+}
+
+// ============================================================
 // HORÁRIO
 // ============================================================
 

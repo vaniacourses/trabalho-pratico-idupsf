@@ -62,8 +62,5 @@ public class InscricaoController {
     public void deletarInscricoesPorTurma(@PathVariable Long turmaId) {
         inscricaoService.deletarInscricoesPorTurma(turmaId);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 1aa626e992e7bd1d72e6c44b18b81f9205fdf9dd
 }
