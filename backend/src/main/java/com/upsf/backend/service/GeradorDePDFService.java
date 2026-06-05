@@ -32,7 +32,7 @@ public abstract class GeradorDePDFService<T> {
         }
     }
 
-    private void adicionarCabecalhoPadrao(Document document) throws IOException {
+    protected void adicionarCabecalhoPadrao(Document document) throws IOException {
 
         ClassPathResource imgFile = new ClassPathResource("logo_idUPSF.jpg");
         if (imgFile.exists()) {
@@ -49,6 +49,8 @@ public abstract class GeradorDePDFService<T> {
 //        document.add(titulo);
 
     }
+
+    protected void adicionarRodape(Document document) throws Exception {}
 
     protected abstract void construirPDF(Document document, T dados) throws Exception;
 

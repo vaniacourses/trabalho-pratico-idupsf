@@ -23,7 +23,7 @@ public class PeriodoService {
 
     private final PeriodoRepository periodoRepository;
     private final TurmaRepository turmaRepository;
-    private final PeriodoMapper periodoMapper; // Injetado via Lombok
+    private final PeriodoMapper periodoMapper;
     private final TurmaMapper turmaMapper;
 
     @Transactional
