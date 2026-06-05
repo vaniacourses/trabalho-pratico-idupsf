@@ -21,6 +21,7 @@ public interface CursoMapper {
 
     @Mapping(target = "curriculos", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "codCurriculoAtual", ignore = true)
     Curso toCurso(CursoCreate cursoCreate);
 
     default List<CurriculoResumo> mapCurriculos(List<Curriculo> curriculos) {

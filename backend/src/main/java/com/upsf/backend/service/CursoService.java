@@ -6,12 +6,10 @@ import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
 import com.upsf.backend.mapper.CursoMapper;
-import com.upsf.backend.model.Curriculo;
 import com.upsf.backend.model.Curso;
-import com.upsf.backend.repository.CurriculoRepository;
-import com.upsf.backend.repository.CursoRepository;
+import com.upsf.backend.model.Departamento;
+import com.upsf.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,16 +20,40 @@ public class CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
-
-    @Autowired
-    private CurriculoRepository curriculoRepository;
-
     @Autowired
     private CursoMapper cursoMapper;
+    @Autowired
+    private DepartamentoRepository departamentoRepository;
+    @Autowired
+    private DiscenteRepository discenteRepository;
+    @Autowired
+    private CoordenadorRepository coordenadorRepository;
 
     @Transactional(readOnly = true)
     public List<CursoDTO> listarTodos() {
         return cursoRepository.findAll()
+                .stream()
+                .map(cursoMapper::toCursoDTO)
+                .toList();
+    }
+
+    void buscarCursoDoDepartamento(
+            Long cursoId,
+            Long departamentoId) {
+
+        cursoRepository
+                .findByIdAndDepartamentoId(cursoId, departamentoId)
+                .orElseThrow(() ->
+                        new EntidadeNaoEncontradaException(
+                                "Curso com id = " + cursoId +
+                                        " não pertence ao departamento de id = " +
+                                        departamentoId + "."
+                        ));
+    }
+
+    @Transactional(readOnly = true)
+    public List<CursoDTO> listarTodosPorDepartamento(Long departamentoID) {
+        return cursoRepository.findAllByDepartamentoId(departamentoID)
                 .stream()
                 .map(cursoMapper::toCursoDTO)
                 .toList();
@@ -46,34 +68,30 @@ public class CursoService {
     public CursoDTO criar(CursoCreate cursoCreate) {
         if (cursoRepository.existsByCod(cursoCreate.cod())) {
             throw new EntidadeJaExistenteException(
-                "Já existe um curso com o código: " + cursoCreate.cod()
+                    "Já existe um curso com o código: " + cursoCreate.cod()
             );
         }
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
-        /*
-        if (cursoCreate.codCurriculoAtual() != null && !cursoCreate.codCurriculoAtual().isBlank()) {
-            if (!curriculoRepository.existsByCod(cursoCreate.codCurriculoAtual())) {
-                throw new EntidadeNaoEncontradaException(
-                    "Currículo com código '" + cursoCreate.codCurriculoAtual() + "' não encontrado."
-                );
-            }
-        }
-        */
+        Departamento departamento = departamentoRepository.findById(cursoCreate.idDepartamento())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
 
         Curso curso = cursoMapper.toCurso(cursoCreate);
-        return cursoMapper.toCursoDTO(cursoRepository.save(curso));
+        cursoRepository.save(curso);
+        departamento.adicionarCurso(curso);
+        departamentoRepository.save(departamento);
+
+        return cursoMapper.toCursoDTO(curso);
     }
 
     @Transactional
     public CursoDTO atualizar(Long id, CursoCreate cursoCreate) {
         Curso curso = buscarCursoPorId(id);
-
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
         if (!curso.getCod().equals(cursoCreate.cod()) && cursoRepository.existsByCod(cursoCreate.cod())) {
             throw new EntidadeJaExistenteException(
-                "Já existe um curso com o código: " + cursoCreate.cod()
+                    "Já existe um curso com o código: " + cursoCreate.cod()
             );
         }
 
@@ -88,10 +106,20 @@ public class CursoService {
 
     @Transactional
     public void deletar(Long id) {
-        cursoRepository.delete(buscarCursoPorId(id));
+        Curso curso = buscarCursoPorId(id);
+
+        if (discenteRepository.existsByCursoId(id)) {
+            throw new RegraNegocioException(
+                    "Não é possível excluir o curso pois existem discentes vinculados a ele."
+            );
+        }
+        if (coordenadorRepository.existsByCursoId(id)) {
+            throw new RegraNegocioException(
+                    "Não é possível excluir o curso pois existe um coordenador vinculado a ele."
+            );
+        }
     }
 
-    // Método auxiliar público — reutilizado por CurriculoService, DiscenteService, CoordenadorService
     public Curso buscarCursoPorId(Long id) {
         return cursoRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
@@ -111,4 +139,5 @@ public class CursoService {
             );
         }
     }
+
 }

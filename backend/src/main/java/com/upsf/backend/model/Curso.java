@@ -28,8 +28,10 @@ public class Curso {
     public enum Turno{DIURNO, NOTURNO, INTEGRAL}
     @Enumerated(EnumType.STRING)
     private Turno turno;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "curso_id")
+    @ManyToOne
+    @JoinColumn(name = "departamento_id")
+    private Departamento departamento;
+    @OneToMany(mappedBy ="curso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Curriculo> curriculos = new ArrayList<>();
 
     // Construtor sem codCurriculoAtual, tem que chamar o setCodCurriculoAtual separadamente para definir

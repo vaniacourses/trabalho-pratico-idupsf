@@ -13,18 +13,15 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/cursos")
+@RequestMapping("/api/departamentos/{departamentoID}/cursos")
 public class CursoController {
 
     @Autowired
     private CursoService cursoService;
 
-    @Autowired
-    private CurriculoService curriculoService;
-
     @GetMapping
-    public ResponseEntity<List<CursoDTO>> listarTodos() {
-        return ResponseEntity.ok(cursoService.listarTodos());
+    public ResponseEntity<List<CursoDTO>> listarTodos(@PathVariable Long departamentoID) {
+        return ResponseEntity.ok(cursoService.listarTodosPorDepartamento(departamentoID));
     }
 
     @GetMapping("/{id}")
@@ -47,26 +44,5 @@ public class CursoController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         cursoService.deletar(id);
         return ResponseEntity.noContent().build();
-    }
-
-    // --- Endpoints de Currículo ---
-
-    @PostMapping("/{cursoId}/curriculos")
-    public ResponseEntity<CursoDTO> adicionarCurriculo(@PathVariable Long cursoId,
-                                                       @RequestParam String cod) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(curriculoService.criarCurriculo(cursoId, cod));
-    }
-
-    @PatchMapping("/{cursoId}/curriculos/{curriculoId}/definir-atual")
-    public ResponseEntity<CursoDTO> definirCurriculoAtual(@PathVariable Long cursoId,
-                                                          @PathVariable Long curriculoId) {
-        return ResponseEntity.ok(curriculoService.definirCurriculoAtual(cursoId, curriculoId));
-    }
-
-    @DeleteMapping("/{cursoId}/curriculos/{curriculoId}")
-    public ResponseEntity<CursoDTO> removerCurriculo(@PathVariable Long cursoId,
-                                                     @PathVariable Long curriculoId) {
-        return ResponseEntity.ok(curriculoService.removerCurriculo(cursoId, curriculoId));
     }
 }
