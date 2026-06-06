@@ -9,6 +9,10 @@ import java.util.List;
 public record DocenteUpdate(
         String nome,
         String email,
+        String nomeSocial,
+        String cep,
+        String logradouro,
+        Usuario.Genero genero,
         Date dataNasc,
         Usuario.Status status,
         Docente.Titulacao titulacao,

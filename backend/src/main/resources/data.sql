@@ -2,11 +2,11 @@
 -- 1. DEPARTAMENTOS (5 registros)
 -- ==============================================================================
 INSERT INTO departamento (id, cod, nome, endereco, campus) VALUES
-                                                               (1, 'DCC', 'Departamento de Ciência da Computação', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
-                                                               (2, 'GMA', 'Departamento de Matemática Aplicada', 'Rua Mário Santos Braga', 'Valonguinho'),
-                                                               (3, 'EGF', 'Departamento de Física', 'Av. Litorânea, s/n', 'Gragoatá'),
-                                                               (4, 'TCE', 'Departamento de Engenharia de Telecomunicações', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
-                                                               (5, 'GLE', 'Departamento de Letras', 'Av. Visconde do Rio Branco', 'Gragoatá');
+                                                               (1, 'DCC', 'Dept. de Ciência da Computação', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
+                                                               (2, 'GMA', 'Dept. de Matemática Aplicada', 'Rua Mário Santos Braga', 'Valonguinho'),
+                                                               (3, 'EGF', 'Dept. de Física', 'Av. Litorânea, s/n', 'Gragoatá'),
+                                                               (4, 'TCE', 'Dept. de Engenharia de Telecomunicações', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
+                                                               (5, 'GLE', 'Dept. de Letras', 'Av. Visconde do Rio Branco', 'Gragoatá');
 
 -- ==============================================================================
 -- 2. CURSOS (5 registros)
@@ -69,16 +69,16 @@ INSERT INTO registro_disciplina (id, periodo_recomendado, tipo_categoria, curric
 -- 7. USUÁRIOS BASE (10 registros: 1-5 Docentes, 6-10 Discentes)
 -- ==============================================================================
 INSERT INTO usuario (id, matricula, nome, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
-                                                                                                               (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '11111111111', '2010-01-15'),
-                                                                                                               (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '22222222222', '2012-03-10'),
-                                                                                                               (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '33333333333', '2015-08-01'),
-                                                                                                               (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '44444444444', '2018-02-20'),
+                                                                                                               (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '111.111.111-11', '2010-01-15'),
+                                                                                                               (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '222.222.222-22', '2012-03-10'),
+                                                                                                               (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '333.333.333-33', '2015-08-01'),
+                                                                                                               (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '444.444.444-44', '2018-02-20'),
                                                                                                                (5, 'DOC005', 'Tim Berners-Lee', 'tim@uff.br', 'tim.lee@id.uff.br', 'senha123', 'ATIVO', '1955-06-08', '55555555555', '2020-07-05'),
-                                                                                                               (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '66666666666', '2022-03-01'),
-                                                                                                               (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '77777777777', '2023-03-01'),
-                                                                                                               (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '88888888888', '2021-03-01'),
-                                                                                                               (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '99999999999', '2024-03-01'),
-                                                                                                               (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '00000000000', '2020-03-01');
+                                                                                                               (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '666.666.666-66', '2022-03-01'),
+                                                                                                               (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '777.777.777-77', '2023-03-01'),
+                                                                                                               (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '888.888.888-88', '2021-03-01'),
+                                                                                                               (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '999.999.999-99', '2024-03-01'),
+                                                                                                               (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '000.000.000-00', '2020-03-01');
 -- ==============================================================================
 -- 8. DOCENTES (Aproveitando os IDs 1 a 5)
 -- ==============================================================================

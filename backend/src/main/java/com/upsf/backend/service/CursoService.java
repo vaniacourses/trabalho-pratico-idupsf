@@ -21,8 +21,7 @@ import java.util.List;
 @Service
 public class CursoService {
 
-    public List<CursoDTO> listarOptions() {
-        return cursoRepository.findAllAsOptions();
+
     @Autowired
     private CursoRepository cursoRepository;
 
@@ -92,6 +91,10 @@ public class CursoService {
     @Transactional
     public void deletar(Long id) {
         cursoRepository.delete(buscarCursoPorId(id));
+    }
+
+    public List<CursoDTO> listarOptions() {
+        return cursoRepository.findAllAsOptions();
     }
 
     // Método auxiliar público — reutilizado por CurriculoService, DiscenteService, CoordenadorService

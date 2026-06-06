@@ -92,6 +92,16 @@ public class DiscenteService {
             }
             discente.setNome(discenteUpdate.nome());
         }
+
+        if (discenteUpdate.nomeSocial() != null)
+            discente.setNomeSocial(discenteUpdate.nomeSocial());
+        if (discenteUpdate.cep() != null)
+            discente.setCep(discenteUpdate.cep());
+        if (discenteUpdate.logradouro() != null)
+            discente.setLogradouro(discenteUpdate.logradouro());
+        if (discenteUpdate.genero() != null)
+            discente.setGenero(discenteUpdate.genero());
+
         if (discenteUpdate.dataNasc() != null && !discenteUpdate.dataNasc().equals(discente.getDataNasc()))
             discente.setDataNasc(discenteUpdate.dataNasc());
         if (discenteUpdate.status() != null && !discenteUpdate.status().equals(discente.getStatus()))

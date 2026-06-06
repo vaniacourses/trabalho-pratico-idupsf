@@ -24,15 +24,18 @@ export type Regime = "DE" | "TP";
 
 export type Turno = "DIURNO" | "NOTURNO" | "INTEGRAL";
 
+export type Perfil = "DISCENTE" | "DOCENTE" | "COORDENADOR";
+
+export type Genero = "Homem_Cisgenero" | "Mulher_Cisgenero" | "Homem_Transgenero" | "Mulher_Transgenero" | "Nao_Binario" | "Outro";
+
 // ============================================================
-// PERFIL
+// USUÁRIO LOGADO (união de Discente, Docente e Coordenador)
 // ============================================================
 
-export type Perfil = Usuario & {
-    curso?: string;
-    departamento?: string;
-}
-
+export type UsuarioLogado =
+    | ({ perfil: "DISCENTE" } & Discente)
+    | ({ perfil: "DOCENTE" } & Docente)
+    | ({ perfil: "COORDENADOR" } & Coordenador);
 
 // ============================================================
 // PERÍODO
@@ -124,13 +127,17 @@ export type Curso = {
 // ============================================================
 
 export type Usuario = {
-    id?: number;
+    id?: string;
     nome?: string;
+    nomeSocial?: string;
+    cep?: string;
+    logradouro?: string;
+    genero?: Genero;
     matricula?: string;
     status?: StatusUsuario;
     email?: string;
     emailInst?: string;
-    CPF?: string;
+    cpf?: string;
     senha?: string;
     dataNasc?: string; // formato "YYYY-MM-DD"
 };
