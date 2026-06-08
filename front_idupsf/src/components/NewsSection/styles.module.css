@@ -1,6 +1,6 @@
 
 /* Estilização semelhante para Componentes dinâmicos de DinamicContent */
-.newsSection {
+.caseBlockSection {
     display: flex;
     flex-direction: column;
     align-items: center;

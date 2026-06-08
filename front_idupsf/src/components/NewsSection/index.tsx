@@ -6,7 +6,7 @@ export default function NewsSection() {
     
     return (
         
-        <section className={styles.newsSection}>
+        <section className={styles.caseBlockSection}>
                 
                 <div className={styles.newsCarrosselDiv}>
                     

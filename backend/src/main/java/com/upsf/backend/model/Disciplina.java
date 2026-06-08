@@ -22,7 +22,7 @@ public class Disciplina {
     @Column(unique = true, nullable = false)
     private String cod;
     private String nome;
-    private int cargaHoraria;
+    private Integer cargaHoraria;
 
     public enum Status {
         ATIVA,

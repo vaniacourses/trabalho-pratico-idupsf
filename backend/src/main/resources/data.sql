@@ -163,9 +163,9 @@ INSERT INTO inscricao (id, discente_id, turma_id, nota, nota_vs, frequencia, sta
 -- 14. DISCIPLINAS CURSADAS (Histórico passado dos alunos)
 -- ==============================================================================
 -- Modificado notavs -> nota_vs para manter padrão de snake_case do banco
-INSERT INTO disciplina_cursada (id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
-                                                                                                                                 (1,9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
-                                                                                                                                 (2, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
-                                                                                                                                 (3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
-                                                                                                                                 (4, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
-                                                                                                                                 (5, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos
+INSERT INTO disciplina_cursada (id, historico_id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
+                                                                                                                                 (1,1, 9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
+                                                                                                                                 (2, 1, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
+                                                                                                                                 (3, 3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
+                                                                                                                                 (4, 5, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
+                                                                                                                                 (5, 2, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos

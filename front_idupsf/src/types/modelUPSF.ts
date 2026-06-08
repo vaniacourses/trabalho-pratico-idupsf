@@ -42,7 +42,7 @@ export type UsuarioLogado =
 // ============================================================
 
 export type Periodo = {
-    id?: number;
+    id?: string;
     semestre?: string; // "2026.1", "2024.2"
     dataInicio?: string;
     dataFim?: string;
@@ -55,7 +55,7 @@ export type Periodo = {
 // ============================================================
 
 export type Horario = {
-    id?: number;
+    id?: string;
     diasDaSemana?: string[];
     horarioInicio?: string; // formato "HH:mm"
     horarioFim?: string;    // formato "HH:mm"
@@ -66,7 +66,7 @@ export type Horario = {
 // ============================================================
 
 export type Disciplina = {
-    id?: number;
+    id?: string;
     nome?: string;
     cod?: string;
     cargaHoraria?: number;
@@ -78,7 +78,7 @@ export type Disciplina = {
 // ============================================================
 
 export type RegistroDisciplina = {
-    id?: number;
+    id?: string;
     tipoCategoria?: TipoCategoria;
     periodoRecomendado?: number;
     disciplina?: Disciplina;
@@ -89,7 +89,7 @@ export type RegistroDisciplina = {
 // ============================================================
 
 export type Curriculo = {
-    id?: number;
+    id?: string;
     cod?: string;
     registroDisciplina?: RegistroDisciplina[];
 };
@@ -99,7 +99,7 @@ export type Curriculo = {
 // ============================================================
 
 export type Departamento = {
-    id?: number;
+    id?: string;
     nome?: string;
     cod?: number;
     endereco?: string;
@@ -112,7 +112,7 @@ export type Departamento = {
 // ============================================================
 
 export type Curso = {
-    id?: number;
+    id?: string;
     cod?: string;
     nome?: string;
     duracaoMin?: number;
@@ -147,9 +147,11 @@ export type Usuario = {
 // ============================================================
 
 export type Historico = {
-    id?: number;
+    id?: string;
+    matriculaAluno?: string;
+    nomeAluno?: string;
     coeficienteRend?: number;
-    listaDisciplinas?: DisciplinaCursada[];
+    disciplinas?: DisciplinaCursada[];
 };
 
 // ============================================================
@@ -195,7 +197,7 @@ export type Coordenador = Docente & {
 // ============================================================
 
 export type Turma = {
-    id?: number;
+    id?: string;
     nome?: string;
     cod?: string;
     anoSemestre?: string; // formato "YYYY.S" ex: "2026.1"
@@ -212,14 +214,17 @@ export type Turma = {
 // ============================================================
 
 export type DisciplinaCursada = {
-    id?: number;
-    turma?: Turma;
+    id?: string;
+    nomeDisciplina?: string;
+    codigoDisciplina?: string;
+    codigoTurma?: string;
     nota?: number;
     notaVS?: number;
     statusFinal?: StatusDisciplinaCursada;
     frequencia?: boolean;
     periodo?: string;
     cargaHoraria?: number;
+    anoSemestre?: string;
 };
 
 // ============================================================
@@ -227,7 +232,7 @@ export type DisciplinaCursada = {
 // ============================================================
 
 export type Inscricao = {
-    id?: number;
+    id?: string;
     turma?: Turma;
     aluno?: Discente;
     status?: StatusInscricao;
