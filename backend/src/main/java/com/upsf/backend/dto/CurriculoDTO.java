@@ -1,7 +1,5 @@
 package com.upsf.backend.dto;
 
-import com.upsf.backend.model.RegistroDisciplina;
-
 import java.util.List;
 
 public record CurriculoDTO(

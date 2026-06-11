@@ -5,10 +5,12 @@ import com.upsf.backend.model.Curriculo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = RegistroDisciplinaMapper.class)
+
 public interface CurriculoMapper {
 
     @Mapping(target = "cursoId", source = "curso.id")
+    @Mapping(target = "disciplinas", source = "registroDisciplinas")
     @Mapping(target = "totalHoras",
             expression = "java(curriculo.calcularTotalHoras())")
     @Mapping(target = "horasObrigatorias",
