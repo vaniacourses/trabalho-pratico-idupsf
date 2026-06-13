@@ -29,54 +29,54 @@ public class CursoService {
     @Autowired
     private CoordenadorRepository coordenadorRepository;
 
-    @Transactional(readOnly = true)
-    public List<CursoDTO> listarTodos() {
-        return cursoRepository.findAll()
-                .stream()
-                .map(cursoMapper::toCursoDTO)
-                .toList();
-    }
-
-    void buscarCursoDoDepartamento(
-            Long cursoId,
-            Long departamentoId) {
-
+    // Valida que o curso pertence ao departamento informado na URL.
+    // Visibilidade package-private mantida para uso interno (ex.: CurriculoService).
+    void buscarCursoDoDepartamento(Long cursoId, Long departamentoId) {
         cursoRepository
                 .findByIdAndDepartamentoId(cursoId, departamentoId)
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException(
                                 "Curso com id = " + cursoId +
-                                        " não pertence ao departamento de id = " +
-                                        departamentoId + "."
+                                " não pertence ao departamento de id = " + departamentoId + "."
                         ));
     }
 
     @Transactional(readOnly = true)
-    public List<CursoDTO> listarTodosPorDepartamento(Long departamentoID) {
-        return cursoRepository.findAllByDepartamentoId(departamentoID)
+    public List<CursoDTO> listarTodosPorDepartamento(Long departamentoId) {
+        return cursoRepository.findAllByDepartamentoId(departamentoId)
                 .stream()
                 .map(cursoMapper::toCursoDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
-    public CursoDTO buscarDTOPorId(Long id) {
+    public CursoDTO buscarDTOPorId(Long id, Long departamentoId) {
+        buscarCursoDoDepartamento(id, departamentoId);
         return cursoMapper.toCursoDTO(buscarCursoPorId(id));
     }
 
     @Transactional
-    public CursoDTO criar(CursoCreate cursoCreate) {
+    public CursoDTO criar(CursoCreate cursoCreate, Long departamentoId) {
         if (cursoRepository.existsByCod(cursoCreate.cod())) {
             throw new EntidadeJaExistenteException(
                     "Já existe um curso com o código: " + cursoCreate.cod()
             );
         }
+
+        // Garante que o departamento do body bate com o da URL
+        if (!cursoCreate.idDepartamento().equals(departamentoId)) {
+            throw new RegraNegocioException(
+                    "O departamento informado no body não corresponde ao departamento da URL."
+            );
+        }
+
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
-        Departamento departamento = departamentoRepository.findById(cursoCreate.idDepartamento())
+        Departamento departamento = departamentoRepository.findById(departamentoId)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
 
         Curso curso = cursoMapper.toCurso(cursoCreate);
+        curso.setDepartamento(departamento);
         cursoRepository.save(curso);
         departamento.adicionarCurso(curso);
         departamentoRepository.save(departamento);
@@ -85,7 +85,9 @@ public class CursoService {
     }
 
     @Transactional
-    public CursoDTO atualizar(Long id, CursoCreate cursoCreate) {
+    public CursoDTO atualizar(Long id, CursoCreate cursoCreate, Long departamentoId) {
+        buscarCursoDoDepartamento(id, departamentoId);
+
         Curso curso = buscarCursoPorId(id);
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
@@ -105,8 +107,8 @@ public class CursoService {
     }
 
     @Transactional
-    public void deletar(Long id) {
-        Curso curso = buscarCursoPorId(id);
+    public void deletar(Long id, Long departamentoId) {
+        buscarCursoDoDepartamento(id, departamentoId);
 
         if (discenteRepository.existsByCursoId(id)) {
             throw new RegraNegocioException(
@@ -118,6 +120,8 @@ public class CursoService {
                     "Não é possível excluir o curso pois existe um coordenador vinculado a ele."
             );
         }
+
+        cursoRepository.deleteById(id);
     }
 
     public Curso buscarCursoPorId(Long id) {
@@ -130,14 +134,13 @@ public class CursoService {
     private void validarDuracoes(int duracaoMin, int duracaoMax) {
         if (duracaoMin <= 0 || duracaoMax <= 0) {
             throw new RegraNegocioException(
-                "As durações mínima e máxima devem ser maiores que zero."
+                    "As durações mínima e máxima devem ser maiores que zero."
             );
         }
         if (duracaoMin > duracaoMax) {
             throw new RegraNegocioException(
-                "A duração mínima não pode ser maior que a duração máxima."
+                    "A duração mínima não pode ser maior que a duração máxima."
             );
         }
     }
-
 }
