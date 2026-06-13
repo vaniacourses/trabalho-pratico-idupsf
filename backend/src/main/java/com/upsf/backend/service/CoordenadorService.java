@@ -89,6 +89,16 @@ public class CoordenadorService {
             }
             coordenador.setNome(coordenadorUpdate.nome());
         }
+
+        if (coordenadorUpdate.nomeSocial() != null)
+            coordenador.setNomeSocial(coordenadorUpdate.nomeSocial());
+        if (coordenadorUpdate.cep() != null)
+            coordenador.setCep(coordenadorUpdate.cep());
+        if (coordenadorUpdate.logradouro() != null)
+            coordenador.setLogradouro(coordenadorUpdate.logradouro());
+        if (coordenadorUpdate.genero() != null)
+            coordenador.setGenero(coordenadorUpdate.genero());
+        
         if (coordenadorUpdate.dataNasc() != null && !coordenadorUpdate.dataNasc().equals(coordenador.getDataNasc()))
             coordenador.setDataNasc(coordenadorUpdate.dataNasc());
         if (coordenadorUpdate.status() != null && !coordenadorUpdate.status().equals(coordenador.getStatus()))

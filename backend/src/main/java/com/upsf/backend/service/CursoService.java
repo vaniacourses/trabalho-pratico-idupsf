@@ -2,6 +2,7 @@ package com.upsf.backend.service;
 
 import com.upsf.backend.create.CursoCreate;
 import com.upsf.backend.dto.CursoDTO;
+import com.upsf.backend.dto.DepartamentoDTO;
 import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Service
 public class CursoService {
+
 
     @Autowired
     private CursoRepository cursoRepository;
@@ -89,6 +91,10 @@ public class CursoService {
     @Transactional
     public void deletar(Long id) {
         cursoRepository.delete(buscarCursoPorId(id));
+    }
+
+    public List<CursoDTO> listarOptions() {
+        return cursoRepository.findAllAsOptions();
     }
 
     // Método auxiliar público — reutilizado por CurriculoService, DiscenteService, CoordenadorService

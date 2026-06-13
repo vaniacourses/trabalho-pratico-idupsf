@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-// import { loginAction } from "@/actions/auth";
 import styles from "./styles.module.css";
 import logoIdUPSF from "../../../public/logo_idUPSF.jpg";
-import { formatCPF } from "@/utils/formatCPF";
-import { loginAction } from "@/actions/auth";
+import { formatCPF } from "@/utils/formatters";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 
 export default function LoginForm() {
     
@@ -15,26 +16,47 @@ export default function LoginForm() {
     const [loading, setLoading] = useState(false);
 
     const [cpf, setCpf] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const router = useRouter();
 
     function handleCPF(e: React.ChangeEvent<HTMLInputElement>) {
         setCpf(formatCPF(e.target.value));
     }
 
-    async function handleSubmit(formData: FormData) {
+    // Função de submit do Formulário de Login 
+    // Chama o signIn do NextAuth com as credenciais
+    // Lida com erros e redirecionamento
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
         setErro("");
+
+        if (!cpf || !senha) {
+            setErro("Preencha CPF e senha.");
+            return;
+        }
+
         setLoading(true);
 
-        const resposta = await loginAction(formData);
+        // Chama o signIn do NextAuth com as credenciais
+        const result = await signIn("credentials", {
+            cpf,
+            senha,
+            redirect: false,
+        });
 
-        if (resposta?.erro) {
-            setErro(resposta.erro);
+        if (result?.error) {
+            setErro("CPF ou senha inválidos.");
             setLoading(false);
+            return;
         }
+
+        router.push("/home");
     }
     
 
     return (
-        <form action={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
 
             <div className={styles.headerLogin}>
                 <figure className={styles.logoFigure}>
@@ -62,7 +84,7 @@ export default function LoginForm() {
             
             <div className={styles.field}>
                 
-                <label htmlFor="Senha" className={styles.label}>Sua Senha:</label>
+                <label htmlFor="senha" className={styles.label}>Sua Senha:</label>
                 
                 <input
                     id="senha"
@@ -70,6 +92,8 @@ export default function LoginForm() {
                     type="password"
                     placeholder="Sua senha"
                     className={styles.input}
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
                 />
                 
             </div>

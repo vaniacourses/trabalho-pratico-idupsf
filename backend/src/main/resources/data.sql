@@ -2,11 +2,11 @@
 -- 1. DEPARTAMENTOS (5 registros)
 -- ==============================================================================
 INSERT INTO departamento (id, cod, nome, endereco, campus) VALUES
-                                                               (1, 'DCC', 'Departamento de Ciência da Computação', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
-                                                               (2, 'GMA', 'Departamento de Matemática Aplicada', 'Rua Mário Santos Braga', 'Valonguinho'),
-                                                               (3, 'EGF', 'Departamento de Física', 'Av. Litorânea, s/n', 'Gragoatá'),
-                                                               (4, 'TCE', 'Departamento de Engenharia de Telecomunicações', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
-                                                               (5, 'GLE', 'Departamento de Letras', 'Av. Visconde do Rio Branco', 'Gragoatá');
+                                                               (1, 'DCC', 'Dept. de Ciência da Computação', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
+                                                               (2, 'GMA', 'Dept. de Matemática Aplicada', 'Rua Mário Santos Braga', 'Valonguinho'),
+                                                               (3, 'EGF', 'Dept. de Física', 'Av. Litorânea, s/n', 'Gragoatá'),
+                                                               (4, 'TCE', 'Dept. de Engenharia de Telecomunicações', 'Rua Passo da Pátria, 156', 'Praia Vermelha'),
+                                                               (5, 'GLE', 'Dept. de Letras', 'Av. Visconde do Rio Branco', 'Gragoatá');
 
 -- ==============================================================================
 -- 2. CURSOS (5 registros)
@@ -69,16 +69,16 @@ INSERT INTO registro_disciplina (id, periodo_recomendado, tipo_categoria, curric
 -- 7. USUÁRIOS BASE (10 registros: 1-5 Docentes, 6-10 Discentes)
 -- ==============================================================================
 INSERT INTO usuario (id, matricula, nome, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
-                                                                                                               (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '11111111111', '2010-01-15'),
-                                                                                                               (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '22222222222', '2012-03-10'),
-                                                                                                               (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '33333333333', '2015-08-01'),
-                                                                                                               (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '44444444444', '2018-02-20'),
+                                                                                                               (1, 'DOC001', 'Alan Turing', 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '111.111.111-11', '2010-01-15'),
+                                                                                                               (2, 'DOC002', 'Ada Lovelace', 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '222.222.222-22', '2012-03-10'),
+                                                                                                               (3, 'DOC003', 'Grace Hopper', 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '333.333.333-33', '2015-08-01'),
+                                                                                                               (4, 'DOC004', 'Linus Torvalds', 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '444.444.444-44', '2018-02-20'),
                                                                                                                (5, 'DOC005', 'Tim Berners-Lee', 'tim@uff.br', 'tim.lee@id.uff.br', 'senha123', 'ATIVO', '1955-06-08', '55555555555', '2020-07-05'),
-                                                                                                               (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '66666666666', '2022-03-01'),
-                                                                                                               (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '77777777777', '2023-03-01'),
-                                                                                                               (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '88888888888', '2021-03-01'),
-                                                                                                               (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '99999999999', '2024-03-01'),
-                                                                                                               (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '00000000000', '2020-03-01');
+                                                                                                               (6, 'DIS001', 'Guilherme Fontoura', 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '666.666.666-66', '2022-03-01'),
+                                                                                                               (7, 'DIS002', 'Maria Silva', 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '777.777.777-77', '2023-03-01'),
+                                                                                                               (8, 'DIS003', 'João Souza', 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '888.888.888-88', '2021-03-01'),
+                                                                                                               (9, 'DIS004', 'Ana Costa', 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '999.999.999-99', '2024-03-01'),
+                                                                                                               (10, 'DIS005', 'Pedro Santos', 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '000.000.000-00', '2020-03-01');
 -- ==============================================================================
 -- 8. DOCENTES (Aproveitando os IDs 1 a 5)
 -- ==============================================================================
@@ -136,12 +136,12 @@ INSERT INTO periodo (id, semestre, data_inicio, data_fim, data_inicio_inscricao,
 -- 12. TURMAS (Associadas aos Períodos criados)
 -- ==============================================================================
 INSERT INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, disciplina_id, docente_id, horario_id, periodo_id) VALUES
-                                                                                                                             (1, 'T01', '2024.1', 'ATIVA', 'Lógica em C', 40, 2, 2, 1, 2),
-                                                                                                                             (2, 'T02', '2024.1', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2, 2),
+                                                                                                                             (1, 'T01', '2023.2', 'ATIVA', 'Lógica em C', 40, 2, 2, 1, 2),
+                                                                                                                             (2, 'T02', '2023.2', 'ATIVA', 'Limites e Derivadas', 50, 1, 3, 2, 2),
                                                                                                                              (3, 'T03', '2024.1', 'ATIVA', 'Listas e Árvores', 30, 3, 1, 3, 2),
                                                                                                                              (4, 'T04', '2024.1', 'ATIVA', 'Modelo OSI e TCP/IP', 40, 7, 4, 4, 2),
-                                                                                                                             (5, 'T05', '2024.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5, 2),
-                                                                                                                             (6, 'T06', '2024.1', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2, 2),
+                                                                                                                             (5, 'T05', '2025.1', 'ATIVA', 'Machine Learning', 25, 10, 1, 5, 2),
+                                                                                                                             (6, 'T06', '2023.2', 'ATIVA', 'SQL e Modelagem', 40, 6, 5, 2, 2),
                                                                                                                              (7, 'T07', '2024.1', 'ATIVA', 'Processos e Threads', 35, 8, 4, 1, 2),
                                                                                                                              (8, 'T08', '2024.1', 'ATIVA', 'Mecânica Clássica', 50, 4, 3, 3, 2),
                                                                                                                              (9, 'T09', '2023.2', 'FECHADA', 'Lógica em Python', 40, 2, 2, 5, 1),
@@ -163,9 +163,9 @@ INSERT INTO inscricao (id, discente_id, turma_id, nota, nota_vs, frequencia, sta
 -- 14. DISCIPLINAS CURSADAS (Histórico passado dos alunos)
 -- ==============================================================================
 -- Modificado notavs -> nota_vs para manter padrão de snake_case do banco
-INSERT INTO disciplina_cursada (id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
-                                                                                                                                 (1,9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
-                                                                                                                                 (2, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
-                                                                                                                                 (3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
-                                                                                                                                 (4, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
-                                                                                                                                 (5, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos
+INSERT INTO disciplina_cursada (id, historico_id, turma_id, carga_horaria, nota, nota_vs, frequencia, periodo, status_final) VALUES
+                                                                                                                                 (1,1, 9, 60, 9.5, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Algoritmos
+                                                                                                                                 (2, 1, 10, 60, 8.0, 0.0, true, '2023.2', 'APROVADO'), -- Guilherme passou em Eng. Software
+                                                                                                                                 (3, 3, 9, 60, 4.0, 6.5, true, '2023.2', 'APROVADO'), -- João foi pra VS em Algoritmos e passou
+                                                                                                                                 (4, 5, 10, 60, 10.0, 0.0, true, '2023.2', 'APROVADO'), -- Pedro passou com 10
+                                                                                                                                 (5, 2, 9, 60, 3.0, 0.0, false, '2023.2', 'REPROVADO'); -- Maria reprovou por falta em Algoritmos

@@ -1,9 +1,6 @@
 package com.upsf.backend.spec;
 
-import com.upsf.backend.model.Departamento;
-import com.upsf.backend.model.Disciplina;
-import com.upsf.backend.model.Docente;
-import com.upsf.backend.model.Turma;
+import com.upsf.backend.model.*;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
@@ -22,9 +19,6 @@ public class TurmaSpec {
     ) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
-
-            // Sempre filtra apenas turmas ativas
-            predicates.add(cb.equal(root.get("status"), Turma.StatusTurma.ATIVA));
 
             // Joins explícitos
             Join<Turma, Disciplina> disciplinaJoin = root.join("disciplina", JoinType.LEFT);
@@ -46,7 +40,14 @@ public class TurmaSpec {
                         cb.lower(docenteJoin.get("nome")),
                         "%" + nomeDocente.toLowerCase() + "%"
                 ));
+//                Join<Docente, Usuario> usuarioJoin = docenteJoin.join("id", JoinType.LEFT);
+//                predicates.add(cb.like(
+//                        cb.lower(usuarioJoin.get("nome")),
+//                        "%" + nomeDocente.toLowerCase() + "%"
+//                ));
             }
+
+
 
             // Busca parcial por nome/cod do departamento
             if (departamento != null && !departamento.isBlank()) {

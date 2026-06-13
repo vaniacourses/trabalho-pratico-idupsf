@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CursoMapper {
 
-    @Mapping(target = "curriculos", source = "curriculos")
+    // @Mapping(target = "curriculos", source = "curriculos")
     CursoDTO toCursoDTO(Curso curso);
 
     @Mapping(target = "curriculos", ignore = true)

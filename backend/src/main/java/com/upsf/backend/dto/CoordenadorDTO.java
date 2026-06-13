@@ -11,19 +11,22 @@ public record CoordenadorDTO(Long id,
                              String nome,
                              String matricula,
                              String cpf,
+                             String nomeSocial,
+                             String cep,
+                             String logradouro,
+                             Usuario.Genero genero,
                              String email,
                              String emailInst,
                              Date dataNasc,
                              Usuario.Status status,
                              Docente.Titulacao titulacao,
                              Docente.Regime regime,
-                             Long idDepartamento,
+                             DepartamentoDTO departamento,
                              List<String> areasAtuacao,
                              String lattes,
                              LocalDate dataIngresso,
-                             Long idCurso,
+                             CursoDTO curso,
                              LocalDate inicioMandato,
                              LocalDate fimMandato
-                             ){
-
-}
+                             )
+{}

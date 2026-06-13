@@ -18,10 +18,10 @@ export default function LoginPage() {
         <section className={styles.imageSide}>
             
             <Image
-            src={predioUPSF}
-            alt="Prédio da Universidade Projeto de Software Fluminense"
-            className={styles.image}
-            priority
+				src={predioUPSF}
+				alt="Prédio da Universidade Projeto de Software Fluminense"
+				className={styles.image}
+				priority
             />
         
         </section>

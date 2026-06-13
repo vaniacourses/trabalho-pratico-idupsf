@@ -25,6 +25,15 @@ public abstract class Usuario {
     @Column(unique = true, nullable = false)
     private String matricula;
     private String nome;
+
+    private String nomeSocial;
+    private String cep;
+    private String logradouro;
+
+    public enum Genero{Homem_Cisgenero, Homem_Transgenero, Mulher_Cisgenero, Mulher_Transgenero, Nao_Binario, Outro};
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
+
     private String email;
     private String emailInst;
     private String cpf;

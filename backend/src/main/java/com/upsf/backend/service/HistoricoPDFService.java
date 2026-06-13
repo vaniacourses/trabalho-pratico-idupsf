@@ -51,7 +51,7 @@ public class HistoricoPDFService extends GeradorDePDFService<RelatorioHistoricoD
 
             tabela.addCell(disc.cargaHoraria() != null ? String.valueOf(disc.cargaHoraria()) : "-");
             tabela.addCell(disc.anoSemestre() != null ? disc.anoSemestre() : "-");
-            tabela.addCell(disc.status() != null ? disc.status() : "-");
+            tabela.addCell(disc.statusFinal() != null ? disc.statusFinal() : "-");
         }
 
         document.add(tabela);
