@@ -1,12 +1,10 @@
 package com.upsf.backend.controller;
 
-import com.upsf.backend.dto.DiscenteDTO;
-import com.upsf.backend.dto.DisciplinaCursadaDTO;
-import com.upsf.backend.dto.DisciplinaDTO;
-import com.upsf.backend.dto.RelatorioHistoricoDTO;
+import com.upsf.backend.dto.*;
 import com.upsf.backend.service.DiscenteService;
 import com.upsf.backend.service.HistoricoPDFService;
 import com.upsf.backend.service.HistoricoService;
+import com.upsf.backend.service.RegularidadePDFService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +22,9 @@ public class DocumentoController {
 
     @Autowired
     private HistoricoPDFService historicoPdfService;
+
+    @Autowired
+    private RegularidadePDFService regularidadePdfService;
 
     @Autowired
     private HistoricoService historicoService;
@@ -57,4 +58,29 @@ public class DocumentoController {
                 .body(pdf);
     }
 
+    @GetMapping("regularidade/{id_aluno}")
+    public ResponseEntity<byte[]> baixarRegularidade(@PathVariable Long id_aluno) {
+
+        DiscenteDTO aluno = discenteService.getDiscenteById(id_aluno);
+
+        // validação: Apenas alunos ativos podem emitir regularidade de matrícula
+        if (aluno.situacaoAcademica() == null || aluno.situacaoAcademica() != com.upsf.backend.model.Discente.SituacaoAcademica.ATIVO) {
+            throw new IllegalStateException("O aluno não encontra-se com matrícula ativa para emissão deste documento.");
+        }
+
+        RelatorioRegularidadeDTO dadosParaPdf = new RelatorioRegularidadeDTO(
+                aluno.nome(),
+                aluno.cpf(),
+                aluno.matricula(),
+                aluno.curso().nome(),
+                aluno.periodo()
+        );
+
+        byte[] pdf = regularidadePdfService.gerarPdf(dadosParaPdf);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=regularidade-" + aluno.matricula() + ".pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
+    }
 }
