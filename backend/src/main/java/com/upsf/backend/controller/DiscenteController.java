@@ -3,6 +3,9 @@ package com.upsf.backend.controller;
 
 import com.upsf.backend.create.DiscenteCreate;
 import com.upsf.backend.dto.DiscenteDTO;
+import com.upsf.backend.dto.HistoricoDTO;
+import com.upsf.backend.model.Historico;
+import com.upsf.backend.service.HistoricoService;
 import com.upsf.backend.update.DiscenteUpdate;
 import com.upsf.backend.service.DiscenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ import java.util.List;
 public class DiscenteController {
     @Autowired
     private DiscenteService discenteService;
+
+    @Autowired
+    private HistoricoService historicoService;
 
     @PostMapping
     public ResponseEntity<DiscenteDTO> cadastrarDiscente(@RequestBody DiscenteCreate discenteCreate){
@@ -35,6 +41,12 @@ public class DiscenteController {
     public ResponseEntity<DiscenteDTO> buscarDiscentePorId(@PathVariable Long id){
         DiscenteDTO discente = discenteService.getDiscenteById(id);
         return ResponseEntity.ok(discente);
+    }
+
+    @GetMapping("historico/{id}")
+    public ResponseEntity<HistoricoDTO> buscarHistoricoPorDiscente(@PathVariable Long id){
+        HistoricoDTO historico = historicoService.buscarHistoricoPorDiscente(id);
+        return ResponseEntity.ok(historico);
     }
 
     @PatchMapping("/{id}")

@@ -11,8 +11,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CoordenadorMapper{
-    @Mapping(source = "departamento.id", target = "idDepartamento")
-    @Mapping(source = "curso.id", target = "idCurso")
+    // @Mapping(source = "departamento.id", target = "idDepartamento")
+    // @Mapping(source = "curso.id", target = "idCurso")
     CoordenadorDTO toDto(Coordenador coordenador);
     Coordenador toEntity(CoordenadorCreate coordenadorCreate);
     List<CoordenadorDTO> toDtos(List<Coordenador> coordenadores);

@@ -91,6 +91,16 @@ public class DocenteService {
             }
             docente.setNome(docenteUpdate.nome());
         }
+
+        if (docenteUpdate.nomeSocial() != null)
+            docente.setNomeSocial(docenteUpdate.nomeSocial());
+        if (docenteUpdate.cep() != null)
+            docente.setCep(docenteUpdate.cep());
+        if (docenteUpdate.logradouro() != null)
+            docente.setLogradouro(docenteUpdate.logradouro());
+        if (docenteUpdate.genero() != null)
+            docente.setGenero(docenteUpdate.genero());
+        
         if (docenteUpdate.dataNasc() != null && !docenteUpdate.dataNasc().equals(docente.getDataNasc())) docente.setDataNasc(docenteUpdate.dataNasc());
         if (docenteUpdate.status() != null && !docenteUpdate.status().equals(docente.getStatus())) docente.setStatus(docenteUpdate.status());
         if (docenteUpdate.titulacao() != null && !docenteUpdate.titulacao().equals(docente.getTitulacao())) docente.setTitulacao(docenteUpdate.titulacao());

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DiscenteMapper {
-    @Mapping(source = "curso.id", target = "cursoId")
+    // @Mapping(source = "curso.id", target = "cursoId")
     @Mapping(source = "historico.id", target = "historicoId")
     DiscenteDTO toDto(Discente discente);
     Discente toEntity(DiscenteCreate discenteCreate);

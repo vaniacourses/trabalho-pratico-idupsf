@@ -26,6 +26,14 @@ public class HistoricoService {
     @Autowired
     private DisciplinaMapper disciplinaMapper;
 
+
+    public HistoricoDTO buscarHistoricoPorDiscente(Long discenteId) {
+        Historico historico = historicoRepository.findHistoricoByDiscenteId(discenteId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Histórico não encontrado para o aluno ID: " + discenteId));
+
+        return historicoMapper.toDTO(historico);
+    }
+
     // talvez seja melhor buscar por matricula
     public Historico buscarPorDiscente(Long discenteId) {
         return historicoRepository.findByDiscenteId(discenteId)
@@ -49,6 +57,7 @@ public class HistoricoService {
                         cursada.getId(),
                         cursada.getTurma().getDisciplina().getNome(), // Navegando até a Disciplina para pegar o nome
                         cursada.getTurma().getDisciplina().getCod(),  // Navegando até a Disciplina para pegar o código
+                        cursada.getTurma().getCod(),
                         cursada.getNota(),
                         cursada.getNotaVS(),
                         cursada.getStatusFinal().name(), // Convertendo o Enum (APROVADO, REPROVADO) para String
