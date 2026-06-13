@@ -1,5 +1,6 @@
 package com.upsf.backend.controller;
 
+import com.upsf.backend.create.CurriculoCreate;
 import com.upsf.backend.dto.CurriculoDTO;
 import com.upsf.backend.dto.CursoDTO;
 import com.upsf.backend.service.CurriculoService;
@@ -12,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/departamentos/{departamentoId}/cursos/{cursoId}/curriculos")
-
 public class CurriculoController {
 
     @Autowired
@@ -24,16 +24,14 @@ public class CurriculoController {
             @PathVariable Long cursoId) {
 
         return ResponseEntity.ok(
-                curriculoService.listarPorCurso(
-                        departamentoId,
-                        cursoId));
+                curriculoService.listarPorCurso(departamentoId, cursoId));
     }
 
     @GetMapping("/{curriculoId}")
     public ResponseEntity<CurriculoDTO> buscarPorId(
+            @PathVariable Long departamentoId,
             @PathVariable Long cursoId,
-            @PathVariable Long curriculoId,
-            @PathVariable Long departamentoId) {
+            @PathVariable Long curriculoId) {
 
         return ResponseEntity.ok(
                 curriculoService.buscarPorId(cursoId, curriculoId, departamentoId));
@@ -41,32 +39,31 @@ public class CurriculoController {
 
     @PostMapping
     public ResponseEntity<CursoDTO> adicionarCurriculo(
+            @PathVariable Long departamentoId,
             @PathVariable Long cursoId,
-            @RequestParam String cod,
-            @PathVariable Long departamentoId) {
+            @RequestBody CurriculoCreate curriculoCreate) {
 
-        CursoDTO dto = curriculoService.criarCurriculo(cursoId, cod);
+        CursoDTO dto = curriculoService.criarCurriculo(cursoId, curriculoCreate, departamentoId);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PatchMapping("/{curriculoId}/atual")
     public ResponseEntity<CursoDTO> definirCurriculoAtual(
+            @PathVariable Long departamentoId,
             @PathVariable Long cursoId,
-            @PathVariable Long curriculoId,
-            @PathVariable Long departamentoId) {
+            @PathVariable Long curriculoId) {
 
         return ResponseEntity.ok(
-                curriculoService.definirCurriculoAtual(cursoId, curriculoId));
+                curriculoService.definirCurriculoAtual(cursoId, curriculoId, departamentoId));
     }
 
     @DeleteMapping("/{curriculoId}")
     public ResponseEntity<Void> removerCurriculo(
+            @PathVariable Long departamentoId,
             @PathVariable Long cursoId,
-            @PathVariable Long curriculoId,
-            @PathVariable Long departamentoId) {
+            @PathVariable Long curriculoId) {
 
-        curriculoService.removerCurriculo(cursoId, curriculoId);
-
+        curriculoService.removerCurriculo(cursoId, curriculoId, departamentoId);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,5 +1,7 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.create.CurriculoCreate;
+import com.upsf.backend.create.RegistroDisciplinaCreate;
 import com.upsf.backend.dto.CurriculoDTO;
 import com.upsf.backend.dto.CursoDTO;
 import com.upsf.backend.exception.EntidadeJaExistenteException;
@@ -9,13 +11,17 @@ import com.upsf.backend.mapper.CurriculoMapper;
 import com.upsf.backend.mapper.CursoMapper;
 import com.upsf.backend.model.Curriculo;
 import com.upsf.backend.model.Curso;
+import com.upsf.backend.model.Disciplina;
+import com.upsf.backend.model.RegistroDisciplina;
 import com.upsf.backend.repository.CurriculoRepository;
 import com.upsf.backend.repository.CursoRepository;
-import java.util.List;
+import com.upsf.backend.repository.DisciplinaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,33 +34,54 @@ public class CurriculoService {
     @Autowired
     CursoRepository cursoRepository;
     @Autowired
+    DisciplinaRepository disciplinaRepository;
+    @Autowired
     CursoMapper cursoMapper;
     @Autowired
     CurriculoMapper curriculoMapper;
 
     @Transactional
-    public CursoDTO criarCurriculo(Long cursoId, String cod) {
+    public CursoDTO criarCurriculo(Long cursoId, CurriculoCreate curriculoCreate, Long departamentoId) {
 
-        if (curriculoRepository.existsByCod(cod)) {
+        if (curriculoRepository.existsByCod(curriculoCreate.cod())) {
             throw new EntidadeJaExistenteException(
-                    "Já existe um currículo com o código: " + cod
+                    "Já existe um currículo com o código: " + curriculoCreate.cod()
             );
         }
+        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
-        Curriculo curriculo = new Curriculo(cod);
+        Curriculo curriculo = new Curriculo(curriculoCreate.cod());
         curriculo.setCurso(curso);
 
-        curso.getCurriculos().add(curriculo);
+        if (curriculoCreate.disciplinas() != null && !curriculoCreate.disciplinas().isEmpty()) {
+            List<RegistroDisciplina> registros = curriculoCreate.disciplinas().stream()
+                    .map(dto -> criarRegistroDisciplina(dto, curriculoCreate.cod()))
+                    .toList();
+            registros.forEach(curriculo::adicionarDisciplina);
+        }
 
+        curso.getCurriculos().add(curriculo);
         cursoRepository.save(curso);
 
         return cursoMapper.toCursoDTO(curso);
     }
 
+    private RegistroDisciplina criarRegistroDisciplina(RegistroDisciplinaCreate dto, String codigoCurriculo) {
+        Disciplina disciplina = disciplinaRepository.findById(dto.disciplinaId())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        "Disciplina com id = " + dto.disciplinaId() +
+                        " não encontrada ao montar o currículo '" + codigoCurriculo + "'."
+                ));
+
+        return new RegistroDisciplina(dto.tipoCategoria(), dto.periodoRecomendado(), disciplina);
+    }
+
     @Transactional
-    public void removerCurriculo(Long cursoId, Long curriculoId) {
+    public void removerCurriculo(Long cursoId, Long curriculoId, Long departamentoId) {
+
+        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
@@ -67,26 +94,25 @@ public class CurriculoService {
         }
 
         curso.getCurriculos().remove(curriculo);
-
         cursoRepository.save(curso);
     }
 
     @Transactional
-    public CursoDTO definirCurriculoAtual(Long cursoId, Long curriculoId) {
+    public CursoDTO definirCurriculoAtual(Long cursoId, Long curriculoId, Long departamentoId) {
+
+        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
         Curriculo curriculo = buscarCurriculoDoCurso(curriculoId, cursoId);
 
         curso.setCodCurriculoAtual(curriculo.getCod());
-
         cursoRepository.save(curso);
 
         return cursoMapper.toCursoDTO(curso);
     }
 
     public Curriculo buscarCurriculoPorId(Long id) {
-
         return curriculoRepository.findById(id)
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException(
@@ -95,7 +121,6 @@ public class CurriculoService {
     }
 
     private Curriculo buscarCurriculoDoCurso(Long curriculoId, Long cursoId) {
-
         return curriculoRepository.findByIdAndCursoId(curriculoId, cursoId)
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException(
@@ -103,10 +128,9 @@ public class CurriculoService {
                                         " não encontrado no curso de id = " + cursoId + "."
                         ));
     }
+
     @Transactional(readOnly = true)
-    public List<CurriculoDTO> listarPorCurso(
-            Long departamentoId,
-            Long cursoId) {
+    public List<CurriculoDTO> listarPorCurso(Long departamentoId, Long cursoId) {
 
         cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
 
