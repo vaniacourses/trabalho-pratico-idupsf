@@ -42,12 +42,6 @@ public abstract class GeradorDePDFService<T> {
             document.add(logo);
         }
 
-//        Font tituloFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
-//        Paragraph titulo = new Paragraph("Declaração");
-//        titulo.setAlignment(Element.ALIGN_CENTER);
-//        titulo.setSpacingAfter(30);
-//        document.add(titulo);
-
     }
 
     protected void adicionarRodape(Document document) throws Exception {}

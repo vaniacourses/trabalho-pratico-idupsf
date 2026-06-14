@@ -3,14 +3,18 @@ package com.upsf.backend.service;
 import com.upsf.backend.create.CursoCreate;
 import com.upsf.backend.dto.CursoDTO;
 import com.upsf.backend.dto.DepartamentoDTO;
+import com.upsf.backend.dto.DocenteDTO;
+import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
 import com.upsf.backend.mapper.CursoMapper;
+import com.upsf.backend.mapper.DisciplinaMapper;
+import com.upsf.backend.mapper.DocenteMapper;
+import com.upsf.backend.mapper.TurmaMapper;
 import com.upsf.backend.model.Curriculo;
 import com.upsf.backend.model.Curso;
-import com.upsf.backend.repository.CurriculoRepository;
-import com.upsf.backend.repository.CursoRepository;
+import com.upsf.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,18 @@ public class CursoService {
 
     @Autowired
     private CursoMapper cursoMapper;
+
+    @Autowired
+    private DocenteRepository docenteRepository;
+
+    @Autowired
+    private DocenteMapper docenteMapper;
+
+    @Autowired
+    private TurmaMapper turmaMapper;
+
+    @Autowired
+    private TurmaRepository turmaRepository;
 
     @Transactional(readOnly = true)
     public List<CursoDTO> listarTodos() {
@@ -116,5 +132,23 @@ public class CursoService {
                 "A duração mínima não pode ser maior que a duração máxima."
             );
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<DocenteDTO> listarDocentesDoDepartamentoDoCurso(Long cursoId) {
+        buscarCursoPorId(cursoId);
+        return docenteRepository.findDocentesByDepartamentoDoCurso(cursoId)
+                .stream()
+                .map(docenteMapper::toDto)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TurmaDTO> listarTurmasDosCurriculosDoCurso(Long cursoId) {
+        buscarCursoPorId(cursoId);
+        return turmaRepository.findTurmasByCurriculosDoCurso(cursoId)
+                .stream()
+                .map(turmaMapper::toTurmaDTO)
+                .toList();
     }
 }
