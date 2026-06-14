@@ -27,4 +27,8 @@ public interface TurmaRepository extends JpaRepository<Turma, Long>, JpaSpecific
     @Query("SELECT t FROM Turma t JOIN FETCH t.disciplina d " +
             "LEFT JOIN FETCH d.preRequisitos WHERE t.status = 'ATIVA'")
     List<Turma> buscarTurmasAtivasComRequisitos();
+
+    @Query("SELECT t FROM Turma t WHERE t.disciplina.id IN (SELECT rd.disciplina.id FROM Curso c JOIN c.curriculos cur JOIN cur.registroDisciplinas rd WHERE c.id = :cursoId)")
+    List<Turma> findTurmasByCurriculosDoCurso(@Param("cursoId") Long cursoId);
+
 }
