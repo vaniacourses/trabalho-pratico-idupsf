@@ -13,6 +13,7 @@ import com.upsf.backend.model.Inscricao;
 import com.upsf.backend.model.Turma;
 import com.upsf.backend.repository.*;
 import com.upsf.backend.inscricao.ValidacaoInscricao;
+import com.upsf.backend.repository.InscricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,31 +27,37 @@ import java.util.Set;
 public class InscricaoService {
 
     @Autowired
-    private HistoricoService historicoService;
-    @Autowired
-    private TurmaService turmaService;
-    @Autowired
-    private TurmaMapper turmaMapper;
-    @Autowired
-    private TurmaRepository turmaRepository;
-    @Autowired
     private InscricaoMapper inscricaoMapper;
+
     @Autowired
     private InscricaoRepository inscricaoRepository;
+
+    @Autowired
+    private HistoricoService historicoService;
+    
+    @Autowired
+    private TurmaMapper turmaMapper;
+    
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     @Autowired
     private PeriodoRepository periodoRepository;
+    
     @Autowired
     private DiscenteRepository discenteRepository;
+    
     @Autowired
     private List<ValidacaoInscricao> validacoesInscricao;
 
     // talvez eu tenha introduzido um erro aqui
     // Função de Listagem de Turmas Disponíveis para um determinado Discente
     // Em resposta à InscricaoController
+
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
         Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
-        List<Turma> turmasAtivas = turmaService.buscarTurmasEntitiesAtivasComRequisitos();
+        List<Turma> turmasAtivas = turmaRepository.buscarTurmasAtivasComRequisitos();
 
         List<Turma> disponiveis = turmasAtivas.stream()
                 .filter(turma -> concluidas.containsAll(turma.getDisciplina().getPreRequisitos()))
@@ -106,4 +113,11 @@ public class InscricaoService {
 //        inscricoesParaTrancar.forEach(Inscricao::trancar);
 //        inscricaoRepository.saveAll(inscricoesParaTrancar);
 //    }
+    public List<Inscricao> listarInscricoesPorTurma(Long id) {
+        return inscricaoRepository.findByTurmaId(id);
+    }
+
+    public void deletarInscricoesPorTurma(Long turmaId) {
+        inscricaoRepository.deleteByTurmaId(turmaId);
+    }
 }

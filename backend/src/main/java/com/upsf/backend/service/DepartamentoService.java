@@ -20,5 +20,8 @@ public class DepartamentoService {
                 .stream()
                 .map(d -> new DepartamentoDTO(d.getId(), d.getCod(), d.getNome(), d.getEndereco(), d.getCampus()))
                 .toList();
+
+    public List<DepartamentoDTO> listarOptions() {
+        return departamentoRepository.findAllAsOptions();
     }
 }

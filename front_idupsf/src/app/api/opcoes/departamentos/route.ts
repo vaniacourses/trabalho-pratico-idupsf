@@ -5,9 +5,9 @@ export async function GET() {
     try {
 
         // URL do Back-End Java (Fazer .env em algum momento)
-        const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:8080";
+        const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
 
-        const response = await fetch(`${BACKEND_URL}/api/opcoes/departamentos`, {
+        const response = await fetch(`${BACKEND_URL}/opcoes/departamentos`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

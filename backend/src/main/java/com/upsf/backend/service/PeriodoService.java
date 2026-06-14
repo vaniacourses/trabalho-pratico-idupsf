@@ -1,6 +1,6 @@
 package com.upsf.backend.service;
 
-import com.upsf.backend.dto.PeriodoCreate;
+import com.upsf.backend.create.PeriodoCreate;
 import com.upsf.backend.dto.PeriodoDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
@@ -23,7 +23,7 @@ public class PeriodoService {
 
     private final PeriodoRepository periodoRepository;
     private final TurmaRepository turmaRepository;
-    private final PeriodoMapper periodoMapper; // Injetado via Lombok
+    private final PeriodoMapper periodoMapper;
     private final TurmaMapper turmaMapper;
 
     @Transactional

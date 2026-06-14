@@ -9,4 +9,8 @@ import java.util.List;
 
 public interface DepartamentoRepository extends JpaRepository<Departamento, Long> {
 
+
+        @Query("SELECT new com.upsf.backend.dto.DepartamentoDTO(d.id, d.cod, d.nome, null, null) FROM Departamento d ORDER BY d.nome")
+        List<DepartamentoDTO> findAllAsOptions();
+
 }

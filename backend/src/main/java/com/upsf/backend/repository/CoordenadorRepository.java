@@ -7,5 +7,4 @@ public interface CoordenadorRepository extends JpaRepository<Coordenador, Long> 
     boolean existsByCursoId(Long cursoId);
 
 
-
 }

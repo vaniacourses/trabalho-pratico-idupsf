@@ -1,4 +1,4 @@
-package com.upsf.backend.dto;
+package com.upsf.backend.create;
 
 import java.time.LocalDateTime;
 

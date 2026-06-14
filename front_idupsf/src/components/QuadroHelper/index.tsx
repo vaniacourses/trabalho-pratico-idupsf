@@ -1,5 +1,6 @@
 "use client";
 
+import styles from './styles.module.css'
 import { useState } from "react";
 import { Turma, Curriculo } from "@/types/modelUPSF";
 import { turmaService } from "@/services/turmasService";
@@ -16,7 +17,7 @@ import { FiltrosBuscaTurmas, TurmasOptionsProps } from "@/types/buscaTypes";
     - Conter a função que realiza a requisição de busca e passá-la para QuadroFiltrosTurma. 
     - Armazenar e exibir o resultado da busca.
 */
-export default function QuadroHelper({ departamentos, cursos }: TurmasOptionsProps) {
+export default function QuadroHelper({ departamentos, cursos, periodos }: TurmasOptionsProps) {
     
     const [turmas, setTurmas] = useState<Turma[]>([]);
     const [curriculos, setCurriculos] = useState<Curriculo[]>([]);
@@ -50,10 +51,11 @@ export default function QuadroHelper({ departamentos, cursos }: TurmasOptionsPro
     }
 
     return (
-        <main>
+        <main className={styles.main}>
             <QuadroFiltroTurmas
                 departamentos={departamentos}
                 cursos={cursos}
+                periodos={periodos}
                 curriculos={curriculos}
                 onBuscar={handleBuscar}
                 onCursoChange={handleCursoChange}
