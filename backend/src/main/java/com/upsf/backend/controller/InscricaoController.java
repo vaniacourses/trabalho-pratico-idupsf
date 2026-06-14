@@ -49,12 +49,6 @@ public class InscricaoController {
 //        return inscricaoService.cancelarInscricao(id);
 //    }
 
-    // Requisição de Listar todas as Inscrições Por Turma
-    @GetMapping("/turma-inscricoes/{turmaId}")
-    public List<Inscricao> listarInscricoesPorTurma(@PathVariable Long turmaId) {
-        return inscricaoService.listarInscricoesPorTurma(turmaId);
-    }
-
     // Requisição de Deletar todas as Inscrições Por Turma
     // (Requisição de Teste - é usada em TurmaService)
     // Mantém consistência de dados após Deletar uma Turma
