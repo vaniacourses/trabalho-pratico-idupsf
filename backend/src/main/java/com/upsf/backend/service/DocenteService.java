@@ -1,12 +1,15 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
+import com.upsf.backend.mapper.TurmaMapper;
 import com.upsf.backend.model.Departamento;
 import com.upsf.backend.model.Docente;
 import com.upsf.backend.model.Usuario;
 import com.upsf.backend.repository.DepartamentoRepository;
+import com.upsf.backend.repository.TurmaRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.DocenteUpdate;
 import com.upsf.backend.util.IdentificacaoUsuarioUtil;
@@ -17,6 +20,7 @@ import com.upsf.backend.create.DocenteCreate;
 import com.upsf.backend.repository.DocenteRepository;
 import com.upsf.backend.mapper.DocenteMapper;
 import com.upsf.backend.dto.DocenteDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +35,12 @@ public class DocenteService {
     private DocenteMapper docenteMapper;
     @Autowired
     private DepartamentoRepository departamentoRepository;
+
+    @Autowired
+    private TurmaRepository turmaRepository;
+
+    @Autowired
+    private TurmaMapper turmaMapper;
 
     public DocenteDTO cadastrarDocente(DocenteCreate docenteCreate) {
         Docente docente = docenteMapper.toEntity(docenteCreate);
@@ -65,6 +75,23 @@ public class DocenteService {
         Docente docente = docenteRepository.findById(id).orElseThrow(() ->
                 new EntidadeNaoEncontradaException("Docente de id = " + id + " não encontrado."));
         return docenteMapper.toDto(docente);
+    }
+
+    public Docente buscarDocentePorId(Long id) {
+        return docenteRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        "Docente com id = " + id + " não encontrado."
+                ));
+    }
+
+    @Transactional(readOnly = true)
+    public List<TurmaDTO> listarTurmasDoDocente(Long docenteId) {
+        buscarDocentePorId(docenteId);
+
+        return turmaRepository.findByDocenteId(docenteId)
+                .stream()
+                .map(turmaMapper::toTurmaDTO)
+                .toList();
     }
 
     public DocenteDTO setDocenteById(Long id, DocenteUpdate docenteUpdate){
