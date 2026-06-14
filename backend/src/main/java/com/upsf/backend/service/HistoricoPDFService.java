@@ -45,7 +45,6 @@ public class HistoricoPDFService extends GeradorDePDFService<RelatorioHistoricoD
             tabela.addCell(disc.nomeDisciplina() != null ? disc.nomeDisciplina() : "-");
             tabela.addCell(disc.nota() != null ? String.valueOf(disc.nota()) : "-");
 
-            // Regra visual: Se a nota da VS for nula ou 0.0, exibe um traço para manter a tabela limpa
             String textoVS = (disc.notaVS() != null && disc.notaVS() > 0.0f) ? String.valueOf(disc.notaVS()) : "-";
             tabela.addCell(textoVS);
 
