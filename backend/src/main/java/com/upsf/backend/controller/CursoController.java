@@ -2,6 +2,8 @@ package com.upsf.backend.controller;
 
 import com.upsf.backend.create.CursoCreate;
 import com.upsf.backend.dto.CursoDTO;
+import com.upsf.backend.dto.DocenteDTO;
+import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.service.CurriculoService;
 import com.upsf.backend.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,4 +71,14 @@ public class CursoController {
                                                      @PathVariable Long curriculoId) {
         return ResponseEntity.ok(curriculoService.removerCurriculo(cursoId, curriculoId));
     }
+    @GetMapping("/{id}/departamento/docentes")
+    public ResponseEntity<List<DocenteDTO>> listarDocentesDoDepartamentoDoCurso(@PathVariable Long id) {
+        return ResponseEntity.ok(cursoService.listarDocentesDoDepartamentoDoCurso(id));
+    }
+
+    @GetMapping("/{id}/curriculos/turmas")
+    public ResponseEntity<List<TurmaDTO>> listarTurmasDosCurriculosDoCurso(@PathVariable Long id) {
+        return ResponseEntity.ok(cursoService.listarTurmasDosCurriculosDoCurso(id));
+    }
+
 }
