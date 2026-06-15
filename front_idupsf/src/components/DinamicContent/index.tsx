@@ -1,9 +1,10 @@
 import { DinamicContentProps } from "@/types/PropsTypes";
 import NewsSection from "../NewsSection";
 import HistoricoDiscente from "../HistoricoDiscente";
+import GerarDeclaracoes from "../GerarDeclaracoes";
 
 const conteudoDiscente: Record<string, React.ReactNode> = {
-    "gerar-declaracoes": null, // <GerarDeclaracoes />,
+    "gerar-declaracoes": <GerarDeclaracoes />,
     "historico": <HistoricoDiscente />,
     "plano-de-estudos": null, // <PlanoDeEstudos />,
     "integralizacao-de-curriculo": null,
