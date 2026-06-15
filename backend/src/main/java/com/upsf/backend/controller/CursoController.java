@@ -6,6 +6,7 @@ import com.upsf.backend.dto.DocenteDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.service.CurriculoService;
 import com.upsf.backend.service.CursoService;
+import com.upsf.backend.service.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,6 @@ public class CursoController {
         cursoService.deletar(id, departamentoId);
         return ResponseEntity.noContent().build();
     }
-}
 
     @GetMapping("/{id}/departamento/docentes")
     public ResponseEntity<List<DocenteDTO>> listarDocentesDoDepartamentoDoCurso(@PathVariable Long id) {
