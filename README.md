@@ -30,6 +30,9 @@
 - Visão Arquitetural: [Diagramas/Visao Arquitetural/](Diagramas/Visao%20Arquitetural/)
 - LPS e Padrões GoF: [Diagramas/Padrões GOF e LPS/](Diagramas/Padrões%20GOF%20e%20LPS/)
 
+## Relatórios
+- Relatórios: [Relatórios/](Relatórios/)
+
 ## Execução
 
 Backend:
