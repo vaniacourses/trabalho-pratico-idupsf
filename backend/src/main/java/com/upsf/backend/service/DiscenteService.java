@@ -13,9 +13,9 @@ import com.upsf.backend.repository.HistoricoRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.DiscenteUpdate;
 import com.upsf.backend.util.IdentificacaoUsuarioUtil;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -130,5 +130,11 @@ public class DiscenteService {
         discente = discenteRepository.save(discente);
 
         return discenteMapper.toDto(discente);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DiscenteDTO> listarDiscentesPorTurma(Long turmaId) {
+        List<Discente> discentes = discenteRepository.findDiscentesByTurmaId(turmaId);
+        return discenteMapper.toDtos(discentes);
     }
 }
