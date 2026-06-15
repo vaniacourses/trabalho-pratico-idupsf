@@ -16,44 +16,38 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/departamentos/{departamentoId}/cursos")
+@RequestMapping("/api/cursos")
 public class CursoController {
 
     @Autowired
     private CursoService cursoService;
 
     @GetMapping
-    public ResponseEntity<List<CursoDTO>> listarTodos(@PathVariable Long departamentoId) {
-        return ResponseEntity.ok(cursoService.listarTodosPorDepartamento(departamentoId));
+    public ResponseEntity<List<CursoDTO>> listarTodos() {
+        return ResponseEntity.ok(cursoService.listarTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CursoDTO> buscarPorId(
-            @PathVariable Long departamentoId,
-            @PathVariable Long id) {
-        return ResponseEntity.ok(cursoService.buscarDTOPorId(id, departamentoId));
+    public ResponseEntity<CursoDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(cursoService.buscarDTOPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<CursoDTO> criar(
-            @PathVariable Long departamentoId,
-            @RequestBody CursoCreate cursoCreate) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.criar(cursoCreate, departamentoId));
+    public ResponseEntity<CursoDTO> criar(@RequestBody CursoCreate cursoCreate) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.criar(cursoCreate));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CursoDTO> atualizar(
-            @PathVariable Long departamentoId,
             @PathVariable Long id,
             @RequestBody CursoCreate cursoCreate) {
-        return ResponseEntity.ok(cursoService.atualizar(id, cursoCreate, departamentoId));
+        return ResponseEntity.ok(cursoService.atualizar(id, cursoCreate));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(
-            @PathVariable Long departamentoId,
             @PathVariable Long id) {
-        cursoService.deletar(id, departamentoId);
+        cursoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 

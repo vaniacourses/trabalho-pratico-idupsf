@@ -1,5 +1,6 @@
 package com.upsf.backend.controller;
 
+import com.upsf.backend.dto.CursoDTO;
 import com.upsf.backend.dto.DepartamentoDTO;
 import com.upsf.backend.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class DepartamentoController {
     @GetMapping
     public ResponseEntity<List<DepartamentoDTO>> listarTodos() {
         return ResponseEntity.ok(departamentoService.listarTodos());
+    }
+
+    @GetMapping("/{id}/cursos")
+    public ResponseEntity<List<CursoDTO>> listarTodos(@PathVariable Long id) {
+        return ResponseEntity.ok(departamentoService.listarCursosPorDepartamento(id));
     }
 }

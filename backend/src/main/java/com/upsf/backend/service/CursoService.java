@@ -58,37 +58,29 @@ public class CursoService {
     }
 
     @Transactional(readOnly = true)
-    public List<CursoDTO> listarTodosPorDepartamento(Long departamentoId) {
-        return cursoRepository.findAllByDepartamentoId(departamentoId)
+    public List<CursoDTO> listarTodos() {
+        return cursoRepository.findAll()
                 .stream()
                 .map(cursoMapper::toCursoDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
-    public CursoDTO buscarDTOPorId(Long id, Long departamentoId) {
-        buscarCursoDoDepartamento(id, departamentoId);
+    public CursoDTO buscarDTOPorId(Long id) {
         return cursoMapper.toCursoDTO(buscarCursoPorId(id));
     }
 
     @Transactional
-    public CursoDTO criar(CursoCreate cursoCreate, Long departamentoId) {
+    public CursoDTO criar(CursoCreate cursoCreate) {
         if (cursoRepository.existsByCod(cursoCreate.cod())) {
             throw new EntidadeJaExistenteException(
                     "Já existe um curso com o código: " + cursoCreate.cod()
             );
         }
 
-        // Garante que o departamento do body bate com o da URL
-        if (!cursoCreate.idDepartamento().equals(departamentoId)) {
-            throw new RegraNegocioException(
-                    "O departamento informado no body não corresponde ao departamento da URL."
-            );
-        }
-
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
 
-        Departamento departamento = departamentoRepository.findById(departamentoId)
+        Departamento departamento = departamentoRepository.findById(cursoCreate.idDepartamento())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
 
         Curso curso = cursoMapper.toCurso(cursoCreate);
@@ -101,8 +93,7 @@ public class CursoService {
     }
 
     @Transactional
-    public CursoDTO atualizar(Long id, CursoCreate cursoCreate, Long departamentoId) {
-        buscarCursoDoDepartamento(id, departamentoId);
+    public CursoDTO atualizar(Long id, CursoCreate cursoCreate) {
 
         Curso curso = buscarCursoPorId(id);
         validarDuracoes(cursoCreate.duracaoMin(), cursoCreate.duracaoMax());
@@ -123,8 +114,7 @@ public class CursoService {
     }
 
     @Transactional
-    public void deletar(Long id, Long departamentoId) {
-        buscarCursoDoDepartamento(id, departamentoId);
+    public void deletar(Long id) {
 
         if (discenteRepository.existsByCursoId(id)) {
             throw new RegraNegocioException(

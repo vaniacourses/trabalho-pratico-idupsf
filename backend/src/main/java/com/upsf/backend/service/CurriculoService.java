@@ -41,14 +41,13 @@ public class CurriculoService {
     CurriculoMapper curriculoMapper;
 
     @Transactional
-    public CursoDTO criarCurriculo(Long cursoId, CurriculoCreate curriculoCreate, Long departamentoId) {
+    public CursoDTO criarCurriculo(Long cursoId, CurriculoCreate curriculoCreate) {
 
         if (curriculoRepository.existsByCod(curriculoCreate.cod())) {
             throw new EntidadeJaExistenteException(
                     "Já existe um currículo com o código: " + curriculoCreate.cod()
             );
         }
-        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
@@ -79,9 +78,7 @@ public class CurriculoService {
     }
 
     @Transactional
-    public void removerCurriculo(Long cursoId, Long curriculoId, Long departamentoId) {
-
-        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
+    public void removerCurriculo(Long cursoId, Long curriculoId) {
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
@@ -98,9 +95,7 @@ public class CurriculoService {
     }
 
     @Transactional
-    public CursoDTO definirCurriculoAtual(Long cursoId, Long curriculoId, Long departamentoId) {
-
-        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
+    public CursoDTO definirCurriculoAtual(Long cursoId, Long curriculoId) {
 
         Curso curso = cursoService.buscarCursoPorId(cursoId);
 
@@ -130,9 +125,7 @@ public class CurriculoService {
     }
 
     @Transactional(readOnly = true)
-    public List<CurriculoDTO> listarPorCurso(Long departamentoId, Long cursoId) {
-
-        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
+    public List<CurriculoDTO> listarPorCurso(Long cursoId) {
 
         return curriculoRepository.findAllByCursoId(cursoId)
                 .stream()
@@ -141,9 +134,8 @@ public class CurriculoService {
     }
 
     @Transactional(readOnly = true)
-    public CurriculoDTO buscarPorId(Long cursoId, Long curriculoId, Long departamentoId) {
+    public CurriculoDTO buscarPorId(Long cursoId, Long curriculoId) {
 
-        cursoService.buscarCursoDoDepartamento(cursoId, departamentoId);
         Curriculo curriculo = curriculoRepository
                 .findByIdAndCursoId(curriculoId, cursoId)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
