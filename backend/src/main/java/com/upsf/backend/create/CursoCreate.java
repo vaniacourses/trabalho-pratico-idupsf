@@ -6,5 +6,6 @@ public record CursoCreate(String cod,
                           String nome,
                           int duracaoMin,
                           int duracaoMax,
-                          Curso.Turno turno) {
-}
+                          Curso.Turno turno,
+                          Long idDepartamento)
+{}

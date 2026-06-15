@@ -3,6 +3,7 @@ package com.upsf.backend.controller;
 
 import com.upsf.backend.create.DocenteCreate;
 import com.upsf.backend.dto.DocenteDTO;
+import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.update.DocenteUpdate;
 import com.upsf.backend.service.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class DocenteController {
     public ResponseEntity<DocenteDTO> removerDocente(@PathVariable Long id){
         DocenteDTO docenteRemovido = docenteService.removeDocenteById(id);
         return ResponseEntity.ok(docenteRemovido);
+    }
+
+    @GetMapping("/{id}/turmas")
+    public ResponseEntity<List<TurmaDTO>> listarTurmasDoDocente(@PathVariable Long id) {
+        return ResponseEntity.ok(docenteService.listarTurmasDoDocente(id));
     }
 }

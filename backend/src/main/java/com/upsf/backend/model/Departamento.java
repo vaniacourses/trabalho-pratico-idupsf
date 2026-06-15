@@ -24,8 +24,7 @@ public class Departamento {
     private String nome;
     private String endereco;
     private String campus;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "departamento_id")
+    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Curso> cursos;
 
     // talvez departamentos não tenham endereço e campus definidos no momento de criação

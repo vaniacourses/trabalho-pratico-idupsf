@@ -8,6 +8,7 @@ import com.upsf.backend.repository.CursoRepository;
 import com.upsf.backend.repository.DepartamentoRepository;
 import com.upsf.backend.repository.UsuarioRepository;
 import com.upsf.backend.update.CoordenadorUpdate;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.upsf.backend.create.CoordenadorCreate;
@@ -30,8 +31,10 @@ public class CoordenadorService {
     private CursoRepository cursoRepository;
     @Autowired
     private DepartamentoRepository departamentoRepository;
+    @Autowired
+    private MatriculaSequenceService matriculaSequenceService;
 
-
+    @Transactional
     public CoordenadorDTO cadastrarCoordenador(CoordenadorCreate coordenadorCreate){
         Coordenador coordenador = coordenadorMapper.toEntity(coordenadorCreate);
 
@@ -42,11 +45,11 @@ public class CoordenadorService {
 
         Curso curso = cursoRepository.findById(coordenadorCreate.idCurso()).orElseThrow(() -> new EntidadeNaoEncontradaException("Curso não encontrado."));
         Departamento dept = departamentoRepository.findById(coordenadorCreate.idDepartamento()).orElseThrow(() -> new EntidadeNaoEncontradaException("Departamento não encontrado."));
-        String email = IdentificacaoUsuarioUtil.createEmailInst(coordenador.getNome());
-        String matricula = IdentificacaoUsuarioUtil.createMatricula(curso.getCod(), 1L);
+        MatriculaSequenceService.IdentificacaoUsuario identificacao =
+                matriculaSequenceService.gerarIdentificacao(curso.getCod(), coordenador.getNome());
 
-        coordenador.setMatricula(matricula);
-        coordenador.setEmailInst(email);
+        coordenador.setMatricula(identificacao.matricula());
+        coordenador.setEmailInst(identificacao.emailInst());
         coordenador.setCurso(curso);
         coordenador.setDepartamento(dept);
         coordenador.setStatus(Usuario.Status.ATIVO);
