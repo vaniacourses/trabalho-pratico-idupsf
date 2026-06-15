@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 try {
-                    const res = await fetch(`${process.env.BACKEND_API_URL}/auth/login`, {
+                    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
