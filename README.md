@@ -13,13 +13,6 @@
 - Carga inicial do banco: [backend/src/main/resources/data.sql](backend/src/main/resources/data.sql)
 - Dependências Maven: [backend/pom.xml](backend/pom.xml)
 
-Login implementado:
-
-- Endpoint: `POST /api/auth/login`
-- Entrada: `cpf`, `senha`
-- Saída: `id`, `matricula`, `nome`, `email`, `emailInst`, `status`, `tipo`
-- Arquivos principais: [AuthController.java](backend/src/main/java/com/upsf/backend/controller/AuthController.java), [AuthService.java](backend/src/main/java/com/upsf/backend/service/AuthService.java), [SecurityConfig.java](backend/src/main/java/com/upsf/backend/security/SecurityConfig.java)
-
 ## Frontend
 
 - Código-fonte: [front_idupsf/src/](front_idupsf/src/)

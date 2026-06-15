@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class AuthService {
     @Autowired
@@ -28,19 +30,17 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         UsuarioDetails usuarioDetails = (UsuarioDetails) authentication.getPrincipal();
         Usuario usuario = usuarioDetails.getUsuario();
+        String perfil = getPerfil(usuario);
+        String token = UUID.randomUUID().toString();
 
         return new LoginResponseDTO(
                 usuario.getId(),
-                usuario.getMatricula(),
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuario.getEmailInst(),
-                usuario.getStatus(),
-                getTipo(usuario)
+                perfil,
+                token
         );
     }
 
-    private String getTipo(Usuario usuario) {
+    private String getPerfil(Usuario usuario) {
         if (usuario instanceof Coordenador) {
             return "COORDENADOR";
         }
@@ -50,6 +50,6 @@ public class AuthService {
         if (usuario instanceof Docente) {
             return "DOCENTE";
         }
-        throw new IllegalStateException("Tipo de usuário não suportado.");
+        throw new IllegalStateException("Perfil de usuário não suportado.");
     }
 }
