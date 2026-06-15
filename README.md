@@ -31,7 +31,7 @@
 - LPS e Padrões GoF: [Diagramas/Padrões GOF e LPS/](Diagramas/Padrões%20GOF%20e%20LPS/)
 
 ## Relatórios
-- Relatórios: [Relatórios/](Relatorios/)
+- Relatórios: [Relatorios/](Relatorios/)
 
 ## Execução
 
