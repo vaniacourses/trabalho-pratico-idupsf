@@ -2,7 +2,12 @@ package com.upsf.backend.controller;
 
 
 import com.upsf.backend.create.TurmaCreate;
+import com.upsf.backend.dto.DisciplinaDTO;
+import com.upsf.backend.dto.InscricaoResponseDTO;
+import com.upsf.backend.dto.InscricaoUpdateDTO;
 import com.upsf.backend.dto.TurmaDTO;
+import com.upsf.backend.model.Inscricao;
+import com.upsf.backend.service.InscricaoService;
 import com.upsf.backend.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +18,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("api/quadro") // caminhos aqui são placeholders (Quadro de Horários)
+@RequestMapping("/api/turmas") // caminhos aqui são placeholders (Quadro de Horários)
 public class TurmaController {
 
     @Autowired
     private TurmaService turmaService;
+
+    @Autowired
+    private InscricaoService inscricaoService;
 
     // Requisição GET para Turmas Ativas (Para Quadro de Horários) - Talvez Desnecessário
     @GetMapping
@@ -26,8 +34,14 @@ public class TurmaController {
         return ResponseEntity.ok(turmasAtivas); // Status 200
     }
 
+    @GetMapping("/{idTurma}")
+    public ResponseEntity<TurmaDTO> buscarTurmaPorId(@PathVariable Long idTurma) {
+        TurmaDTO turma = turmaService.buscarTurmaPorId(idTurma);
+        return ResponseEntity.ok(turma); // Status 200
+    }
+
     // Busca de Turmas com Filtros (Para Quadro de Horários)
-    @GetMapping("/turmas")
+    @GetMapping("/quadro")
     public ResponseEntity<List<TurmaDTO>> listarQuadroTurmas(
             @RequestParam(required = false) String nomeCodDisciplina,
             @RequestParam(required = false) String departamento,
@@ -46,16 +60,32 @@ public class TurmaController {
     }
 
     // Requisição PUT para Atualização dos Dados de uma Turma
-    @PutMapping
+    @PutMapping("/{idTurma}")
     public ResponseEntity<TurmaDTO> alterarTurma(@RequestBody TurmaDTO turmaDto) { // Passa um Objeto Destacado
         return ResponseEntity.ok(turmaService.alterarTurma(turmaDto));
     }
 
     // Requisição DELETE para Exclução de uma Turma
-    @DeleteMapping("{idTurma}")
+    @DeleteMapping("/{idTurma}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Status 204 (Sucesso, mas sem corpo)
     public void removerTurmaPorId(@PathVariable("idTurma") long id) {
         turmaService.removerTurmaPorId(id);
         // Espera receber um Objeto Persistente
     }
+
+    @GetMapping("/{id}/inscricoes")
+    public ResponseEntity<List<InscricaoResponseDTO>> listarInscricoesDaTurma(@PathVariable Long id) {
+        return ResponseEntity.ok(inscricaoService.listarInscricoesPorTurma(id));
+    }
+
+    @PatchMapping("/{id}/notas")
+    public ResponseEntity<Void> atribuirNotas(
+            @PathVariable Long id,
+            @RequestParam Long docenteId,
+            @RequestBody List<InscricaoUpdateDTO> atualizacoes) {
+
+        inscricaoService.atribuirNotasEFrequencias(id, docenteId, atualizacoes);
+        return ResponseEntity.noContent().build();
+    }
+
 }

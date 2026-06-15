@@ -1,7 +1,6 @@
 package com.upsf.backend.create;
 
 import com.upsf.backend.model.Docente;
-import org.mapstruct.Mapping;
 
 import java.util.Date;
 import java.util.List;

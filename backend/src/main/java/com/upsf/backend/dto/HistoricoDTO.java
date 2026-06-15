@@ -6,6 +6,6 @@ public record HistoricoDTO(
         Long id,
         String matriculaAluno,
         String nomeAluno,
-        Float coeficienteRendimento,
+        Float coeficienteRend,
         List<DisciplinaCursadaDTO> disciplinas) {
 }

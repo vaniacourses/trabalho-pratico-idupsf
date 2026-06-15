@@ -8,7 +8,7 @@ import java.util.List;
 public record DisciplinaDTO(Long id,
                             String cod,
                             String nome,
-                            int cargaHoraria,
+                            Integer cargaHoraria,
                             Disciplina.Status status)
 {
 }

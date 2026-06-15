@@ -1,6 +1,6 @@
 package com.upsf.backend.mapper;
 
-import com.upsf.backend.dto.PeriodoCreate;
+import com.upsf.backend.create.PeriodoCreate;
 import com.upsf.backend.dto.PeriodoDTO;
 import com.upsf.backend.model.Periodo;
 import org.mapstruct.Mapper;

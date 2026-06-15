@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class IdentificacaoUsuarioUtil {
-    public static String createEmailInst(String nome) {
+    public static String createEmailInst(String nome, Long userId) {
         String[] partes = nome.split("\\s+");
         StringBuilder email = new StringBuilder();
 
@@ -15,6 +15,7 @@ public class IdentificacaoUsuarioUtil {
                     email.append(partes[i].charAt(0));
                 }
             }
+            email.append(userId.toString());
             email.append("@id.ufps.com.br");
         }
         return email.toString().toLowerCase();

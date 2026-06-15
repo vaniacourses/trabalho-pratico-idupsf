@@ -2,10 +2,14 @@ package com.upsf.backend.service;
 
 import com.upsf.backend.create.CursoCreate;
 import com.upsf.backend.dto.CursoDTO;
+import com.upsf.backend.dto.DocenteDTO;
+import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeJaExistenteException;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
 import com.upsf.backend.mapper.CursoMapper;
+import com.upsf.backend.mapper.DocenteMapper;
+import com.upsf.backend.mapper.TurmaMapper;
 import com.upsf.backend.model.Curso;
 import com.upsf.backend.model.Departamento;
 import com.upsf.backend.repository.*;
@@ -29,6 +33,18 @@ public class CursoService {
     @Autowired
     private CoordenadorRepository coordenadorRepository;
 
+    @Autowired
+    private DocenteRepository docenteRepository;
+
+    @Autowired
+    private DocenteMapper docenteMapper;
+
+    @Autowired
+    private TurmaMapper turmaMapper;
+
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     // Valida que o curso pertence ao departamento informado na URL.
     // Visibilidade package-private mantida para uso interno (ex.: CurriculoService).
     void buscarCursoDoDepartamento(Long cursoId, Long departamentoId) {
@@ -37,7 +53,7 @@ public class CursoService {
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException(
                                 "Curso com id = " + cursoId +
-                                " não pertence ao departamento de id = " + departamentoId + "."
+                                        " não pertence ao departamento de id = " + departamentoId + "."
                         ));
     }
 
@@ -124,6 +140,11 @@ public class CursoService {
         cursoRepository.deleteById(id);
     }
 
+    public List<CursoDTO> listarOptions() {
+        return cursoRepository.findAllAsOptions();
+    }
+
+    // Método auxiliar público — reutilizado por CurriculoService, DiscenteService, CoordenadorService
     public Curso buscarCursoPorId(Long id) {
         return cursoRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
@@ -142,5 +163,23 @@ public class CursoService {
                     "A duração mínima não pode ser maior que a duração máxima."
             );
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<DocenteDTO> listarDocentesDoDepartamentoDoCurso(Long cursoId) {
+        buscarCursoPorId(cursoId);
+        return docenteRepository.findDocentesByDepartamentoDoCurso(cursoId)
+                .stream()
+                .map(docenteMapper::toDto)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TurmaDTO> listarTurmasDosCurriculosDoCurso(Long cursoId) {
+        buscarCursoPorId(cursoId);
+        return turmaRepository.findTurmasByCurriculosDoCurso(cursoId)
+                .stream()
+                .map(turmaMapper::toTurmaDTO)
+                .toList();
     }
 }

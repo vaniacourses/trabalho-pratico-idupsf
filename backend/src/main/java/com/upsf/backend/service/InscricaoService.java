@@ -2,6 +2,8 @@ package com.upsf.backend.service;
 
 import com.upsf.backend.create.InscricaoCreate;
 import com.upsf.backend.dto.InscricaoDTO;
+import com.upsf.backend.dto.InscricaoResponseDTO;
+import com.upsf.backend.dto.InscricaoUpdateDTO;
 import com.upsf.backend.dto.TurmaDTO;
 import com.upsf.backend.exception.EntidadeNaoEncontradaException;
 import com.upsf.backend.exception.RegraNegocioException;
@@ -13,6 +15,7 @@ import com.upsf.backend.model.Inscricao;
 import com.upsf.backend.model.Turma;
 import com.upsf.backend.repository.*;
 import com.upsf.backend.inscricao.ValidacaoInscricao;
+import com.upsf.backend.repository.InscricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,31 +29,37 @@ import java.util.Set;
 public class InscricaoService {
 
     @Autowired
-    private HistoricoService historicoService;
-    @Autowired
-    private TurmaService turmaService;
-    @Autowired
-    private TurmaMapper turmaMapper;
-    @Autowired
-    private TurmaRepository turmaRepository;
-    @Autowired
     private InscricaoMapper inscricaoMapper;
+
     @Autowired
     private InscricaoRepository inscricaoRepository;
+
+    @Autowired
+    private HistoricoService historicoService;
+    
+    @Autowired
+    private TurmaMapper turmaMapper;
+    
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     @Autowired
     private PeriodoRepository periodoRepository;
+    
     @Autowired
     private DiscenteRepository discenteRepository;
+    
     @Autowired
     private List<ValidacaoInscricao> validacoesInscricao;
 
     // talvez eu tenha introduzido um erro aqui
     // Função de Listagem de Turmas Disponíveis para um determinado Discente
     // Em resposta à InscricaoController
+
     @Transactional(readOnly = true)
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
         Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
-        List<Turma> turmasAtivas = turmaService.buscarTurmasEntitiesAtivasComRequisitos();
+        List<Turma> turmasAtivas = turmaRepository.buscarTurmasAtivasComRequisitos();
 
         List<Turma> disponiveis = turmasAtivas.stream()
                 .filter(turma -> concluidas.containsAll(turma.getDisciplina().getPreRequisitos()))
@@ -106,4 +115,63 @@ public class InscricaoService {
 //        inscricoesParaTrancar.forEach(Inscricao::trancar);
 //        inscricaoRepository.saveAll(inscricoesParaTrancar);
 //    }
+
+    @Transactional(readOnly = true)
+    public List<InscricaoResponseDTO> listarInscricoesPorTurma(Long turmaId) {
+        if (!turmaRepository.existsById(turmaId)) {
+            throw new EntidadeNaoEncontradaException("Turma não encontrada.");
+        }
+
+        List<Inscricao> inscricoes = inscricaoRepository.findByTurmaId(turmaId);
+
+        return inscricoes.stream()
+                .map(inscricao -> new InscricaoResponseDTO(
+
+                        inscricao.getId(),
+                        inscricao.getDiscente().getNome(),
+                        inscricao.getDiscente().getMatricula(),
+                        inscricao.getNota(),
+                        inscricao.getNotaVS(),
+                        inscricao.isFrequencia(),
+                        inscricao.getStatus()
+                ))
+                .toList();
+    }
+
+    @Transactional
+    public void atribuirNotasEFrequencias(Long turmaId, Long docenteId, List<InscricaoUpdateDTO> atualizacoes) {
+        Turma turma = turmaRepository.findById(turmaId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Turma não encontrada."));
+
+        // Validação Analítica: O docente tentando alterar as notas é o dono da turma?
+        if (turma.getDocente() == null || !turma.getDocente().getId().equals(docenteId)) {
+            throw new RegraNegocioException("Operação negada: O docente informado não é o responsável por esta turma.");
+        }
+
+        // Validação de Status: Turmas FECHADAS não deveriam receber alteração de notas de forma direta
+        if (turma.getStatus() == Turma.StatusTurma.FECHADA) {
+            throw new RegraNegocioException("Não é possível alterar notas de uma turma já encerrada.");
+        }
+
+        for (InscricaoUpdateDTO dto : atualizacoes) {
+            Inscricao inscricao = inscricaoRepository.findById(dto.inscricaoId())
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Inscrição com ID " + dto.inscricaoId() + " não encontrada."));
+
+            // Validação de integridade: A inscrição pertence à turma informada?
+            if (!inscricao.getTurma().getId().equals(turmaId)) {
+                throw new RegraNegocioException("A inscrição " + dto.inscricaoId() + " não pertence à turma " + turmaId);
+            }
+
+            // Atualiza os dados
+            if (dto.nota() != null) inscricao.setNota(dto.nota());
+            if (dto.notaVS() != null) inscricao.setNotaVS(dto.notaVS());
+            if (dto.frequencia() != null) inscricao.setFrequencia(dto.frequencia());
+
+            inscricaoRepository.save(inscricao);
+        }
+    }
+
+    public void deletarInscricoesPorTurma(Long turmaId) {
+        inscricaoRepository.deleteByTurmaId(turmaId);
+    }
 }
