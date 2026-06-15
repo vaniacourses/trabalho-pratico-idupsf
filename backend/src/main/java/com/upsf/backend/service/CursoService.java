@@ -47,7 +47,9 @@ public class CursoService {
 
     // Valida que o curso pertence ao departamento informado na URL.
     // Visibilidade package-private mantida para uso interno (ex.: CurriculoService).
-    void buscarCursoDoDepartamento(Long cursoId, Long departamentoId) {
+    // Não mais usado. Talvez seja util futuramente
+    /*
+    void validarCursoDoDepartamento(Long cursoId, Long departamentoId) {
         cursoRepository
                 .findByIdAndDepartamentoId(cursoId, departamentoId)
                 .orElseThrow(() ->
@@ -56,7 +58,7 @@ public class CursoService {
                                         " não pertence ao departamento de id = " + departamentoId + "."
                         ));
     }
-
+    */
     @Transactional(readOnly = true)
     public List<CursoDTO> listarTodos() {
         return cursoRepository.findAll()
