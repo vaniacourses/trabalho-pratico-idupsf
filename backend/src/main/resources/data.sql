@@ -82,6 +82,16 @@ INSERT IGNORE INTO usuario (id, matricula, nome, nome_social, cep, logradouro, g
 (10, 'DIS005', 'Pedro Santos', NULL, NULL, NULL, NULL, 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '000.000.000-00', '2020-03-01');
 
 -- ==============================================================================
+-- 7.1. USUÁRIOS COORDENADORES (5 registros)
+-- ==============================================================================
+INSERT IGNORE INTO usuario (id, matricula, nome, nome_social, cep, logradouro, genero, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
+(11, 'COORD001', 'Edsger Dijkstra', NULL, NULL, NULL, NULL, 'dijkstra@uff.br', 'edsger.dijkstra@id.uff.br', 'senha123', 'ATIVO', '1930-05-11', '101.101.101-11', '2011-03-01'),
+(12, 'COORD002', 'Margaret Hamilton', NULL, NULL, NULL, NULL, 'margaret@uff.br', 'margaret.hamilton@id.uff.br', 'senha123', 'ATIVO', '1936-08-17', '202.202.202-22', '2013-03-01'),
+(13, 'COORD003', 'Katherine Johnson', NULL, NULL, NULL, NULL, 'katherine@uff.br', 'katherine.johnson@id.uff.br', 'senha123', 'ATIVO', '1918-08-26', '303.303.303-33', '2014-03-01'),
+(14, 'COORD004', 'Richard Feynman', NULL, NULL, NULL, NULL, 'feynman@uff.br', 'richard.feynman@id.uff.br', 'senha123', 'ATIVO', '1918-05-11', '404.404.404-44', '2016-03-01'),
+(15, 'COORD005', 'Claude Shannon', NULL, NULL, NULL, NULL, 'shannon@uff.br', 'claude.shannon@id.uff.br', 'senha123', 'ATIVO', '1916-04-30', '505.505.505-55', '2017-03-01');
+
+-- ==============================================================================
 -- 8. DOCENTES (Aproveitando os IDs 1 a 5)
 -- ==============================================================================
 INSERT IGNORE INTO docente (id, departamento_id, titulacao, regime, lattes) VALUES
@@ -97,6 +107,30 @@ INSERT IGNORE INTO docente_areas_atuacao (docente_id, areas_atuacao) VALUES
 (3, 'Cálculo Numérico'),
 (4, 'Sistemas Operacionais'), (4, 'Redes'),
 (5, 'Desenvolvimento Web');
+
+-- ==============================================================================
+-- 8.1. COORDENADORES (Aproveitando os IDs 11 a 15)
+-- ==============================================================================
+INSERT IGNORE INTO docente (id, departamento_id, titulacao, regime, lattes) VALUES
+(11, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/101'),
+(12, 1, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/202'),
+(13, 2, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/303'),
+(14, 3, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/404'),
+(15, 4, 'DOUTOR', 'DE', 'http://lattes.cnpq.br/505');
+
+INSERT IGNORE INTO coordenador (id, curso_id, inicio_mandato, fim_mandato) VALUES
+(11, 1, '2024-01-01', NULL),
+(12, 2, '2024-01-01', NULL),
+(13, 3, '2024-01-01', NULL),
+(14, 4, '2024-01-01', NULL),
+(15, 5, '2024-01-01', NULL);
+
+INSERT IGNORE INTO docente_areas_atuacao (docente_id, areas_atuacao) VALUES
+(11, 'Algoritmos'), (11, 'Sistemas Distribuídos'),
+(12, 'Engenharia de Software'), (12, 'Sistemas Críticos'),
+(13, 'Matemática Aplicada'),
+(14, 'Física Teórica'),
+(15, 'Teoria da Informação'), (15, 'Telecomunicações');
 
 -- ==============================================================================
 -- 9. DISCENTES E SEUS HISTÓRICOS (Aproveitando os IDs 6 a 10)
