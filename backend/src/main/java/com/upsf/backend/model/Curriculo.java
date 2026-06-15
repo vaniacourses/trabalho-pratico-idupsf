@@ -24,6 +24,9 @@ public class Curriculo {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "curriculo_id")
     private List<RegistroDisciplina> registroDisciplinas;
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    Curso curso;
 
     public Curriculo(String cod) {
         this.cod = cod;

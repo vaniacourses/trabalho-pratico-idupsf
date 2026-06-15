@@ -13,6 +13,10 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 
     Optional<Curso> findByCod(String cod);
 
+    List<Curso> findAllByDepartamentoId(Long departamentoId);
+
+    Optional<Curso> findByIdAndDepartamentoId(Long cursoId, Long departamentoId);
+
     boolean existsByCod(String cod);
 
     @Query("SELECT new com.upsf.backend.dto.CursoDTO(c.id, c.cod, c.nome, null, null, null, c.turno) FROM Curso c ORDER BY c.nome")
