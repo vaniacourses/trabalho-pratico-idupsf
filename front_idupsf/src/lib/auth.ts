@@ -2,6 +2,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
+
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
@@ -23,7 +25,7 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 try {
-                    const res = await fetch(`${process.env.BACKEND_API_URL}/auth/login`, {
+                    const res = await fetch(`${BACKEND_URL}/api/auth/login`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({

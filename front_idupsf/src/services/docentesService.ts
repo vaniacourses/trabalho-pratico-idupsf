@@ -1,9 +1,13 @@
 import { CamposEditaveis } from "@/components/EditarUsuarioForm";
-import { Docente } from "@/types/modelUPSF";
+import { Docente, Turma } from "@/types/modelUPSF";
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
+const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
+
 export const docentesService = {
+    
+    // Feito pra API Next
     async buscarDocentePorId(id: string): Promise<Docente> {
         const res = await fetch(`${BASE_URL}/api/docentes/${id}`);
         
@@ -12,6 +16,7 @@ export const docentesService = {
         return res.json();
     },
 
+    // Feito pra API Next
     async atualizarDocente(id: string, dados: CamposEditaveis): Promise<Docente> {
             
         const res = await fetch(`${BASE_URL}/api/docentes/${id}`, {
@@ -21,6 +26,16 @@ export const docentesService = {
         });
 
         if (!res.ok) throw new Error("Erro ao atualizar docente de id " + id);
+        
+        return res.json();
+    },
+
+    // Feito pro Back
+    async listarTurmasPorDocente(id: string): Promise<Turma[]> {
+        
+        const res = await fetch(`${BACKEND_URL}/api/docentes/${id}/turmas`);
+
+        if (!res.ok) throw new Error("Erro ao buscar turmas do docente de id " + id);
         
         return res.json();
     }

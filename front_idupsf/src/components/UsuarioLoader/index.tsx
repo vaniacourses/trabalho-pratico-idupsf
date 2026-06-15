@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useUsuarioStore } from "@/stores/usuarioStore";
+import { Perfil } from "@/types/modelUPSF";
 
 export default function UsuarioLoader() {
     

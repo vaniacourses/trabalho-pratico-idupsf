@@ -19,7 +19,6 @@ const casesPorPerfil: Record<string, Case[]> = {
     DOCENTE: [
         { key: "consultar-turmas",  label: "Consultar Turmas",   icon: "bi bi-calendar3" },
         { key: "historico-turmas",  label: "Histórico de Turmas", icon: "bi bi-clock-history" },
-        { key: "plano-de-aulas",    label: "Plano de Aulas",      icon: "bi bi-journal-text" },
         { key: "curriculo",         label: "Currículo",           icon: "bi bi-person-vcard" },
     ],
     COORDENADOR: [

@@ -1,8 +1,10 @@
 
 import { FiltrosBuscaTurmas } from "@/types/buscaTypes";
-import { Turma } from "@/types/modelUPSF";
+import { Inscricao, Turma } from "@/types/modelUPSF";
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+
+const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
 
 export const turmaService = {
     
@@ -27,4 +29,22 @@ export const turmaService = {
         
         return res.json();
     },
+    
+    async buscarTurmaPorId(id: string): Promise<Turma> {
+
+        const res = await fetch(`${BACKEND_URL}/api/turmas/${id}`);
+
+        if (!res.ok) throw new Error("Erro ao buscar turma");
+        
+        return res.json();
+    },
+
+    async listarInscricoesPorTurma(id: string): Promise<Inscricao[]> {
+
+        const res = await fetch(`${BACKEND_URL}/api/turmas/${id}/inscricoes`);
+
+        if (!res.ok) throw new Error("Erro ao buscar inscrições em turma");
+        
+        return res.json();
+    }
 };
