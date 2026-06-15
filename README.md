@@ -28,6 +28,7 @@
 - Diagramas de Interação: [Diagramas/Diagramas de Interacao/](Diagramas/Diagramas%20de%20Interacao/)
 - Modelo Conceitual: [Diagramas/Modelo Conceitual/](Diagramas/Modelo%20Conceitual/)
 - Visão Arquitetural: [Diagramas/Visao Arquitetural/](Diagramas/Visao%20Arquitetural/)
+- LPS e Padrões GoF: [Diagramas/Visao Arquitetural/](Diagramas/Padrões GOF e LPS/)
 
 ## Execução
 
