@@ -60,4 +60,9 @@ public class DiscenteController {
         DiscenteDTO discenteRemovido = discenteService.removeDiscenteById(id);
         return ResponseEntity.ok(discenteRemovido);
     }
+
+    @GetMapping("/{id}/discentes")
+    public ResponseEntity<List<DiscenteDTO>> listarAlunosDaTurma(@PathVariable Long id) {
+        return ResponseEntity.ok(discenteService.listarDiscentesPorTurma(id));
+    }
 }

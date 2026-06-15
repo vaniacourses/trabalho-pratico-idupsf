@@ -13,6 +13,8 @@ public interface InscricaoRepository extends JpaRepository<Inscricao, Long> {
 
     List<Inscricao> findByDiscenteId(Long discenteId);
 
+    long countByTurmaIdAndStatus(Long turmaId, String status);
+
     void deleteByDiscenteIdAndTurmaIdIn(Long discenteId, List<Long> turmasIds);
     List<Inscricao> findByTurmaId(Long turmaId);
 

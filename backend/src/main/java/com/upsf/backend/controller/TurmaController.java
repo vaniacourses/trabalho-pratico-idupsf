@@ -2,11 +2,9 @@ package com.upsf.backend.controller;
 
 
 import com.upsf.backend.create.TurmaCreate;
-import com.upsf.backend.dto.DisciplinaDTO;
-import com.upsf.backend.dto.InscricaoResponseDTO;
-import com.upsf.backend.dto.InscricaoUpdateDTO;
-import com.upsf.backend.dto.TurmaDTO;
+import com.upsf.backend.dto.*;
 import com.upsf.backend.model.Inscricao;
+import com.upsf.backend.service.DiscenteService;
 import com.upsf.backend.service.InscricaoService;
 import com.upsf.backend.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,9 @@ public class TurmaController {
 
     @Autowired
     private InscricaoService inscricaoService;
+
+    @Autowired
+    private DiscenteService discenteService;
 
     // Requisição GET para Turmas Ativas (Para Quadro de Horários) - Talvez Desnecessário
     @GetMapping
@@ -86,6 +87,11 @@ public class TurmaController {
 
         inscricaoService.atribuirNotasEFrequencias(id, docenteId, atualizacoes);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/discentes")
+    public ResponseEntity<List<DiscenteDTO>> listarAlunosDaTurma(@PathVariable Long id) {
+        return ResponseEntity.ok(discenteService.listarDiscentesPorTurma(id));
     }
 
 }

@@ -1,6 +1,9 @@
 package com.upsf.backend.service;
 
+import com.upsf.backend.dto.CursoDTO;
 import com.upsf.backend.dto.DepartamentoDTO;
+import com.upsf.backend.mapper.CursoMapper;
+import com.upsf.backend.repository.CursoRepository;
 import com.upsf.backend.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,12 @@ public class DepartamentoService {
     @Autowired
     private DepartamentoRepository departamentoRepository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
+    @Autowired
+    private CursoMapper  cursoMapper;
+
     @Transactional(readOnly = true)
     public List<DepartamentoDTO> listarTodos() {
         return departamentoRepository.findAll()
@@ -24,5 +33,13 @@ public class DepartamentoService {
 
     public List<DepartamentoDTO> listarOptions() {
         return departamentoRepository.findAllAsOptions();
+    }
+
+    @Transactional(readOnly = true)
+    public List<CursoDTO> listarCursosPorDepartamento(Long departamentoId) {
+        return cursoRepository.findAllByDepartamentoId(departamentoId)
+                .stream()
+                .map(cursoMapper::toCursoDTO)
+                .toList();
     }
 }
