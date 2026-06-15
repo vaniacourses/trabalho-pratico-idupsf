@@ -2,12 +2,52 @@
 
 import styles from './styles.module.css'
 import { useState } from "react";
-import { Turma, Curriculo } from "@/types/modelUPSF";
+import { Turma, Curriculo, Horario } from "@/types/modelUPSF";
 import { turmaService } from "@/services/turmasService";
 import { opcoesService } from "@/services/opcoesService";
 import QuadroFiltroTurmas from "../QuadroFiltrosTurmas";
 import { FiltrosBuscaTurmas, TurmasOptionsProps } from "@/types/buscaTypes";
+import DinamicTable, { Column } from '../DinamicTable';
 
+function checkHorario(h: Horario | undefined, dia: string): React.ReactNode {
+    if (!h?.diasDaSemana?.includes(dia)) return null;
+    return <p>{h.horarioInicio} - {h.horarioFim}</p>;
+}
+
+const DIAS = [
+    { label: "Seg", valor: "SEGUNDA" },
+    { label: "Ter", valor: "TERCA" },
+    { label: "Qua", valor: "QUARTA" },
+    { label: "Qui", valor: "QUINTA" },
+    { label: "Sex", valor: "SEXTA" },
+];
+
+const colunas: Column<Turma>[] = [
+    {
+        header: "Código",
+        accessor: "disciplina",
+        key: "codigo",
+        render: (v) => v.disciplina?.cod ?? "—",
+    },
+    {
+        header: "Nome",
+        accessor: "disciplina",
+        key: "nome",
+        render: (v) => v.disciplina?.nome?.toUpperCase() ?? "—",
+    },
+    {
+        header: "Turma",
+        accessor: "cod",
+        key: "turma",
+        render: (v) => v.cod ?? "—",
+    },
+    ...DIAS.map((dia) => ({
+        header: dia.label,
+        accessor: "horario" as const,
+        key: `horario-${dia.valor}`,
+        render: (v: Turma) => checkHorario(v.horario, dia.valor),
+    })),
+];
 
 /*
     Responsabilidades/Intenções do Componente Cliente QuadroHelper:
@@ -65,15 +105,14 @@ export default function QuadroHelper({ departamentos, cursos, periodos }: Turmas
             {buscaFeita && turmas.length === 0 && (
                 <p>Nenhuma turma encontrada para os filtros selecionados.</p>
             )}
+            
 
-            {turmas.length > 0 && (
-                <ul>
-                    {turmas.map((turma) => (
-                        <li key={turma.id}>{turma.nome} — {turma.disciplina?.nome}</li>
-                    ))}
-                </ul>
-            )
-            }
+            <DinamicTable
+                colunas={colunas}
+                dados={turmas ?? []}
+                keyExtractor={(t) => t.id}
+                mensagemVazia="Nenhuma turma encontrada."
+            />
         </main>
     );
 }

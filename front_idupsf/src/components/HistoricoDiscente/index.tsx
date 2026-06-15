@@ -34,25 +34,29 @@ function BadgeStatus({ status }: { status: string }) {
 }
 
 const colunas: Column<DisciplinaCursada>[] = [
-    { header: "Código",   accessor: "codigoDisciplina" },
+    { header: "Código",   accessor: "codigoDisciplina", 
+      render: (v) => String(v.codigoDisciplina)},
     
     { header: "Nome",     accessor: "nomeDisciplina",
-      render: (v) => String(v).toUpperCase() },
+      render: (v) => String(v.nomeDisciplina).toUpperCase() },
     
     { header: "Situação", accessor: "statusFinal",
-      render: (v) => <BadgeStatus status={String(v)} />},
+      render: (v) => <BadgeStatus status={String(v.statusFinal)} />},
     
-    { header: "Turma",    accessor: "codigoTurma" },
+    { header: "Turma",    accessor: "codigoTurma",
+      render: (v) => String(v.codigoTurma) },
     
     { header: "Nota",     accessor: "nota",
-      render: (v) => Number(v).toFixed(1) },
+      render: (v) => Number(v.nota).toFixed(1) },
     
     { header: "VS",       accessor: "notaVS",
-      render: (v) => Number(v).toFixed(1) },
+      render: (v) => Number(v.notaVS).toFixed(1) },
     
-    { header: "Horas",    accessor: "cargaHoraria" },
+    { header: "Horas",    accessor: "cargaHoraria", 
+      render: (v) => String(v.cargaHoraria)},
     
-    { header: "Semestre", accessor: "anoSemestre" },
+    { header: "Semestre", accessor: "anoSemestre", 
+      render: (v) => String(v.anoSemestre)},
 ];
 
 export default function HistoricoDiscente() {

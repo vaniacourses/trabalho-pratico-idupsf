@@ -1,18 +1,19 @@
 import { DinamicContentProps } from "@/types/PropsTypes";
 import NewsSection from "../NewsSection";
 import HistoricoDiscente from "../HistoricoDiscente";
+import GerarDeclaracoes from "../GerarDeclaracoes";
+import DocenteTurmas from "../DocenteTurmas";
 
 const conteudoDiscente: Record<string, React.ReactNode> = {
-    "gerar-declaracoes": null, // <GerarDeclaracoes />,
+    "gerar-declaracoes": <GerarDeclaracoes />,
     "historico": <HistoricoDiscente />,
     "plano-de-estudos": null, // <PlanoDeEstudos />,
     "integralizacao-de-curriculo": null,
 };
 
 const conteudoDocente: Record<string, React.ReactNode> = {
-    "consultar-turmas": null, // <DocenteTurmas />,
+    "consultar-turmas": <DocenteTurmas />,
     "historico-turmas": null, // <HistoricoTurmas />,
-    "plano-de-aulas": null, // <PlanoDeAulas />,
     "curriculo": null, // <Curriculo />,
 };
 

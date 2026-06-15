@@ -9,9 +9,9 @@ const BACKEND_URL = process.env.BACKEND_API_URL ?? "http://localhost:8080";
 /*
 	Em opcoesService, ocorre um erro de Sintaxe de transformação em JSON,
 	caso o opcoesService use a API do Next, mas o erro não ocorre se o 
-	opcoesService realizar a requisição direto para o BACK,
+	opcoesService realizar a requisição direto para o BACK.
 
-	Aparentemente, é porque o Quadro de Horários é Server Component, então a
+	Isso ocorre porque o Quadro de Horários é Server Component, então a
 	rota da API do Next fica ocupada para renderização.
 */
 
