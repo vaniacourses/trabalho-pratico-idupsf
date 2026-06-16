@@ -59,7 +59,7 @@
 /* ─── Feedback ─────────────────────────────────────── */
  
 .erro {
-    font-size: 0.82rem;
+    font-size: 16px;
     color: var(--color-error);
     background-color: var(--color-error-light);
     padding: 10px 14px;
@@ -68,7 +68,7 @@
 }
  
 .sucesso {
-    font-size: 0.82rem;
+    font-size: 16px;
     color: var(--color-success);
     background-color: var(--color-success-light);
     padding: 10px 14px;

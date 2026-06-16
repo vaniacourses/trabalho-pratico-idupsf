@@ -3,6 +3,7 @@ import NewsSection from "../NewsSection";
 import HistoricoDiscente from "../HistoricoDiscente";
 import GerarDeclaracoes from "../GerarDeclaracoes";
 import DocenteTurmas from "../DocenteTurmas";
+import CurriculoDocente from "../CurriculoDocente";
 
 const conteudoDiscente: Record<string, React.ReactNode> = {
     "gerar-declaracoes": <GerarDeclaracoes />,
@@ -14,7 +15,7 @@ const conteudoDiscente: Record<string, React.ReactNode> = {
 const conteudoDocente: Record<string, React.ReactNode> = {
     "consultar-turmas": <DocenteTurmas />,
     "historico-turmas": null, // <HistoricoTurmas />,
-    "curriculo": null, // <Curriculo />,
+    "curriculo": <CurriculoDocente />,
 };
 
 const conteudoCoordenador: Record<string, React.ReactNode> = {
