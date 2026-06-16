@@ -132,7 +132,7 @@ public class InscricaoService {
                         inscricao.getDiscente().getMatricula(),
                         inscricao.getNota(),
                         inscricao.getNotaVS(),
-                        inscricao.isFrequencia(),
+                        inscricao.getFrequencia(),
                         inscricao.getStatus()
                 ))
                 .toList();

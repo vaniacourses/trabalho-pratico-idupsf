@@ -2,6 +2,7 @@ import Image from 'next/image'
 import logo from '../../../public/logo_idUPSF.jpg'
 import styles from './styles.module.css'
 import Link from 'next/link'
+import BotaoLogout from '../BotaoLogout'
 
 
 export default function NavBar() {
@@ -39,6 +40,8 @@ export default function NavBar() {
                 <Link href="/solicita" className={styles.link}>
                     Solicitação UPSF
                 </Link>
+                
+                <BotaoLogout />
             
             </div>
             

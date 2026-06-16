@@ -23,10 +23,10 @@ public class Inscricao {
     @JoinColumn(name = "discente_id")
     private Discente discente;
     private String status; // Cancelada, Aprovada, Trancada, Em Espera?
-    private float nota;
+    private Float nota;
     @Column(name = "nota_vs")
-    private float notaVS;
-    private boolean frequencia;
+    private Float notaVS;
+    private Boolean frequencia;
 
     // nota, notaVS e frequencia são definidos com o tempo
     public Inscricao(Turma turma, Discente discente, String status) {

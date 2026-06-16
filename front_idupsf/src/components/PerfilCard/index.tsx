@@ -8,6 +8,8 @@ export default function PerfilCard() {
     
 
     const usuario = useStore(useUsuarioStore, (state) => state.usuario);
+    const loading = useStore(useUsuarioStore, (state) => state.loading);
+    
     
     if (!usuario) { return null; }
     
@@ -24,24 +26,33 @@ export default function PerfilCard() {
             </div>
             
 
-            <div className={styles.info}>
-                <h2>{usuario!.nome}</h2>
+            {loading ?
+                <div className={styles.info}>
+                    <h2>Usuário</h2>
+                    
+                    <h3><span>Carregando</span></h3>
 
-                {usuario.nomeSocial && (<h3><span>Nome Social:</span> {usuario.nomeSocial}</h3>)}
-                
-                <h3><span>Perfil:</span> {usuario!.perfil}</h3>
-                <h3><span>Matrícula:</span> {usuario!.matricula}</h3>
-                <h3><span>Id-UPSF:</span> {usuario!.cpf}</h3>
+                </div>
+            : 
+                <div className={styles.info}>
+                    <h2>{usuario!.nome}</h2>
 
-                {usuario!.perfil === "DISCENTE" && usuario!.curso && (
-                    <h3><span>Curso:</span> {usuario!.curso.nome}</h3>
-                )}
+                    {usuario.nomeSocial && (<h3><span>Nome Social:</span> {usuario.nomeSocial}</h3>)}
+                    
+                    <h3><span>Perfil:</span> {usuario!.perfil}</h3>
+                    <h3><span>Matrícula:</span> {usuario!.matricula}</h3>
+                    <h3><span>Id-UPSF:</span> {usuario!.cpf}</h3>
 
-                {usuario!.perfil === "DOCENTE" && usuario!.departamento && (
-                    <h3><span>Departamento:</span> {usuario!.departamento.nome}</h3>
-                )}
+                    {usuario!.perfil === "DISCENTE" && usuario!.curso && (
+                        <h3><span>Curso:</span> {usuario!.curso.nome}</h3>
+                    )}
 
-            </div>
+                    {usuario!.perfil === "DOCENTE" && usuario!.departamento && (
+                        <h3><span>Departamento:</span> {usuario!.departamento.nome}</h3>
+                    )}
+
+                </div>
+            }
         
         </section>
     )

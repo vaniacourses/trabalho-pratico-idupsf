@@ -188,12 +188,13 @@ INSERT IGNORE INTO turma (id, cod, ano_semestre, status, ementa, max_alunos, dis
 -- ==============================================================================
 -- 13. INSCRIÇÕES ATUAIS (Alunos cursando turmas no semestre 2024.1)
 -- ==============================================================================
-INSERT IGNORE INTO inscricao (id, discente_id, turma_id, nota, nota_vs, frequencia, status) VALUES
-(1, 6, 3, 0.0, 0.0, 1, 'ATIVA'),
-(2, 6, 5, 0.0, 0.0, 1, 'ATIVA'),
-(3, 7, 1, 0.0, 0.0, 1, 'ATIVA'),
-(4, 7, 2, 0.0, 0.0, 1, 'ATIVA'),
-(5, 8, 6, 0.0, 0.0, 1, 'ATIVA');
+
+INSERT IGNORE INTO inscricao (id, discente_id, turma_id, status) VALUES
+(1, 6, 3, 'ATIVA'),
+(2, 6, 5, 'ATIVA'),
+(3, 7, 1, 'ATIVA'),
+(4, 7, 2, 'ATIVA'),
+(5, 8, 6, 'ATIVA');
 
 -- ==============================================================================
 -- 14. DISCIPLINAS CURSADAS (Histórico passado dos alunos)

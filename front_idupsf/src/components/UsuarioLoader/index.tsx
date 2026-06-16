@@ -20,8 +20,8 @@ export default function UsuarioLoader() {
             
             // só recarrega se não tiver usuario no store
             if (!usuario) {
-                // carregarUsuario(session.user.id, session.user.perfil as Perfil);
-                carregarUsuario("3", "DOCENTE");
+                carregarUsuario(session.user.id, session.user.perfil as Perfil);
+                // carregarUsuario("3", "DOCENTE");
             }
         } else {
             limparUsuario();

@@ -1,0 +1,40 @@
+
+
+.link {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--font-roboto);
+    
+    color: white;
+
+    transition: all 0.3s ease;
+    
+    background: none;
+    border: none;
+    
+    &:hover {
+        color: var(--color-neutral-light);
+        transform: scale(1.2);
+    }
+
+    &:after {
+        content:'';
+        position: absolute;
+        
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height:2px;
+        
+        background-color: var(--color-neutral-light);
+        transition: all 0.3s ease;
+    }
+
+    &:hover::after {
+        width: 80%;
+    }
+}
