@@ -1,0 +1,18 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    padding: 50px;
+}
+
+.titleSection {
+    font-size: 36px;
+    font-weight: 800;
+    font-family: var(--font-darker-grotesque);
+
+    color: var(--color-primary-dark);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-primary-dark);
+}

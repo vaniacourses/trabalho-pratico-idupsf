@@ -31,18 +31,34 @@
 - LPS e Padrões GoF: [Diagramas/Padrões GOF e LPS/](Diagramas/Padrões%20GOF%20e%20LPS/)
 
 ## Relatórios
+
 - Relatórios: [Relatorios/](Relatorios/)
 
 ## Execução
 
-Backend:
+### Backend
 
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
-Frontend:
+### Frontend
+
+**1. Crie o arquivo de variáveis de ambiente**
+
+Dentro da pasta `front_idupsf/`, crie um arquivo chamado `.env.local` com o seguinte conteúdo:
+
+```env
+NEXTAUTH_SECRET=chave-secreta-upsf-projeto-software-2026-uff
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+BACKEND_API_URL=http://localhost:8080
+```
+
+> ⚠️ O arquivo `.env.local` não é versionado (está no `.gitignore`). Ele deve ser criado manualmente em cada ambiente de desenvolvimento.
+
+**2. Instale as dependências e inicie o servidor**
 
 ```bash
 cd front_idupsf

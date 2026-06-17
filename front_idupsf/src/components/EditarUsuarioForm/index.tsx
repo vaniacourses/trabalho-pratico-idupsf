@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Usuario, Genero } from "@/types/modelUPSF";
 import { useUsuarioStore } from "@/stores/usuarioStore";
 import styles from "./styles.module.css";
-import { redirect } from "next/navigation";
 import { discentesService } from "@/services/discentesService";
 import { docentesService } from "@/services/docentesService";
 import { coordenadoresService } from "@/services/coordenadoresService";

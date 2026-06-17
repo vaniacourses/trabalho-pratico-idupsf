@@ -241,6 +241,23 @@ export type Inscricao = {
     frequencia?: boolean;
 };
 
+export type InscricaoResponseDTO = {
+    id?: string;
+    nomeAluno?: string;
+    matriculaAluno?: string;
+    nota?: number;
+    notaVS?: number;
+    frequencia?: boolean;
+    status?: string;
+}
+
+export type InscricaoUpdate = {
+    inscricaoId?: string;
+    nota?: number;
+    notaVS?: number;
+    frequencia?: boolean;
+}
+
 // ============================================================
 // OBSERVAÇÕES
 // ============================================================

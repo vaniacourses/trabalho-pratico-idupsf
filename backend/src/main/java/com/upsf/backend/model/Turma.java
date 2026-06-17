@@ -31,7 +31,7 @@ public class Turma {
     private StatusTurma status; // pode ser enum {ATIVA, INATIVA} OU ABERTA, FECHADA
 
     private String ementa;
-    private int maxAlunos;
+    private Integer maxAlunos;
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id" , foreignKey = @ForeignKey(name = "TURMA_DISCIPLINA_ID_FK"))

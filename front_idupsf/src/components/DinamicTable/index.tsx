@@ -6,7 +6,8 @@ import styles from "./styles.module.css";
 export interface Column<T> {
     header: string;                                             // título da coluna
     accessor: keyof T;                                          // chave do objeto
-    render?: (valor: T[keyof T], row: T) => React.ReactNode;    // renderização customizada
+    key?: string;                                               // identificador único, opcional
+    render?: (row: T) => React.ReactNode;                       // renderização customizada
     className?: string;                                         // classe CSS extra para a célula
 }
 
@@ -34,8 +35,8 @@ export default function DinamicTable<T>({
                 <table className={styles.tabela}>
                     <thead>
                         <tr>
-                            {colunas.map((col) => (
-                                <th key={String(col.accessor)} className={styles.th}>
+                            {colunas.map((col, index) => (
+                                <th key={col.key ?? `${String(col.accessor)}-${index}`} className={styles.th}>
                                     {col.header}
                                 </th>
                             ))}
@@ -45,13 +46,13 @@ export default function DinamicTable<T>({
                     <tbody>
                         {dados.map((row) => (
                             <tr key={keyExtractor(row)} className={styles.tr}>
-                                {colunas.map((col) => (
+                                {colunas.map((col, index) => (
                                     <td
-                                        key={String(col.accessor)}
+                                        key={col.key ?? `${String(col.accessor)}-${index}`}
                                         className={`${styles.td} ${col.className ?? ""}`}
                                     >
                                         {col.render
-                                            ? col.render(row[col.accessor], row)
+                                            ? col.render(row)
                                             : String(row[col.accessor] ?? "—")}
                                     </td>
                                 ))}

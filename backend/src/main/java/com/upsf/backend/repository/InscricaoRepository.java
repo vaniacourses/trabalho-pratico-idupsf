@@ -1,5 +1,6 @@
 package com.upsf.backend.repository;
 
+import com.upsf.backend.model.Disciplina;
 import com.upsf.backend.model.Inscricao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
