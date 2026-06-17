@@ -1,0 +1,238 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    color: var(--color-neutral-dark);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: var(--color-neutral);
+}
+
+.feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.success,
+.error {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.success {
+    color: var(--color-success);
+    background-color: var(--color-success-light);
+}
+
+.error {
+    color: var(--color-error);
+    background-color: var(--color-error-light);
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(130px, 1fr));
+    gap: 16px;
+    align-items: end;
+    padding: 20px;
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 8px;
+    background-color: var(--color-neutral-sub);
+}
+
+.field,
+.fieldCompact {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-neutral-dark);
+}
+
+.fieldCompact {
+    min-width: 260px;
+}
+
+.input {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--color-neutral-light);
+    border-radius: 6px;
+    font: inherit;
+    color: var(--color-neutral-dark);
+    background-color: white;
+}
+
+.input:focus {
+    outline: 2px solid var(--color-primary-light);
+    border-color: var(--color-primary);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton,
+.smallButton,
+.dangerButton {
+    min-height: 40px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.primaryButton {
+    color: white;
+    background-color: var(--color-primary);
+}
+
+.primaryButton:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.secondaryButton,
+.smallButton {
+    color: var(--color-primary-dark);
+    background-color: var(--color-primary-subtle);
+}
+
+.secondaryButton:hover,
+.smallButton:hover {
+    background-color: var(--color-neutral-light);
+}
+
+.dangerButton {
+    color: var(--color-error);
+    background-color: var(--color-error-light);
+}
+
+.dangerButton:hover {
+    color: white;
+    background-color: var(--color-error);
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.smallButton:disabled,
+.dangerButton:disabled,
+.input:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--color-neutral-light);
+    font-size: 15px;
+}
+
+.table th {
+    padding: 12px;
+    text-align: left;
+    color: white;
+    background-color: var(--color-neutral);
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 12px;
+    border-top: 1px solid var(--color-neutral-light);
+    color: var(--color-neutral-dark);
+    background-color: white;
+}
+
+.table tr:hover td {
+    background-color: var(--color-primary-subtle);
+}
+
+.rowActions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.empty {
+    text-align: center;
+    color: var(--color-neutral);
+}
+
+@media (max-width: 900px) {
+    .form {
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .main {
+        padding: 28px 16px;
+    }
+
+    .form {
+        grid-template-columns: 1fr;
+    }
+
+    .fieldCompact {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+}

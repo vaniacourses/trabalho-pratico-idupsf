@@ -37,11 +37,13 @@ export default function NavBar() {
                     Quadro de Horários
                 </Link>
 
+                <Link href="/gestao-academica" className={styles.link}>
+                    Gestão Acadêmica
+                </Link>
+
                 <Link href="/solicita" className={styles.link}>
                     Solicitação UPSF
                 </Link>
-                
-                <BotaoLogout />
             
             </div>
             
