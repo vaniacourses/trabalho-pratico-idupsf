@@ -70,26 +70,26 @@ INSERT IGNORE INTO registro_disciplina (id, periodo_recomendado, tipo_categoria,
 -- Inclusão das colunas mapeadas no modelo atual: nome_social, cep, logradouro, genero
 -- ==============================================================================
 INSERT IGNORE INTO usuario (id, matricula, nome, nome_social, cep, logradouro, genero, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
-(1, 'DOC001', 'Alan Turing', NULL, NULL, NULL, NULL, 'alan@uff.br', 'alan.turing@id.uff.br', 'senha123', 'ATIVO', '1912-06-23', '111.111.111-11', '2010-01-15'),
-(2, 'DOC002', 'Ada Lovelace', NULL, NULL, NULL, NULL, 'ada@uff.br', 'ada.lovelace@id.uff.br', 'senha123', 'ATIVO', '1815-12-10', '222.222.222-22', '2012-03-10'),
-(3, 'DOC003', 'Grace Hopper', NULL, NULL, NULL, NULL, 'grace@uff.br', 'grace.hopper@id.uff.br', 'senha123', 'ATIVO', '1906-12-09', '333.333.333-33', '2015-08-01'),
-(4, 'DOC004', 'Linus Torvalds', NULL, NULL, NULL, NULL, 'linus@uff.br', 'linus.torvalds@id.uff.br', 'senha123', 'ATIVO', '1969-12-28', '444.444.444-44', '2018-02-20'),
-(5, 'DOC005', 'Tim Berners-Lee', NULL, NULL, NULL, NULL, 'tim@uff.br', 'tim.lee@id.uff.br', 'senha123', 'ATIVO', '1955-06-08', '555.555.555-55', '2020-07-05'),
-(6, 'DIS001', 'Guilherme Fontoura', NULL, NULL, NULL, NULL, 'guilherme@gmail.com', 'guilherme@id.uff.br', 'senha123', 'ATIVO', '2000-01-01', '666.666.666-66', '2022-03-01'),
-(7, 'DIS002', 'Maria Silva', NULL, NULL, NULL, NULL, 'maria@gmail.com', 'maria@id.uff.br', 'senha123', 'ATIVO', '2001-02-02', '777.777.777-77', '2023-03-01'),
-(8, 'DIS003', 'João Souza', NULL, NULL, NULL, NULL, 'joao@gmail.com', 'joao@id.uff.br', 'senha123', 'ATIVO', '1999-03-03', '888.888.888-88', '2021-03-01'),
-(9, 'DIS004', 'Ana Costa', NULL, NULL, NULL, NULL, 'ana@gmail.com', 'ana@id.uff.br', 'senha123', 'ATIVO', '2002-04-04', '999.999.999-99', '2024-03-01'),
-(10, 'DIS005', 'Pedro Santos', NULL, NULL, NULL, NULL, 'pedro@gmail.com', 'pedro@id.uff.br', 'senha123', 'ATIVO', '2000-05-05', '000.000.000-00', '2020-03-01');
+(1, 'DOC001', 'Alan Turing', NULL, NULL, NULL, NULL, 'alan@upsf.br', 'alan.turing@id.upsf.br', 'senha123', 'ATIVO', '1912-06-23', '111.111.111-11', '2010-01-15'),
+(2, 'DOC002', 'Ada Lovelace', NULL, NULL, NULL, NULL, 'ada@upsf.br', 'ada.lovelace@id.upsf.br', 'senha123', 'ATIVO', '1815-12-10', '222.222.222-22', '2012-03-10'),
+(3, 'DOC003', 'Grace Hopper', NULL, NULL, NULL, NULL, 'grace@upsf.br', 'grace.hopper@id.upsf.br', 'senha123', 'ATIVO', '1906-12-09', '333.333.333-33', '2015-08-01'),
+(4, 'DOC004', 'Linus Torvalds', NULL, NULL, NULL, NULL, 'linus@upsf.br', 'linus.torvalds@id.upsf.br', 'senha123', 'ATIVO', '1969-12-28', '444.444.444-44', '2018-02-20'),
+(5, 'DOC005', 'Tim Berners-Lee', NULL, NULL, NULL, NULL, 'tim@upsf.br', 'tim.lee@id.upsf.br', 'senha123', 'ATIVO', '1955-06-08', '555.555.555-55', '2020-07-05'),
+(6, 'DIS001', 'Guilherme Fontoura', NULL, NULL, NULL, NULL, 'guilherme@gmail.com', 'guilherme@id.upsf.br', 'senha123', 'ATIVO', '2000-01-01', '666.666.666-66', '2022-03-01'),
+(7, 'DIS002', 'Maria Silva', NULL, NULL, NULL, NULL, 'maria@gmail.com', 'maria@id.upsf.br', 'senha123', 'ATIVO', '2001-02-02', '777.777.777-77', '2023-03-01'),
+(8, 'DIS003', 'João Souza', NULL, NULL, NULL, NULL, 'joao@gmail.com', 'joao@id.upsf.br', 'senha123', 'ATIVO', '1999-03-03', '888.888.888-88', '2021-03-01'),
+(9, 'DIS004', 'Ana Costa', NULL, NULL, NULL, NULL, 'ana@gmail.com', 'ana@id.upsf.br', 'senha123', 'ATIVO', '2002-04-04', '999.999.999-99', '2024-03-01'),
+(10, 'DIS005', 'Pedro Santos', NULL, NULL, NULL, NULL, 'pedro@gmail.com', 'pedro@id.upsf.br', 'senha123', 'ATIVO', '2000-05-05', '000.000.000-00', '2020-03-01');
 
 -- ==============================================================================
 -- 7.1. USUÁRIOS COORDENADORES (5 registros)
 -- ==============================================================================
 INSERT IGNORE INTO usuario (id, matricula, nome, nome_social, cep, logradouro, genero, email, email_inst, senha, status, data_nasc, cpf, data_ingresso) VALUES
-(11, 'COORD001', 'Edsger Dijkstra', NULL, NULL, NULL, NULL, 'dijkstra@uff.br', 'edsger.dijkstra@id.uff.br', 'senha123', 'ATIVO', '1930-05-11', '101.101.101-11', '2011-03-01'),
-(12, 'COORD002', 'Margaret Hamilton', NULL, NULL, NULL, NULL, 'margaret@uff.br', 'margaret.hamilton@id.uff.br', 'senha123', 'ATIVO', '1936-08-17', '202.202.202-22', '2013-03-01'),
-(13, 'COORD003', 'Katherine Johnson', NULL, NULL, NULL, NULL, 'katherine@uff.br', 'katherine.johnson@id.uff.br', 'senha123', 'ATIVO', '1918-08-26', '303.303.303-33', '2014-03-01'),
-(14, 'COORD004', 'Richard Feynman', NULL, NULL, NULL, NULL, 'feynman@uff.br', 'richard.feynman@id.uff.br', 'senha123', 'ATIVO', '1918-05-11', '404.404.404-44', '2016-03-01'),
-(15, 'COORD005', 'Claude Shannon', NULL, NULL, NULL, NULL, 'shannon@uff.br', 'claude.shannon@id.uff.br', 'senha123', 'ATIVO', '1916-04-30', '505.505.505-55', '2017-03-01');
+(11, 'COORD001', 'Edsger Dijkstra', NULL, NULL, NULL, NULL, 'dijkstra@upsf.br', 'edsger.dijkstra@id.upsf.br', 'senha123', 'ATIVO', '1930-05-11', '101.101.101-11', '2011-03-01'),
+(12, 'COORD002', 'Margaret Hamilton', NULL, NULL, NULL, NULL, 'margaret@upsf.br', 'margaret.hamilton@id.upsf.br', 'senha123', 'ATIVO', '1936-08-17', '202.202.202-22', '2013-03-01'),
+(13, 'COORD003', 'Katherine Johnson', NULL, NULL, NULL, NULL, 'katherine@upsf.br', 'katherine.johnson@id.upsf.br', 'senha123', 'ATIVO', '1918-08-26', '303.303.303-33', '2014-03-01'),
+(14, 'COORD004', 'Richard Feynman', NULL, NULL, NULL, NULL, 'feynman@upsf.br', 'richard.feynman@id.upsf.br', 'senha123', 'ATIVO', '1918-05-11', '404.404.404-44', '2016-03-01'),
+(15, 'COORD005', 'Claude Shannon', NULL, NULL, NULL, NULL, 'shannon@upsf.br', 'claude.shannon@id.upsf.br', 'senha123', 'ATIVO', '1916-04-30', '505.505.505-55', '2017-03-01');
 
 -- ==============================================================================
 -- 8. DOCENTES (Aproveitando os IDs 1 a 5)
