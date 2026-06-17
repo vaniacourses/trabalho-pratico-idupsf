@@ -22,16 +22,19 @@ public class CursoController {
 
     @GetMapping
     public ResponseEntity<List<CursoDTO>> listarTodos() {
+        
         return ResponseEntity.ok(cursoService.listarTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CursoDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<CursoDTO> buscarPorId(
+            @PathVariable Long id) {
         return ResponseEntity.ok(cursoService.buscarDTOPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<CursoDTO> criar(@RequestBody CursoCreate cursoCreate) {
+    public ResponseEntity<CursoDTO> criar(
+            @RequestBody CursoCreate cursoCreate) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.criar(cursoCreate));
     }
 
@@ -50,12 +53,14 @@ public class CursoController {
     }
 
     @GetMapping("/{id}/departamento/docentes")
-    public ResponseEntity<List<DocenteDTO>> listarDocentesDoDepartamentoDoCurso(@PathVariable Long id) {
+    public ResponseEntity<List<DocenteDTO>> listarDocentesDoDepartamentoDoCurso(
+            @PathVariable Long id) {
         return ResponseEntity.ok(cursoService.listarDocentesDoDepartamentoDoCurso(id));
     }
 
     @GetMapping("/{id}/curriculos/turmas")
-    public ResponseEntity<List<TurmaDTO>> listarTurmasDosCurriculosDoCurso(@PathVariable Long id) {
+    public ResponseEntity<List<TurmaDTO>> listarTurmasDosCurriculosDoCurso(
+            @PathVariable Long id) {
         return ResponseEntity.ok(cursoService.listarTurmasDosCurriculosDoCurso(id));
     }
 
