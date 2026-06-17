@@ -15,4 +15,5 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 
     List<Disciplina> findByNomeContainingIgnoreCase(String nome);
 
+    List<Disciplina> findByDepartamentoId(Long departamentoId);
 }

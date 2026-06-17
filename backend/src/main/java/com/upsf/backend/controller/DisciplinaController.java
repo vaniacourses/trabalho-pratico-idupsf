@@ -2,7 +2,10 @@ package com.upsf.backend.controller;
 
 import com.upsf.backend.create.DisciplinaCreate;
 import com.upsf.backend.dto.DisciplinaDTO;
+import com.upsf.backend.model.Curso;
 import com.upsf.backend.service.DisciplinaService;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;

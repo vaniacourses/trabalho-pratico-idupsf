@@ -32,19 +32,19 @@ INSERT IGNORE INTO curriculo (id, cod, curso_id) VALUES
 
 
 -- ==============================================================================
--- 4. DISCIPLINAS (10 registros)
+-- 4. DISCIPLINAS (10 registros) - ATUALIZADO
 -- ==============================================================================
-INSERT IGNORE INTO disciplina (id, cod, nome, carga_horaria, status) VALUES
-(1,  'MAT001',  'Cálculo 1',                  60, 'ATIVA'),
-(2,  'COMP001', 'Algoritmos 1',               60, 'ATIVA'),
-(3,  'COMP002', 'Estrutura de Dados',          60, 'ATIVA'),
-(4,  'FIS001',  'Física 1',                   60, 'ATIVA'),
-(5,  'MAT002',  'Álgebra Linear',             60, 'ATIVA'),
-(6,  'COMP003', 'Bancos de Dados',             60, 'ATIVA'),
-(7,  'COMP004', 'Redes de Computadores',       60, 'ATIVA'),
-(8,  'COMP005', 'Sistemas Operacionais',       60, 'ATIVA'),
-(9,  'COMP006', 'Engenharia de Software',      60, 'ATIVA'),
-(10, 'COMP007', 'Inteligência Artificial',     60, 'ATIVA');
+INSERT IGNORE INTO disciplina (id, cod, nome, carga_horaria, status, departamento_id) VALUES
+(1,  'MAT001',  'Cálculo 1',              60, 'ATIVA', 2),
+(2,  'COMP001', 'Algoritmos 1',           60, 'ATIVA', 1),
+(3,  'COMP002', 'Estrutura de Dados',     60, 'ATIVA', 1),
+(4,  'FIS001',  'Física 1',               60, 'ATIVA', 3),
+(5,  'MAT002',  'Álgebra Linear',         60, 'ATIVA', 2),
+(6,  'COMP003', 'Bancos de Dados',        60, 'ATIVA', 1),
+(7,  'COMP004', 'Redes de Computadores',  60, 'ATIVA', 1),
+(8,  'COMP005', 'Sistemas Operacionais',  60, 'ATIVA', 1),
+(9,  'COMP006', 'Engenharia de Software', 60, 'ATIVA', 1),
+(10, 'COMP007', 'Inteligência Artificial', 60, 'ATIVA', 1);
 
 
 -- ==============================================================================
@@ -183,7 +183,12 @@ INSERT IGNORE INTO discente (id, curso_id, cod_curriculo, periodo, forma_permane
 (10, 4, 'FIS-2024', '8', 'DEFINITIVA', 'FORMADO');
 
 INSERT IGNORE INTO historico (id, discente_id, coeficiente_rend) VALUES
-(1, 6, 8.8), (2, 7, 9.1), (3, 8, 7.2), (4, 9, 0.0), (5, 10, 8.8);
+(1, 6,  8.5),
+(2, 7,  9.1),
+(3, 8,  7.2),
+(4, 9,  0.0),
+(5, 10, 8.8);
+
 
 -- ==============================================================================
 -- 10. HORÁRIOS
