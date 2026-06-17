@@ -1,5 +1,5 @@
 import { CamposEditaveis } from "@/components/EditarUsuarioForm";
-import { Docente, Turma } from "@/types/modelUPSF";
+import { Docente, DocenteCreate, Turma } from "@/types/modelUPSF";
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
@@ -37,6 +37,19 @@ export const docentesService = {
 
         if (!res.ok) throw new Error("Erro ao buscar turmas do docente de id " + id);
         
+        return res.json();
+    },
+
+    async cadastrarDocente(dados: DocenteCreate): Promise<Docente> {
+ 
+        const res = await fetch(`${BACKEND_URL}/api/docentes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dados),
+        });
+ 
+        if (!res.ok) throw new Error("Erro ao cadastrar docente");
+ 
         return res.json();
     }
 };

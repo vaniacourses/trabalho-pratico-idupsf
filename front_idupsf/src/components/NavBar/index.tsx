@@ -4,7 +4,6 @@ import styles from './styles.module.css'
 import Link from 'next/link'
 import BotaoLogout from '../BotaoLogout'
 
-
 export default function NavBar() {
     return (
         <nav className={styles.navBar}>
@@ -37,13 +36,11 @@ export default function NavBar() {
                     Quadro de Horários
                 </Link>
 
-                <Link href="/gestao-academica" className={styles.link}>
-                    Gestão Acadêmica
-                </Link>
-
                 <Link href="/solicita" className={styles.link}>
                     Solicitação UPSF
                 </Link>
+
+                <BotaoLogout />
             
             </div>
             

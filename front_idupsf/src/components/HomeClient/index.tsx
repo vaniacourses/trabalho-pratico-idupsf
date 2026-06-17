@@ -16,6 +16,7 @@ export default function HomeClient() {
         setCaseSelecionado(caseKey);
     }
 
+    const loading = useUsuarioStore((state) => state.loading)
     const usuario = useUsuarioStore((state) => state.usuario);
 
     return (     
@@ -24,9 +25,14 @@ export default function HomeClient() {
             
             <div className={styles.funcsSection}>
                 
-                <PerfilCard />
+                {loading ? <></> :  
+                    (<>
+                        <PerfilCard />
                 
-                <CasesBox perfil={usuario!.perfil} onSelect={handleCaseSelect} caseSelecionado={caseSelecionado} />
+                        <CasesBox perfil={usuario!.perfil} onSelect={handleCaseSelect} caseSelecionado={caseSelecionado} />
+                    </>
+                    )
+                }
             
             </div>
 

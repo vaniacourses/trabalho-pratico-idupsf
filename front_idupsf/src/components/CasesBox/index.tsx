@@ -13,18 +13,18 @@ const casesPorPerfil: Record<string, Case[]> = {
     DISCENTE: [
         { key: "gerar-declaracoes",           label: "Gerar Declarações",           icon: "bi bi-filetype-pdf" },
         { key: "historico",                   label: "Histórico",                   icon: "bi bi-file-ruled" },
-        { key: "plano-de-estudos",            label: "Plano de Estudos",            icon: "bi bi-journal-bookmark" },
-        { key: "integralizacao-de-curriculo", label: "Integralização de Currículo", icon: "bi bi-file-earmark-break" },
+        // { key: "plano-de-estudos",            label: "Plano de Estudos",            icon: "bi bi-journal-bookmark" },
+        // { key: "integralizacao-de-curriculo", label: "Integralização de Currículo", icon: "bi bi-file-earmark-break" },
     ],
     DOCENTE: [
         { key: "consultar-turmas",  label: "Consultar Turmas",   icon: "bi bi-calendar3" },
-        { key: "historico-turmas",  label: "Histórico de Turmas", icon: "bi bi-clock-history" },
+        // { key: "historico-turmas",  label: "Histórico de Turmas", icon: "bi bi-clock-history" },
         { key: "curriculo",         label: "Currículo",           icon: "bi bi-person-vcard" },
     ],
     COORDENADOR: [
-        { key: "gerenciar-turmas",   label: "Gerenciar Turmas",   icon: "bi bi-easel" },
+        // { key: "gerenciar-turmas",   label: "Gerenciar Turmas",   icon: "bi bi-easel" },
         { key: "gerenciar-docentes", label: "Gerenciar Docentes", icon: "bi bi-people" },
-        { key: "gerenciar-curso",    label: "Gerenciar Curso",    icon: "bi bi-mortarboard" },
+        // { key: "gerenciar-curso",    label: "Gerenciar Curso",    icon: "bi bi-mortarboard" },
     ],
 };
 
@@ -67,6 +67,12 @@ export default function CasesBox({ perfil, onSelect, caseSelecionado }: CasesPro
                             {c.label}
                         </button>
                     ))}
+
+                    {perfil === "COORDENADOR" && 
+                        <Link href="/gestao-academica" className={styles.caseCard}>
+                            Gestão Acadêmica
+                        </Link>
+                    }
                 </div>
             </section>
         </>

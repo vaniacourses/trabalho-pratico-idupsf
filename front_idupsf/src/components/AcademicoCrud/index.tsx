@@ -49,13 +49,17 @@ const turnos: Turno[] = ["DIURNO", "NOTURNO", "INTEGRAL"];
 const statusDisciplinas: StatusDisciplina[] = ["ATIVA", "INATIVA"];
 
 export default function AcademicoCrud() {
+    
     const [departamentos, setDepartamentos] = useState<Departamento[]>([]);
     const [departamentoSelecionado, setDepartamentoSelecionado] = useState("");
+    
     const [cursos, setCursos] = useState<Curso[]>([]);
     const [disciplinas, setDisciplinas] = useState<DisciplinaCrud[]>([]);
 
     const [cursoForm, setCursoForm] = useState<CursoForm>(cursoInicial);
+    
     const [disciplinaForm, setDisciplinaForm] = useState<DisciplinaForm>(disciplinaInicial);
+    
     const [cursoEditandoId, setCursoEditandoId] = useState<string | null>(null);
     const [disciplinaEditandoId, setDisciplinaEditandoId] = useState<string | null>(null);
 
@@ -166,13 +170,12 @@ export default function AcademicoCrud() {
         try {
             if (cursoEditandoId) {
                 await academicoCrudService.atualizarCurso(
-                    departamentoSelecionado,
                     cursoEditandoId,
                     dados
                 );
                 setMensagem("Curso atualizado com sucesso.");
             } else {
-                await academicoCrudService.criarCurso(departamentoSelecionado, dados);
+                await academicoCrudService.criarCurso(dados);
                 setMensagem("Curso criado com sucesso.");
             }
 
@@ -210,7 +213,7 @@ export default function AcademicoCrud() {
         setMensagem("");
 
         try {
-            await academicoCrudService.excluirCurso(departamentoSelecionado, cursoId);
+            await academicoCrudService.excluirCurso(cursoId);
             setMensagem("Curso excluído com sucesso.");
             await carregarCursos(departamentoSelecionado);
 

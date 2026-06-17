@@ -181,6 +181,17 @@ export type Docente = Usuario & {
     regime?: Regime;
 };
 
+export interface DocenteCreate {
+    nome: string;
+    email: string;
+    cpf: string;
+    senha: string;
+    dataNasc: string; // formato "YYYY-MM-DD"
+    titulacao: Titulacao;
+    regime: Regime;
+    idDepartamento: string;
+}
+
 // ============================================================
 // COORDENADOR
 // ============================================================

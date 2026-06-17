@@ -68,26 +68,25 @@ export const academicoCrudService = {
         return fetchJson<Curso[]>(`${BACKEND_URL}/api/departamentos/${departamentoId}/cursos`);
     },
 
-    async criarCurso(departamentoId: string | number, dados: CursoPayload): Promise<Curso> {
-        return fetchJson<Curso>(`${BACKEND_URL}/api/departamentos/${departamentoId}/cursos`, {
+    async criarCurso(dados: CursoPayload): Promise<Curso> {
+        return fetchJson<Curso>(`${BACKEND_URL}/api/cursos`, {
             method: "POST",
             body: JSON.stringify(dados),
         });
     },
 
     async atualizarCurso(
-        departamentoId: string | number,
         cursoId: string | number,
         dados: CursoPayload
     ): Promise<Curso> {
-        return fetchJson<Curso>(`${BACKEND_URL}/api/departamentos/${departamentoId}/cursos/${cursoId}`, {
+        return fetchJson<Curso>(`${BACKEND_URL}/api/cursos/${cursoId}`, {
             method: "PUT",
             body: JSON.stringify(dados),
         });
     },
 
-    async excluirCurso(departamentoId: string | number, cursoId: string | number): Promise<void> {
-        return fetchVoid(`${BACKEND_URL}/api/departamentos/${departamentoId}/cursos/${cursoId}`, {
+    async excluirCurso(cursoId: string | number): Promise<void> {
+        return fetchVoid(`${BACKEND_URL}/api/cursos/${cursoId}`, {
             method: "DELETE",
         });
     },
