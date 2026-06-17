@@ -51,6 +51,10 @@ export default function PerfilCard() {
                         <h3><span>Departamento:</span> {usuario!.departamento.nome}</h3>
                     )}
 
+                    {usuario!.perfil === "COORDENADOR" && usuario!.curso && (
+                        <h3><span>Curso:</span> {usuario!.curso.nome}</h3>
+                    )}
+
                 </div>
             }
         

@@ -177,7 +177,7 @@ export type Docente = Usuario & {
     departamento?: Departamento;
     areasAtuacao?: string[];
     lattes?: string;
-    dataAdmissao?: string; // formato "YYYY-MM-DD"
+    dataIngresso?: string; // formato "YYYY-MM-DD"
     regime?: Regime;
 };
 
@@ -256,6 +256,11 @@ export type InscricaoUpdate = {
     nota?: number;
     notaVS?: number;
     frequencia?: boolean;
+}
+
+export interface InscricaoCreate {
+    discenteId: string;
+    turmasIds: string[];
 }
 
 // ============================================================

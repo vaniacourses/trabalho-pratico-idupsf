@@ -14,8 +14,8 @@ public record DocenteCreate(
         Date dataNasc,
         Docente.Titulacao titulacao,
         Docente.Regime regime, // eu não sei oq é esse regime, então deixei aqui
-        List<String> areasAtuacao,
-        String lattes,
+        // List<String> areasAtuacao,
+        // String lattes,
         Long idDepartamento
 ) {
 

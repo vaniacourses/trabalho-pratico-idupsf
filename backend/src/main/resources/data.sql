@@ -143,7 +143,7 @@ INSERT IGNORE INTO discente (id, curso_id, cod_curriculo, periodo, forma_permane
 (10, 4, 'FIS-2024', '8', 'DEFINITIVA', 'FORMADO');
 
 INSERT IGNORE INTO historico (id, discente_id, coeficiente_rend) VALUES
-(1, 6, 8.5), (2, 7, 9.1), (3, 8, 7.2), (4, 9, 0.0), (5, 10, 8.8);
+(1, 6, 8.8), (2, 7, 9.1), (3, 8, 7.2), (4, 9, 0.0), (5, 10, 8.8);
 
 -- ==============================================================================
 -- 10. HORÁRIOS (5 slots padrão da universidade)

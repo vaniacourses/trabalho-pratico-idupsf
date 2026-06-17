@@ -37,7 +37,7 @@ const colunas: Column<DisciplinaCursada>[] = [
     { header: "Código",   accessor: "codigoDisciplina", 
       render: (v) => String(v.codigoDisciplina)},
     
-    { header: "Nome",     accessor: "nomeDisciplina",
+    { header: "Disciplina",     accessor: "nomeDisciplina",
       render: (v) => String(v.nomeDisciplina).toUpperCase() },
     
     { header: "Situação", accessor: "statusFinal",

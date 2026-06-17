@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class InscricaoService {
@@ -60,8 +61,14 @@ public class InscricaoService {
     public List<TurmaDTO> listarTurmasDisponiveis(Long discenteId) {
         Set<Disciplina> concluidas = new HashSet<>(historicoService.buscarDisciplinasEntitiesAprovadas(discenteId));
         List<Turma> turmasAtivas = turmaRepository.buscarTurmasAtivasComRequisitos();
+        Set<Disciplina> inscritas = new HashSet<>(inscricaoRepository.findByDiscenteId(discenteId))
+                .stream()
+                .map(inscricao -> inscricao.getTurma().getDisciplina())
+                .collect(Collectors.toSet());
 
         List<Turma> disponiveis = turmasAtivas.stream()
+                .filter(turma -> !inscritas.contains(turma.getDisciplina()))
+                .filter(turma -> !concluidas.contains(turma.getDisciplina()))
                 .filter(turma -> concluidas.containsAll(turma.getDisciplina().getPreRequisitos()))
                 .toList();
 

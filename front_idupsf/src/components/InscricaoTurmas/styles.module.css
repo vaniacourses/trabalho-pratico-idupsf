@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.subtitulo {
+    font-size: 16px;
+    color: var(--color-neutral);
+    margin: 0;
+}
+
+/* ─── Topo de ações ────────────────────────────────── */
+
+.acoesTopo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background-color: var(--color-neutral-sub);
+    border-radius: 6px;
+}
+
+.selecionarTodas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: var(--color-neutral-dark);
+    cursor: pointer;
+}
+
+.contador {
+    font-size: 16px;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* ─── Checkbox da tabela ───────────────────────────── */
+
+.colCheckbox {
+    width: 40px;
+    text-align: center;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+}
+
+/* ─── Feedback ─────────────────────────────────────── */
+
+.erro {
+    font-size: 18px;
+    color: var(--color-error);
+    background-color: var(--color-error-light);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 0;
+}
+
+.sucesso {
+    font-size: 18px;
+    color: var(--color-success);
+    background-color: var(--color-success-light);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 0;
+}
+
+/* ─── Ações ────────────────────────────────────────── */
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnInscrever {
+    height: 40px;
+    padding: 0 28px;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.btnInscrever:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+}
+
+.btnInscrever:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

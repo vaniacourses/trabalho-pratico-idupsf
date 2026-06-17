@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 export default withAuth(
     
     function proxy(req) {
+        
         const perfil = req.nextauth.token?.perfil;
+        
         const path = req.nextUrl.pathname;
 
         // Rotas exclusivas do Coordenador
@@ -15,6 +17,11 @@ export default withAuth(
 
         // Rotas exclusivas do Docente
         if (path.startsWith("/docente") && perfil !== "DOCENTE" && perfil !== "COORDENADOR") {
+            return NextResponse.redirect(new URL("/home", req.url));
+        }
+
+        // Rota de inscrição apenas para Discentes
+        if (path.startsWith("/inscricao") && perfil !== "DISCENTE") {
             return NextResponse.redirect(new URL("/home", req.url));
         }
 
