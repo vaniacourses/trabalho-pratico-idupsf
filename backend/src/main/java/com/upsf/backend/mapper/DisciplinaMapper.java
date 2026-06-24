@@ -16,6 +16,7 @@ public interface DisciplinaMapper {
     @Mapping(target = "preRequisitos", ignore = true)
     Disciplina toDisciplina(DisciplinaCreate disciplinaCreate);
 
+    @Mapping(source = "departamento.id", target = "departamento_id")
     DisciplinaDTO toDisciplinaDTO(Disciplina disciplina);
 
     List<DisciplinaDTO> toDisciplinasDTO(List<Disciplina> disciplinas);

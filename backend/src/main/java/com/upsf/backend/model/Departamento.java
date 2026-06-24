@@ -26,6 +26,8 @@ public class Departamento {
     private String campus;
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Curso> cursos;
+    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Disciplina> disciplinas;
 
     // talvez departamentos não tenham endereço e campus definidos no momento de criação
     public Departamento(String cod, String nome, String endereco, String campus) {

@@ -69,4 +69,9 @@ public class DisciplinaService {
 
         disciplinaRepository.save(disciplina);
     }
+
+    public List<DisciplinaDTO> retornarListaDisciplinasPeloDepartamento(Long departamentoId) {
+        List<Disciplina> disciplinas = disciplinaRepository.findByDepartamentoId(departamentoId);
+        return disciplinaMapper.toDisciplinasDTO(disciplinas);
+    }
 }
